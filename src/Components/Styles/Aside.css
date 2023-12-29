@@ -1,0 +1,15 @@
+.asideContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  top: 30%;
+  background-color: gray;
+  margin-left: 1%;
+}
+
+.asideWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
