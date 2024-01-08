@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import "../Components/Styles/Main.css";
 
 function Main(props) {
@@ -11,37 +10,29 @@ function Main(props) {
 
   axios.defaults.withCredentials = true;
 
-  const getLecData = async () => {
-    try {
-      const { data } = await axios.get(`${lecApi}`, {
-        withCredentials: true,
-      });
-      return { data: data.data };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const selectLec = async () => {
-    try {
-      const result = await getLecData();
-      console.log(result.data);
-      if (result.data) {
-        setData(result.data);
-      } else {
-        alert("수강 정보를 받아오지 못했습니다.");
-      }
-    } catch (error) {
-      console.log(
-        "알 수 없는 오류로 수강 정보를 받아오지 못했습니다. 관리자에게 문의하세요.",
-        error
-      );
-    }
-  };
-
   useEffect(() => {
+    const selectLec = async () => {
+      try {
+        const { data } = await axios.get(`${lecApi}`, {
+          withCredentials: true,
+        });
+
+        console.log(data.data);
+
+        if (data.data) {
+          setData(data.data);
+        } else {
+          alert("수강 정보를 받아오지 못했습니다.");
+        }
+      } catch (error) {
+        console.log(
+          "알 수 없는 오류로 수강 정보를 받아오지 못했습니다. 관리자에게 문의하세요.",
+          error
+        );
+      }
+    };
     selectLec();
-  }, []);
+  }, [lecApi]);
 
   const [cardStates, setCardStates] = useState({});
 

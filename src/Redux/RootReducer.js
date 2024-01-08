@@ -1,16 +1,13 @@
 import { persistReducer } from "redux-persist"; // 추가
 import storage from "redux-persist/lib/storage";
 
-// state , useState
-// selector , dispatch
-
 const persistConfig = {
   key: "root",
   storage,
 };
 
 const initialState = {
-  token: false,
+  token: true,
 };
 
 const rootReducer = (state = initialState, action) => {

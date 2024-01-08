@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "../Components/Styles/User.css";
+import { useDispatch, useSelector } from "react-redux";
 
 function UserAuth(props) {
   const departmentApi = `/department`;
@@ -11,38 +11,29 @@ function UserAuth(props) {
 
   axios.defaults.withCredentials = true;
 
-  const getDepartmentData = async () => {
-    try {
-      const { data } = await axios.get(`${departmentApi}`, {
-        withCredentials: true,
-      });
-      return { data: data.data };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const selectDepartment = async () => {
-    try {
-      const result = await getDepartmentData();
-
-      if (result.data) {
-        setData(result.data);
-      } else {
-        alert("학과 정보를 받아오지 못했습니다.");
-      }
-    } catch (error) {
-      console.log(
-        "알 수 없는 오류로 학과 정보를 받아오지 못했습니다. 관리자에게 문의하세요.",
-        error
-      );
-    }
-  };
-
   useEffect(() => {
+    const selectDepartment = async () => {
+      try {
+        const { data } = await axios.get(`${departmentApi}`, {
+          withCredentials: true,
+        });
+
+        console.log("!!!", data);
+
+        if (data.data) {
+          setData(data.data);
+        } else {
+          alert("학과 정보를 받아오지 못했습니다.");
+        }
+      } catch (error) {
+        console.log(
+          "알 수 없는 오류로 학과 정보를 받아오지 못했습니다. 관리자에게 문의하세요.",
+          error
+        );
+      }
+    };
     selectDepartment();
-    console.log("업로딩");
-  }, []);
+  }, [departmentApi]);
 
   const navigate = useNavigate();
 
@@ -112,7 +103,7 @@ function UserAuth(props) {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(response.data);
+      console.log(response.data.data[0].token);
 
       if (response.data.status === "200") {
         setToken();
@@ -147,7 +138,9 @@ function UserAuth(props) {
         method: "POST",
         url: "/signup",
         data: Data,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       console.log(response.data);
 
@@ -170,108 +163,106 @@ function UserAuth(props) {
   };
 
   return (
-    <div>
-      <div className="body">
-        <div
-          className={`container ${
-            isRightPanelActive ? "right-panel-active" : ""
-          }`}
-        >
-          <div className="form-container sign-up-container">
-            <form className="form" onSubmit={(e) => e.preventDefault()}>
-              <h1 className="h1">회원가입</h1>
-              <label className="label">닉네임</label>
-              <input
-                className="input"
-                type="text"
-                placeholder="NICKNAME"
-                value={nickname}
-                onChange={userNickNameHandler}
-              ></input>
-              <label className="label">이름</label>
-              <input
-                className="input"
-                type="text"
-                placeholder="NAME"
-                value={user_name}
-                onChange={userNameHandler}
-              ></input>
-              <label className="label">아이디</label>
-              <input
-                className="input"
-                type="text"
-                placeholder="ID"
-                value={user_number}
-                onChange={userIdHandler}
-              ></input>
-              <label className="label">비밀번호</label>
-              <input
-                className="input"
-                type="text"
-                placeholder="PASSWORD"
-                value={user_password}
-                onChange={userPasswordHandler}
-              ></input>
-              <label className="label">학과</label>
+    <div className="body">
+      <div
+        className={`container ${
+          isRightPanelActive ? "right-panel-active" : ""
+        }`}
+      >
+        <div className="form-container sign-up-container">
+          <form className="form" onSubmit={(e) => e.preventDefault()}>
+            <h1 className="h1">회원가입</h1>
+            <label className="label">닉네임</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="NICKNAME"
+              value={nickname}
+              onChange={userNickNameHandler}
+            ></input>
+            <label className="label">이름</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="NAME"
+              value={user_name}
+              onChange={userNameHandler}
+            ></input>
+            <label className="label">아이디</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="ID"
+              value={user_number}
+              onChange={userIdHandler}
+            ></input>
+            <label className="label">비밀번호</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="PASSWORD"
+              value={user_password}
+              onChange={userPasswordHandler}
+            ></input>
+            <label className="label">학과</label>
 
-              <select
-                className="input"
-                value={department}
-                onChange={userDepartmentHandler}
-                required
-              >
-                {data.map((item) => (
-                  <option value={item} key={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
+            <select
+              className="input"
+              value={department}
+              onChange={userDepartmentHandler}
+              required
+            >
+              {data.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
 
-              <button className="button" type="submit" onClick={userSignup}>
-                회원가입
+            <button className="button" type="submit" onClick={userSignup}>
+              회원가입
+            </button>
+          </form>
+        </div>
+        <div className="form-container sign-in-container">
+          <form className="form" onSubmit={(e) => e.preventDefault()}>
+            <h1>로그인</h1>
+            <label className="label">아이디</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="ID"
+              value={id}
+              onChange={idHandler}
+            ></input>
+            <label className="label">비밀번호</label>
+            <input
+              className="input"
+              type="password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={pwHandler}
+            ></input>
+            <button className="button" type="submit" onClick={userSignIn}>
+              로그인
+            </button>
+          </form>
+        </div>
+        <div className="overlay-container">
+          <div className="overlay">
+            <div className="overlay-panel overlay-left">
+              <h1>아이디가 있으신가요?</h1>
+              <p>내가 들은 수업을 지금 리뷰해보세요!</p>
+              <button className="button ghost" onClick={handleSignInClick}>
+                Sign In
               </button>
-            </form>
-          </div>
-          <div className="form-container sign-in-container">
-            <form className="form" onSubmit={(e) => e.preventDefault()}>
-              <h1>로그인</h1>
-              <label className="label">아이디</label>
-              <input
-                className="input"
-                type="text"
-                placeholder="ID"
-                value={id}
-                onChange={idHandler}
-              ></input>
-              <label className="label">비밀번호</label>
-              <input
-                className="input"
-                type="password"
-                placeholder="PASSWORD"
-                value={password}
-                onChange={pwHandler}
-              ></input>
-              <button className="button" type="submit" onClick={userSignIn}>
-                로그인
+            </div>
+            <div className="overlay-panel overlay-right">
+              <h1>아이디가 없으신가요?</h1>
+              <p>동서대 학생이라면 지금 회원가입을 하세요!</p>
+              <button className="button ghost" onClick={handleSignUpClick}>
+                Sign Up
               </button>
-            </form>
-          </div>
-          <div className="overlay-container">
-            <div className="overlay">
-              <div className="overlay-panel overlay-left">
-                <h1>아이디가 있으신가요?</h1>
-                <p>내가 들은 수업을 지금 리뷰해보세요!</p>
-                <button className="button ghost" onClick={handleSignInClick}>
-                  Sign In
-                </button>
-              </div>
-              <div className="overlay-panel overlay-right">
-                <h1>아이디가 없으신가요?</h1>
-                <p>동서대 학생이라면 지금 회원가입을 하세요!</p>
-                <button className="button ghost" onClick={handleSignUpClick}>
-                  Sign Up
-                </button>
-              </div>
             </div>
           </div>
         </div>
