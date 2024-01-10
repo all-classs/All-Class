@@ -4,13 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { composeWithDevTools } from "redux-devtools-extension";
-import RootReducer from "./Redux/RootReducer";
-import { persistStore } from "redux-persist";
-import { createStore } from "redux";
-
-const store = createStore(RootReducer, composeWithDevTools());
-const persistor = persistStore(store);
+import { store, persistor } from "./Store/Store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,4 +14,5 @@ root.render(
     </PersistGate>
   </Provider>
 );
+
 reportWebVitals();
