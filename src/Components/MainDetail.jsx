@@ -1,11 +1,12 @@
 import axios from "axios";
-import modal from "react-modal";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../Components/Styles/Review.css";
 import "../Components/Styles/Main.css";
 
 function MainDetail() {
+  const token = localStorage.getItem("token");
+
   const params = useParams();
   let index = parseInt(params.id);
 
@@ -18,40 +19,38 @@ function MainDetail() {
 
   axios.defaults.withCredentials = true;
 
-  const getReviewData = async () => {
-    try {
-      const { data } = await axios.get(`${reviewApi}${index}`, {
-        withCredentials: true,
-      });
-      return { data: data.data };
-    } catch (error) {
-      alert("리뷰를 받아오는데 실패했습니다.");
-    }
-  };
-
-  const selectReview = async () => {
-    try {
-      const result = await getReviewData();
-
-      if (result.data) {
-        setAuthData(result.data[0]);
-        setReviewData(result.data[1]);
-        console.log(result.data[0]);
-        console.log(result.data[1]);
-      } else {
-        alert("리뷰 정보를 받아오지 못했습니다.");
-      }
-    } catch (error) {
-      alert(
-        error,
-        "알 수 없는 오류로 리뷰 정보를 받아오지 못했습니다. 관리자에게 문의하세요."
-      );
-    }
-  };
-
   useEffect(() => {
+    const selectReview = async () => {
+      if (!token) {
+        alert("로그인 후 이용 가능합니다.");
+        navigate("/");
+        return;
+      }
+      try {
+        const { data } = await axios.get(`${reviewApi}${index}`, {
+          headers: {
+            Authorization: token,
+          },
+          withCredentials: true,
+        });
+
+        if (data.data) {
+          setAuthData(data.data[0]);
+          setReviewData(data.data[1]);
+          console.log(data.data[0]);
+          console.log(data.data[1]);
+        } else {
+          alert("리뷰 정보를 받아오지 못했습니다.");
+        }
+      } catch (error) {
+        alert(
+          "알 수 없는 오류로 리뷰 정보를 받아오지 못했습니다. 관리자에게 문의하세요.",
+          error
+        );
+      }
+    };
     selectReview();
-  }, []);
+  }, [reviewApi, index, token, navigate]);
 
   const [user_number, setUserNumber] = useState("");
   const [star_lating, setStarLating] = useState("");

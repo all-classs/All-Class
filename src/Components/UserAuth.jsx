@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Components/Styles/User.css";
 import { useDispatch, useSelector } from "react-redux";
+import { SET_TOKEN } from "../Reducer/UserAuth";
 
 function UserAuth(props) {
   const departmentApi = `/department`;
@@ -80,12 +81,18 @@ function UserAuth(props) {
   };
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.auth.token);
 
-  const setToken = () => {
+  if (token) return null;
+
+  const setToken = (token, nickname, username) => {
     dispatch({
-      type: "SET_TOKEN",
-      payload: true,
+      type: SET_TOKEN,
+      payload: {
+        token,
+        nickname,
+        username,
+      },
     });
   };
 
@@ -103,11 +110,11 @@ function UserAuth(props) {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(response.data.data[0].token);
-
       if (response.data.status === "200") {
-        setToken();
-        alert("로그인 성공");
+        const { token, userNickname, userId } = response.data.data[0];
+        localStorage.setItem("token", token);
+        setToken(token, userNickname, userId);
+        alert(`환영합니다 ${userNickname} 님!`);
         navigate("/main");
       } else if (response.data.status === "201") {
         alert(response.data.server);
@@ -234,6 +241,7 @@ function UserAuth(props) {
               placeholder="ID"
               value={id}
               onChange={idHandler}
+              autoComplete="username"
             ></input>
             <label className="label">비밀번호</label>
             <input
@@ -242,6 +250,7 @@ function UserAuth(props) {
               placeholder="PASSWORD"
               value={password}
               onChange={pwHandler}
+              autoComplete="current-password"
             ></input>
             <button className="button" type="submit" onClick={userSignIn}>
               로그인

@@ -2,9 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Components/Styles/Main.css";
+import { useDispatch, useSelector } from "react-redux";
+import { CLEAR_TOKEN } from "../Reducer/UserAuth";
 
 function Main(props) {
+  const dispatch = useDispatch();
+  const tokens = useSelector((state) => state.auth.token);
+
+  const signOut = () => {
+    dispatch({ type: CLEAR_TOKEN });
+    localStorage.clear();
+    window.location.replace("/");
+  };
+
+  const token = localStorage.getItem("token");
+
   const lecApi = `/class`;
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
@@ -12,17 +27,27 @@ function Main(props) {
 
   useEffect(() => {
     const selectLec = async () => {
+      if (!token) {
+        alert("로그인 후 이용 가능합니다.");
+        navigate("/");
+        return;
+      }
+
       try {
         const { data } = await axios.get(`${lecApi}`, {
+          headers: {
+            Authorization: token,
+          },
           withCredentials: true,
         });
 
-        console.log(data.data);
+        console.log(data);
 
         if (data.data) {
           setData(data.data);
         } else {
-          alert("수강 정보를 받아오지 못했습니다.");
+          alert("로그인 유효기간이 만료되었습니다 다시 로그인 해주세요!.");
+          signOut();
         }
       } catch (error) {
         console.log(
@@ -32,7 +57,7 @@ function Main(props) {
       }
     };
     selectLec();
-  }, [lecApi]);
+  }, [lecApi, token, navigate]);
 
   const [cardStates, setCardStates] = useState({});
 
@@ -49,8 +74,6 @@ function Main(props) {
       [cardId]: false,
     }));
   };
-
-  const navigate = useNavigate();
 
   const classDetailTrans = async (index) => {
     try {
