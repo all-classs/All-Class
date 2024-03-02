@@ -10,7 +10,6 @@
   justify-content: space-between;
   padding: 0 20px;
   background-color: white;
-  border-bottom: 1px solid gray;
   background-color: #c20324;
 }
 
@@ -27,4 +26,47 @@
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #ff3b30;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #d92c26;
+}
+
+.btn:active {
+  background-color: #b12620;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  width: 40%;
+}
+
+.headerRight p {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.headerRight a {
+  text-decoration: none;
 }

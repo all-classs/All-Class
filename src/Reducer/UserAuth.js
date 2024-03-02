@@ -13,7 +13,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
-        nickname: action.payload.nickname,
+        userNickname: action.payload.userNickname,
         username: action.payload.username,
       };
     case "CLEAR_TOKEN":

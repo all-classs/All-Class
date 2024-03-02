@@ -6,9 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { SET_TOKEN } from "../Reducer/UserAuth";
 
 function UserAuth(props) {
+  const tokens = localStorage.getItem("token");
+
   const departmentApi = `/department`;
 
   const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
@@ -19,12 +23,14 @@ function UserAuth(props) {
           withCredentials: true,
         });
 
-        console.log("!!!", data);
-
         if (data.data) {
           setData(data.data);
         } else {
           alert("학과 정보를 받아오지 못했습니다.");
+        }
+
+        if (tokens) {
+          navigate("/main");
         }
       } catch (error) {
         console.log(
@@ -34,9 +40,7 @@ function UserAuth(props) {
       }
     };
     selectDepartment();
-  }, [departmentApi]);
-
-  const navigate = useNavigate();
+  }, [departmentApi, tokens, navigate]);
 
   const [isRightPanelActive, setRightPanelActive] = useState(false);
 
@@ -85,12 +89,12 @@ function UserAuth(props) {
 
   if (token) return null;
 
-  const setToken = (token, nickname, username) => {
+  const setToken = (token, userNickname, username) => {
     dispatch({
       type: SET_TOKEN,
       payload: {
         token,
-        nickname,
+        userNickname,
         username,
       },
     });
@@ -109,9 +113,9 @@ function UserAuth(props) {
         data: Data,
         headers: { "Content-Type": "application/json" },
       });
-
       if (response.data.status === "200") {
         const { token, userNickname, userId } = response.data.data[0];
+        console.log(response.data.data[0]);
         localStorage.setItem("token", token);
         setToken(token, userNickname, userId);
         alert(`환영합니다 ${userNickname} 님!`);
@@ -123,6 +127,8 @@ function UserAuth(props) {
       } else {
         alert("다시 시도 해주세요.");
       }
+      console.log(Data);
+      console.log(response.data.status);
     } catch (error) {
       alert(
         "알수없는 오류로 실패 했습니다. 재시도후 로그인 실패시 관리자에게 문의하세요.",
@@ -151,12 +157,14 @@ function UserAuth(props) {
       });
       console.log(response.data);
 
-      if (response.data.status === "200") {
+      if (response.data.status === 200) {
         alert("회원가입이 완료되었습니다!");
         window.location.replace("/");
-      } else if (response.data.status === "201") {
+      } else if (response.data.status === 201) {
         alert(response.data.server);
-      } else if (response.data.status === "203") {
+      } else if (response.data.status === 203) {
+        alert(response.data.server);
+      } else if (response.data.status === 401) {
         alert(response.data.server);
       } else {
         alert("다시 시도 해주세요.");

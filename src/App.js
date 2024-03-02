@@ -5,6 +5,8 @@ import MainPage from "./Pages/MainPage";
 import DetailPage from "./Pages/DeatilPage";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
+import NoticePage from "./Pages/NoticePage";
+import MyPage from "./Pages/MyPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route exact path="/" element={<UserAuthPage />}></Route>
           <Route path="/main" element={<MainPage />}></Route>
           <Route path="/post/detail/:id" element={<DetailPage />}></Route>
+          <Route path="/info" element={<NoticePage />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
