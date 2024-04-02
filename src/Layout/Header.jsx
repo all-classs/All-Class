@@ -7,7 +7,10 @@ import { CLEAR_TOKEN } from "../Reducer/UserAuth";
 function Header(props) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+
   const nickname = useSelector((state) => state.auth.userNickname);
+
+
 
   const signOut = () => {
     dispatch({ type: CLEAR_TOKEN });
