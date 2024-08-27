@@ -27,9 +27,9 @@ export default function ReviewModal({
 	const [rating, setRating] = useState(0);
 	const [postTitle, setPostTitle] = useState('');
 	const [postContent, setPostContent] = useState('');
-	const [important, setImportant] = useState('0'); // 기본값 0
-	const [funny, setFunny] = useState('0'); // 기본값 0
-	const [difficulty, setDifficulty] = useState('0'); // 기본값 0
+	const [important, setImportant] = useState('0'); 
+	const [funny, setFunny] = useState('0');
+	const [difficulty, setDifficulty] = useState('0'); 
 	const [showConfetti, setShowConfetti] = useState(false);
 	const router = useRouter();
 
@@ -55,7 +55,6 @@ export default function ReviewModal({
 		const userNumber = authInfo?.state?.name;
 		const token = authInfo?.state?.token;
 
-		// 중요도, 재미, 난이도를 payload에 추가
 		const payload = {
 			userNumber,
 			lectureName: ReviewsInfo,
