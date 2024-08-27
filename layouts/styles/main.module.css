@@ -1,0 +1,126 @@
+.rootLayout {
+  height: 100svh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+.topNavBar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: absolute;
+  height: 10%;
+  top: 0;
+  color: #4d49a7;
+  border-bottom: 1px solid black;
+  z-index: 3;
+}
+
+.topNavBar:hover {
+  color: white;
+  background-color: #4d49a7;
+  transition: 0.5s ease-in-out;
+}
+
+.topNavBar:not(:hover) {
+  backdrop-filter: saturate(130%) blur(20px);
+  color: #4d49a7;
+  transition: 0.5s ease-in-out;
+}
+
+.headerLeftLogo {
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  left: -4.3%;
+}
+
+.logo {
+  width: 40%;
+  height: 80%;
+  padding-bottom: 6%;
+  position: absolute;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.logo1 {
+        width: 40%;
+    height: 80%;
+    padding-bottom: 6%;
+  opacity: 1;
+}
+
+.logo2 {
+        width: 30%;
+    height: 80%;
+    padding-bottom: 6%;
+  opacity: 0;
+}
+
+.topNavBar:hover .logo1 {
+  opacity: 0;
+}
+
+.topNavBar:hover .logo2 {
+  opacity: 1;
+}
+
+.headerCenterUniversity {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.headerRightIcon {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.hiddenContainer {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 350%;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.headerCenterUniversity:hover .hiddenContainer {
+  opacity: 1;
+  visibility: visible;
+  background-color: #4d49a7;
+  border-top: 1px solid white;
+}
+
+.headerCenterUniversity:not(hover) .hiddenContainer {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s ease-in-out;
+  border-top: 1px solid white;
+}
+
+.LinkTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon1{
+    cursor: pointer;
+}
+
+.icon2{
+    cursor: pointer;
+}
