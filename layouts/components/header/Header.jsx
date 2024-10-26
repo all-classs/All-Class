@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
-import colorlogo from '@/public/assets/logo/colorlogo.png';
-import whitelogo from '@/public/assets/logo/whitelogo.png';
 import {
 	HeaderContainer,
 	LogoImages,
@@ -17,58 +14,43 @@ import {
 	CoinImage,
 	CoinText,
 	CoinContainer,
+	RightThirdIcon,
 } from './styles/Header';
 import UniversityCard from '@/components/common/universitycard/UniversityCard';
 import useLoginModalStore from '@/stores/useLoginModalStore';
+import useSignupModalStore from '@/stores/useSignupModalStore';
 import useAuthStore from '@/stores/useAuthStore';
+import colorlogo from '@/public/assets/logo/colorlogo.png';
+import whitelogo from '@/public/assets/logo/whitelogo.png';
 
 const coinImageSrc = '/assets/coin/coin.png';
 
-export default function Header({ isDashboard = false }) {
+const Header = React.memo(function Header({ isDashboard = false }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const { openLoginModal } = useLoginModalStore();
+	const { openSignupModal } = useSignupModalStore();
 	const { token, userKey, clearAuthInfo, coin } = useAuthStore();
 	const router = useRouter();
 
-	const MouseHover = () => {
-		setIsHovered(true);
-	};
-
-	const MouseNotHover = () => {
-		setIsHovered(false);
-	};
-
-	const handleLogout = () => {
+	const handleLogout = useCallback(() => {
 		clearAuthInfo();
 		router.push('/');
-	};
+	}, [clearAuthInfo, router]);
 
-	const handleMyPageClick = event => {
-		if (!token) {
-			event.preventDefault();
-			alert('로그인 후 사용 가능합니다.');
-		}
-	};
-
-	useEffect(() => {
-		if (
-			userKey === 'student' &&
-			router.pathname.startsWith('/dashboard/professor')
-		) {
-			router.push('/dashboard/student');
-		}
-		if (
-			userKey === 'professor' &&
-			router.pathname.startsWith('/dashboard/student')
-		) {
-			router.push('/dashboard/professor');
-		}
-	}, [userKey, token, router]);
+	const handleMyPageClick = useCallback(
+		event => {
+			if (!token) {
+				event.preventDefault();
+				alert('로그인 후 사용 가능합니다.');
+			}
+		},
+		[token],
+	);
 
 	return (
 		<HeaderContainer
-			onMouseEnter={MouseHover}
-			onMouseLeave={MouseNotHover}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
 			$isDashboard={isDashboard}
 		>
 			<LeftHeader>
@@ -79,12 +61,14 @@ export default function Header({ isDashboard = false }) {
 					onClick={() => router.push('/')}
 				/>
 			</LeftHeader>
+
 			<CenterHeader $isDashboard={isDashboard}>
 				<h2>Busan is good!</h2>
 				<HiddenContainer $isHovered={isHovered}>
 					<UniversityCard />
 				</HiddenContainer>
 			</CenterHeader>
+
 			<RightHeader>
 				<RightFirstIcon>
 					{isDashboard ? (
@@ -113,7 +97,15 @@ export default function Header({ isDashboard = false }) {
 				<RightSecondIcon onClick={token ? handleLogout : openLoginModal}>
 					<h3>{token ? '로그아웃' : '로그인'}</h3>
 				</RightSecondIcon>
+
+				{/* {!token && (
+					<RightThirdIcon onClick={openSignupModal}>
+						<h3>회원가입</h3>
+					</RightThirdIcon>
+				)} */}
 			</RightHeader>
 		</HeaderContainer>
 	);
-}
+});
+
+export default Header;

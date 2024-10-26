@@ -5,7 +5,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
+	min-height: 100vh; // 화면 중앙 정렬을 위한 최소 높이
 	background-color: #f8f9fa;
 	padding: 20px;
 	box-sizing: border-box;
@@ -76,7 +76,7 @@ export const CurriculumImageWrapper = styled.div`
 	width: 100px;
 	height: 100px;
 	margin: 0 auto 10px auto;
-	background-color: #e0e0e0;
+	background-color: #e0e0e0; /* Placeholder background color */
 	position: relative;
 	border-radius: 50%;
 `;
@@ -94,7 +94,7 @@ export const CurriculumCategory = styled.p`
 export const CurriculumPoints = styled.p`
 	margin: 5px 0;
 	font-weight: bold;
-	color: #dc3545;
+	color: #dc3545; /* 포인트 색상 */
 `;
 
 export const CategorySelect = styled.div`

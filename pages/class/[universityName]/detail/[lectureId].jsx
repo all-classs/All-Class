@@ -37,18 +37,29 @@ DetailLectureandReviewPage.getLayout = page => {
 
 export async function getServerSideProps(context) {
 	const { lectureId, universityName } = context.query;
-	const ReviewsInfo = await fetchReviewInfo(universityName, lectureId);
-	const ReviewsDetail = await fetchReviewDetail(lectureId);
-	const ChartCheck = await fetchKeyword(lectureId);
-	// console.log(ReviewsInfo);
-	// console.log(ReviewsDetail);
-	// console.log(ChartCheck);
 
-	return {
-		props: {
-			ReviewsInfo,
-			ReviewsDetail,
-			ChartCheck,
-		},
-	};
+	try {
+		const [ReviewsInfo, ReviewsDetail, ChartCheck] = await Promise.all([
+			fetchReviewInfo(universityName, lectureId),
+			fetchReviewDetail(lectureId),
+			// fetchKeyword(lectureId),
+		]);
+		console.log(ReviewsInfo);
+		return {
+			props: {
+				ReviewsInfo,
+				ReviewsDetail,
+				// ChartCheck,
+			},
+		};
+	} catch (error) {
+		console.error('Error fetching data:', error);
+		return {
+			props: {
+				ReviewsInfo: null,
+				ReviewsDetail: null,
+				ChartCheck: null,
+			},
+		};
+	}
 }

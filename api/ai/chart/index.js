@@ -1,18 +1,15 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_SLR_AI_KEYWORD_API_URL,
+	baseURL: process.env.NEXT_PUBLIC_SLR_CHART_API_URL,
 	headers: {
 		'Content-Type': 'application/json',
 	},
 });
 
-// 키워드 GET
 export const fetchKeyword = async lectureId => {
 	try {
-		const response = await instance.get(`/keyword`, {
-			params: { lectureId },
-		});
+		const response = await instance.get(`/keyword?lectureId=${lectureId}`);
 
 		if (!response.data) {
 			return '현재 분석된 키워드가 없습니다.';
@@ -26,12 +23,12 @@ export const fetchKeyword = async lectureId => {
 	}
 };
 
-// 키워드 POST
+// 키워드 분석 post
 export const keywordAnalysis = async keywordValue => {
 	try {
-		const response = await instance.post(`/completion`, {
-			lectureId: keywordValue,
-		});
+		const response = await instance.post(
+			`/completion?lectureId=${keywordValue}`,
+		);
 		return response;
 	} catch (error) {
 		throw new Error(

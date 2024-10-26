@@ -46,8 +46,8 @@ export const IntrocduceBox = styled.div`
 
 export const ImageWrapper = styled.div`
 	display: flex;
-	width: 287px;
-	height: 230px;
+	width: 300px;
+	height: 300px;
 	flex-direction: column;
 `;
 
@@ -55,7 +55,7 @@ export const ProfileImage = styled(Image)`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	object-fit: cover;
+	object-fit: contain;
 `;
 
 export const ProfileTitleWrapper = styled.div`

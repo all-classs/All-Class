@@ -1,48 +1,37 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
 	Overlay,
 	LoginContainer,
 	TabContainer,
 	Tab,
 	InputField,
-	LoginButton,
+	LoginButton as SignupButton,
 	CloseButton,
-} from './styles/Login';
-import { fetchLogin } from '@/api/auth';
-import useLoginModalStore from '@/stores/useLoginModalStore';
-import useAuthStore from '@/stores/useAuthStore';
+} from '../login/styles/Login';
 import { useRouter } from 'next/router';
 
-const Login = React.memo(function Login({ onClose }) {
+export default function Signup({ onClose }) {
 	const [activeTab, setActiveTab] = useState('student');
+	const [name, setName] = useState('');
 	const [userNumber, setUserNumber] = useState('');
 	const [password, setPassword] = useState('');
-	const { closeLoginModal } = useLoginModalStore();
-	const { setAuthInfo, clearAuthInfo } = useAuthStore();
+	const [confirmPassword, setConfirmPassword] = useState('');
 	const router = useRouter();
-
-	useEffect(() => {
-		setActiveTab('student');
-	}, []);
 
 	const handleTabClick = useCallback(tab => {
 		setActiveTab(tab);
 	}, []);
 
-	const handleLogin = useCallback(async () => {
-		try {
-			// clearAuthInfo();
-			const data = await fetchLogin(userNumber, password);
-			const { name, token, userKey, checkLecture, coin } = data.data;
-
-			setAuthInfo(name, token, userKey, checkLecture, coin);
-			alert(`환영합니다. ${name}님`);
-			closeLoginModal();
-			router.reload(router.asPath);
-		} catch (error) {
-			alert('로그인 실패');
+	const handleSignup = useCallback(() => {
+		if (password !== confirmPassword) {
+			alert('비밀번호가 일치하지 않습니다.');
+			return;
 		}
-	}, [userNumber, password, setAuthInfo, closeLoginModal, router]);
+		// 회원가입 API 호출 예정 부분
+		alert(`환영합니다, ${name}님! 회원가입이 완료되었습니다.`);
+		onClose();
+		router.push('/');
+	}, [password, confirmPassword, name, onClose, router]);
 
 	return (
 		<Overlay onClick={onClose}>
@@ -53,15 +42,21 @@ const Login = React.memo(function Login({ onClose }) {
 						$active={activeTab === 'student'}
 						onClick={() => handleTabClick('student')}
 					>
-						<h3>학생 로그인</h3>
+						<h3>학생 회원가입</h3>
 					</Tab>
 					<Tab
 						$active={activeTab === 'professor'}
 						onClick={() => handleTabClick('professor')}
 					>
-						<h3>교수 로그인</h3>
+						<h3>교수 회원가입</h3>
 					</Tab>
 				</TabContainer>
+				<InputField
+					type="text"
+					placeholder="이름을 입력해주세요."
+					value={name}
+					onChange={e => setName(e.target.value)}
+				/>
 				<InputField
 					type="text"
 					placeholder="학번을 입력해주세요."
@@ -74,12 +69,16 @@ const Login = React.memo(function Login({ onClose }) {
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 				/>
-				<LoginButton onClick={handleLogin}>
-					<h3>로그인</h3>
-				</LoginButton>
+				<InputField
+					type="password"
+					placeholder="비밀번호를 다시 입력해주세요."
+					value={confirmPassword}
+					onChange={e => setConfirmPassword(e.target.value)}
+				/>
+				<SignupButton onClick={handleSignup}>
+					<h3>회원가입</h3>
+				</SignupButton>
 			</LoginContainer>
 		</Overlay>
 	);
-});
-
-export default Login;
+}

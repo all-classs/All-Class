@@ -41,8 +41,8 @@ export default function Footer() {
 							</TopItem>
 							<FooterItem>
 								<h3>
-									Copyright© 2024 제11회 대한민국 SW융합 해커톤 장우영. 김강민.
-									김정환. 박진우. 정규환. All rights reserved.
+									Copyright© AI KOREA 2024 장우영. 김강민. 김정환. 박진우.
+									정규환. All rights reserved.
 								</h3>
 							</FooterItem>
 						</FooterInfo>

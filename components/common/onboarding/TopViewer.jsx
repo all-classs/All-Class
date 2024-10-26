@@ -41,7 +41,7 @@ export default function TopViewer() {
 					</IntroContainerSecond>
 				</IntroContainer>
 			</div>
-			<Arrow>
+			{/* <Arrow>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="2.4em"
@@ -54,7 +54,7 @@ export default function TopViewer() {
 						d="M11 19.5V7.914l-4.5 4.5L5.086 11L12 4.086L18.914 11L17.5 12.414l-4.5-4.5V19.5z"
 					/>
 				</svg>
-			</Arrow>
+			</Arrow> */}
 		</MainContainer>
 	);
 }

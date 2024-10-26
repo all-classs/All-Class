@@ -16,32 +16,40 @@ import {
 } from './styles/Introduce';
 
 export default function Introduce({ ReviewsInfo }) {
+	const professorImage =
+		ReviewsInfo?.data?.profileImage || '/default-profile-image.jpg';
+	const professorIcon = ReviewsInfo?.data?.icon || '/default-icon.png';
+	const professorName = ReviewsInfo?.data?.professor || '교수 이름 없음';
+	const department = ReviewsInfo?.data?.department || '학과 정보 없음';
+	const introduction =
+		ReviewsInfo?.data?.introduction || '소개 정보가 없습니다.';
+
 	return (
 		<IntroduceContainer>
 			<IntroduceWrapper>
 				<IntrocduceBox>
 					<ImageWrapper>
 						<ProfileImage
-							src={ReviewsInfo.data.imageUrl}
-							width={287}
-							height={230}
-							alt={ReviewsInfo.data.professor}
+							src={professorImage}
+							width={400}
+							height={350}
+							alt={professorName}
 						/>
 					</ImageWrapper>
 					<ProfileTitleWrapper>
 						<ProfileMainTitle>
 							<IconImage
-								src={ReviewsInfo.data.icon}
+								src={professorIcon}
 								width={25}
 								height={25}
-								alt={ReviewsInfo.data.professor}
+								alt={professorName}
 							/>
-							<ProfessorName> {ReviewsInfo.data.professor} </ProfessorName>
+							<ProfessorName> {professorName} </ProfessorName>
 							<ProfessorSub>교수</ProfessorSub>
 						</ProfileMainTitle>
-						<Department>{ReviewsInfo.data.department}</Department>
+						<Department>{department}</Department>
 						<Info>과목소개</Info>
-						<LectureIntroduce>{ReviewsInfo.data.introduction}</LectureIntroduce>
+						<LectureIntroduce>{introduction}</LectureIntroduce>
 					</ProfileTitleWrapper>
 				</IntrocduceBox>
 			</IntroduceWrapper>

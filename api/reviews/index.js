@@ -24,8 +24,11 @@ export const fetchReviewInfo = async (universityName, lectureId) => {
 };
 
 // 지정한 대학의 해당 강의내역의 수강리뷰 정보 GET
-export const fetchReviewDetail = async lectureId => {
-	const response = await instance.get(`/review?lectureId=${lectureId}`);
+export const fetchReviewDetail = async (lectureId, queryParams = {}) => {
+	const queryString = new URLSearchParams(queryParams).toString();
+	const endpoint = `/review?lectureId=${lectureId}${queryString ? `&${queryString}` : ''}`;
+
+	const response = await instance.get(endpoint);
 	return response.data;
 };
 
@@ -37,7 +40,6 @@ export const submitReview = async (token, payload) => {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-		console.log(payload);
 		return response.data;
 	} catch (error) {
 		throw new Error(

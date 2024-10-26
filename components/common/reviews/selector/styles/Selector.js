@@ -71,14 +71,17 @@ export const LeftSelectorWrapper = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: 31vh;
 	h1 {
-		font-size: large;
+		font-size: medium;
+		text-align: center;
+		width: 100%;
 	}
 	h2 {
 		padding-left: 10px;
 		font-size: small;
 		color: #969696;
+		width: 100%;
 	}
 	@media (max-width: 1400px) {
 		justify-content: center;

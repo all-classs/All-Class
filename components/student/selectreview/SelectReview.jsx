@@ -8,8 +8,8 @@ const defaultImg = {
 };
 
 export default function SelectReview() {
-	const authInfo = JSON.parse(localStorage.getItem('auth-storage'));
-	const { state } = authInfo || {};
+	// const authInfo = JSON.parse(localStorage.getItem('auth-storage'));
+	// const { state } = authInfo || {};
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [file, setFile] = useState(null);

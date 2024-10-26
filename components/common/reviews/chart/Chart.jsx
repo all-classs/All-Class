@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radar } from 'react-chartjs-2';
 import {
 	Chart as ChartJS,
@@ -20,6 +20,7 @@ import {
 	RecommandViewer,
 } from './styles/Chart';
 import useAuthStore from '@/stores/useAuthStore';
+import { RandomLectures } from '@/api/lectures/index';
 
 ChartJS.register(
 	RadialLinearScale,
@@ -32,26 +33,31 @@ ChartJS.register(
 
 export default function Chart({ ReviewsInfo, ChartCheck }) {
 	const userKey = useAuthStore(state => state.userKey);
+	const [recommendedLectures, setRecommendedLectures] = useState([]);
 
-	console.log(ChartCheck);
-	console.log(ReviewsInfo);
+	const universityName = ReviewsInfo.data.university;
 
-	const score = ReviewsInfo.data.averageStarLating;
-	const important = ReviewsInfo.data.important;
-	const difficulty = ReviewsInfo.data.difficulty;
-	const funny = ReviewsInfo.data.funny;
-	const keyword = ChartCheck.score;
+	const score = ReviewsInfo?.data?.averageStarLating || 0;
+	const important = ReviewsInfo?.data?.important || 0;
+	const difficulty = ReviewsInfo?.data?.difficulty || 0;
+	const funny = ReviewsInfo?.data?.funny || 0;
+	const keyword = ChartCheck?.score || 0;
+	const keywordLabel = ChartCheck?.keyword || '분석X';
 
-	console.log('차트값:', difficulty, important, funny, keyword, score);
+	useEffect(() => {
+		console.log(recommendedLectures);
+
+		if (ReviewsInfo?.data?.university) {
+			const fetchRecommendedLectures = async () => {
+				const lectures = await RandomLectures(universityName);
+				setRecommendedLectures(lectures.data);
+			};
+			fetchRecommendedLectures();
+		}
+	}, [ReviewsInfo, universityName]);
 
 	const data = {
-		labels: [
-			'난이도',
-			'중요도',
-			'재미',
-			`${ChartCheck.keyword}(AI분석)`,
-			'평점',
-		],
+		labels: ['난이도', '중요도', '재미', `${keywordLabel}(AI분석)`, '평점'],
 		datasets: [
 			{
 				label: '점수',
@@ -102,15 +108,11 @@ export default function Chart({ ReviewsInfo, ChartCheck }) {
 						}}
 					>
 						<ul>
-							<li>
-								<h3>1. 소프트웨어 분석 및 설계</h3>
-							</li>
-							<li>
-								<h3>2. 아이데이션</h3>
-							</li>
-							<li>
-								<h3>3. 소프트웨어공학</h3>
-							</li>
+							{recommendedLectures.map((lecture, index) => (
+								<li key={index}>
+									<h3>{`${index + 1}. ${lecture.lectureName}`}</h3>
+								</li>
+							))}
 						</ul>
 					</RecommandViewer>
 				</RecommandWrapper>

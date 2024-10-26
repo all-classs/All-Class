@@ -20,3 +20,13 @@ export const fetchLogin = async (userNumber, password) => {
 		throw error;
 	}
 };
+
+// 회원가입 api post
+export const fetchSignup = async () => {
+	try {
+		const response = await instance.post('/signup', {});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

@@ -60,7 +60,7 @@ export const ModalHeader = styled.div`
 export const StarContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 
 	span {
 		font-size: 30px;

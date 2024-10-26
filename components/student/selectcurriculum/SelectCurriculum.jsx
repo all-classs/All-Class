@@ -129,6 +129,7 @@ export default function SelectCurriculum() {
 								onChange={e => setSelectedCategory(e.target.value)}
 							>
 								<option value="software">소프트웨어학과</option>
+								{/* 추가 학과 옵션을 여기에 추가하세요 */}
 							</select>
 						</CategorySelect>
 						<CurriculumList>
@@ -159,6 +160,7 @@ export default function SelectCurriculum() {
 				{selectedTab === 'myCurriculum' && (
 					<MyCurriculumContainer>
 						<SectionTitle>내 커리큘럼</SectionTitle>
+						{/* 내 커리큘럼 콘텐츠를 여기에 추가하세요 */}
 					</MyCurriculumContainer>
 				)}
 			</ContentWrapper>

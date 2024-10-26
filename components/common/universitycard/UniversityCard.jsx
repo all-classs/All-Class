@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useUniversityStore from '@/stores/useUniversityStore';
@@ -14,25 +14,33 @@ const convertToUrlSafe = name => {
 	return encodeURIComponent(name.replace(/\s+/g, '-'));
 };
 
+const universityLogos = [
+	{ id: 1, url: '/assets/universitylogo/1.jpg', name: '부산외국어대학교' },
+	{ id: 2, url: '/assets/universitylogo/2.png', name: '동아대학교' },
+	{ id: 3, url: '/assets/universitylogo/3.jpg', name: '경성대학교' },
+	{ id: 4, url: '/assets/universitylogo/4.png', name: '부산대학교' },
+	{ id: 5, url: '/assets/universitylogo/5.jpg', name: '동서대학교' },
+	{ id: 6, url: '/assets/universitylogo/6.jpeg', name: '경남정보대학교' },
+	{ id: 7, url: '/assets/universitylogo/7.jpg', name: '동명대학교' },
+	{ id: 8, url: '/assets/universitylogo/8.png', name: '동의과학대학교' },
+	{ id: 9, url: '/assets/universitylogo/9.jpg', name: '동의대학교' },
+	{ id: 10, url: '/assets/universitylogo/10.png', name: '부경대학교' },
+	{ id: 11, url: '/assets/universitylogo/11.png', name: '부산가톨릭대학교' },
+	{ id: 12, url: '/assets/universitylogo/12.svg', name: '부산경상대학교' },
+	{ id: 13, url: '/assets/universitylogo/13.png', name: '신라대학교' },
+	{ id: 14, url: '/assets/universitylogo/14.png', name: '한국해양대학교' },
+];
+
 export default function UniversityCard({ isFooter }) {
 	const setUniversity = useUniversityStore(state => state.setUniversity);
 	const router = useRouter();
-	const [universityLogos, setUniversityLogos] = useState([]);
-
-	useEffect(() => {
-		const fetchUniversityLogos = async () => {
-			const response = await fetch(process.env.NEXT_PUBLIC_UNIVERSITY_NAME_URL);
-			const data = await response.json();
-			setUniversityLogos(data);
-		};
-
-		fetchUniversityLogos();
-	}, []);
 
 	const handleUniversityClick = (event, university) => {
 		event.preventDefault();
 		setUniversity(university.name, university.url);
-		router.push(`/class/${convertToUrlSafe(university.name)}`);
+		router.push(`/class/${convertToUrlSafe(university.name)}`, undefined, {
+			scroll: false,
+		});
 	};
 
 	return (

@@ -66,13 +66,13 @@ export const RightHeader = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-evenly;
 `;
 
 export const RightFirstIcon = styled.div`
 	display: flex;
-	justify-content: center;
 	flex: 1;
+	justify-content: center;
 	text-decoration: none;
 	color: inherit;
 	cursor: pointer;
@@ -89,7 +89,18 @@ export const StyledLink = styled(Link)`
 export const RightSecondIcon = styled.div`
 	display: flex;
 	flex: 1;
+	/* justify-content: center; */
 	justify-content: flex-start;
+	cursor: pointer;
+	@media (max-width: 600px) {
+		font-size: small;
+	}
+`;
+
+export const RightThirdIcon = styled.div`
+	display: flex;
+	flex: 1;
+	justify-content: center;
 	cursor: pointer;
 	@media (max-width: 600px) {
 		font-size: small;

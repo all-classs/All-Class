@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_SLR_AI_CHECK_API_URL,
+	baseURL: process.env.NEXT_PUBLIC_SLR_AI_API_URL,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -10,7 +10,10 @@ const instance = axios.create({
 // 욕설감지 post
 export const checkReview = async checkValue => {
 	try {
-		const response = await instance.post('/filter', checkValue);
+		const response = await instance.post(
+			`${process.env.NEXT_PUBLIC_SLR_AI_API_URL}/filter`,
+			checkValue,
+		);
 		return response;
 	} catch (error) {
 		throw new Error(
