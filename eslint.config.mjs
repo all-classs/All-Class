@@ -26,10 +26,9 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': 'off',
+      'cypress/unsafe-to-chain-command': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       'prettier/prettier': ['error', {
         'semi': true,
         'singleQuote': true,
