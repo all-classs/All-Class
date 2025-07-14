@@ -1,15 +1,26 @@
-import { UniversityGrid, UniversityCard } from './University.style';
-import Image from 'next/image';
+import { UniversityGrid, UniversityCard, UniversityImage } from './University.style';
 import { universities } from '@/constants/universityName';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 const UniversityList = memo(function UniversityList() {
+  const universityData = useMemo(() => {
+    return universities.map((university) => ({
+      ...university,
+      imageSrc: typeof university.logo === 'string' ? university.logo : university.logo.src,
+    }));
+  }, []);
+
   return (
     <UniversityGrid>
-      {universities.map((university) => (
-        <UniversityCard key={university.slug} href={`/${university.slug}`}>
-          <Image
-            src={university.logo}
+      {universityData.map((university) => (
+        <UniversityCard
+          className="university-card"
+          key={university.slug}
+          href={`/${university.slug}`}
+        >
+          <UniversityImage
+            key={university.slug}
+            src={university.imageSrc}
             alt={university.name}
             width={100}
             height={50}
