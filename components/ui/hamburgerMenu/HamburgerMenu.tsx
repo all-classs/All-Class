@@ -7,6 +7,8 @@ import {
   MobileMenu,
   MobileMenuOverlay,
   MobileButton,
+  UniversityListContainer,
+  ButtonSection,
 } from './HamburgerMenu.style';
 import UniversityList from '../universityList/UniversityList';
 
@@ -36,15 +38,15 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
           <MobileMenuOverlay onClick={handleMobileMenuClose} />
           <MobileMenu>
             {showDropdown && (
-              <div>
+              <UniversityListContainer>
                 <h3>대학교 선택</h3>
                 <UniversityList />
-              </div>
+              </UniversityListContainer>
             )}
-            <div>
+            <ButtonSection>
               <MobileButton onClick={handleMobileMenuClose}>마이페이지</MobileButton>
               <MobileButton onClick={handleMobileMenuClose}>로그인</MobileButton>
-            </div>
+            </ButtonSection>
           </MobileMenu>
         </>
       )}
