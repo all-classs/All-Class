@@ -9,8 +9,8 @@ import {
   CenterSection,
   RightSection,
   Button,
+  Logo,
 } from './Header.style';
-import Image from 'next/image';
 import UniversityList from '../universityList/UniversityList';
 import Link from 'next/link';
 import HamburgerMenu from '../hamburgerMenu/HamburgerMenu';
@@ -33,7 +33,7 @@ export default function Header({ showDropdown = false }: HeaderProps) {
     <HeaderContainer>
       <LeftSection>
         <Link href="/">
-          <Image src="/assets/logo.svg" alt="logo" width={150} height={50} priority />
+          <Logo src="/assets/logo.svg" alt="logo" width={150} height={50} priority />
         </Link>
       </LeftSection>
       <CenterSection onMouseEnter={handleDropdownOpen}>
