@@ -1,38 +1,40 @@
-import { UniversityGrid, UniversityCard, UniversityImage } from './University.style';
-import { universities } from '@/constants/universityName';
+'use client';
+
+import styles from './University.module.css';
 import { memo, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getUniversitiesWithImageSrc } from '@/utils';
 
 const UniversityList = memo(function UniversityList() {
   const pathname = usePathname();
   const decodedPathname = decodeURIComponent(pathname);
 
   const universityData = useMemo(() => {
-    return universities.map((university) => ({
-      ...university,
-      imageSrc: typeof university.logo === 'string' ? university.logo : university.logo.src,
-    }));
+    return getUniversitiesWithImageSrc();
   }, []);
 
   return (
-    <UniversityGrid>
+    <div className={styles.universityGrid}>
       {universityData.map((university) => {
         const href = `/${university.slug}`;
         const isCurrent = decodedPathname === href;
 
         return (
-          <UniversityCard
-            className="university-card"
+          <Link
+            className={`${styles.universityCard} university-card`}
             key={university.slug}
             href={href}
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
               if (isCurrent) {
                 e.preventDefault();
                 e.stopPropagation();
               }
             }}
           >
-            <UniversityImage
+            <Image
+              className={styles.universityImage}
               key={university.slug}
               src={university.imageSrc}
               alt={university.name}
@@ -41,10 +43,10 @@ const UniversityList = memo(function UniversityList() {
               loading="eager"
               priority
             />
-          </UniversityCard>
+          </Link>
         );
       })}
-    </UniversityGrid>
+    </div>
   );
 });
 
