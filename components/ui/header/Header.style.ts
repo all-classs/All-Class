@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { colors } from '@/constants';
+import Image from 'next/image';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -9,17 +10,25 @@ export const HeaderContainer = styled.header`
   position: relative;
 `;
 
+export const Logo = styled(Image)`
+  pointer-events: none;
+`;
+
 export const LeftSection = styled.section`
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
 `;
 
 export const CenterSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
   height: 100%;
 
   &:hover button {
@@ -87,9 +96,9 @@ export const DropdownMenu = styled.div<{ isOpen: boolean }>`
   margin-top: 0.5rem;
   min-width: 900px;
 
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  transition: opacity 0.2s ease;
+  pointer-events: ${({ isOpen }) => (isOpen ? 'auto' : 'none')};
+  transition: opacity 0.1s ease;
 
   @media (max-width: 1024px) {
     min-width: 300px;
@@ -111,6 +120,7 @@ export const DropdownMenu = styled.div<{ isOpen: boolean }>`
 
 export const Button = styled.button`
   font-size: 1rem;
+  text-align: center;
   font-weight: 500;
   color: ${colors.BLACK};
   cursor: pointer;

@@ -54,11 +54,12 @@ export const MobileMenuOverlay = styled.div`
 
 export const MobileMenu = styled.div`
   position: fixed;
+  display: flex;
   top: 0;
   right: 0;
   width: 280px;
   height: 100%;
-  background-color: white;
+  background-color: ${colors.WHITE};
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   padding: 2rem 1.5rem;
@@ -71,13 +72,7 @@ export const MobileMenu = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     color: ${colors.BLACK};
-    margin-bottom: 1rem;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   @media (max-width: 470px) {
@@ -85,24 +80,42 @@ export const MobileMenu = styled.div`
   }
 `;
 
+export const UniversityListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 export const MobileButton = styled.button`
-  width: 100%;
   font-size: 1rem;
   font-weight: 500;
   color: ${colors.BLACK};
   cursor: pointer;
   background: none;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 8px;
   transition: all 0.2s ease;
   border: none;
-  text-align: left;
-  justify-content: flex-start;
+  text-align: center;
+  width: 50%;
   display: flex;
+  justify-content: center;
   align-items: center;
 
   &:hover {
     background: ${colors.BLACK};
     color: ${colors.WHITE};
   }
+`;
+
+export const ButtonSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
 `;
