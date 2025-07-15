@@ -1,9 +1,13 @@
 export interface Lecture {
-  lectureId: string;
+  lectureId: number;
   lectureName: string;
-  credit: number;
+  department: string;
+  university: string;
+  lectureType: string;
+  averageStarLating: number;
   professor: string;
-  classification: string;
+  opened: boolean;
+  icon: string;
 }
 
 export type LectureList = Lecture[];

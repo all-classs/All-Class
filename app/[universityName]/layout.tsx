@@ -1,4 +1,4 @@
-import Header from '@/components/ui/header/Header';
+import { Header } from '@/components/ui';
 
 export default async function UniversityLayout({ children }: { children: React.ReactNode }) {
   return (

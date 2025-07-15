@@ -1,16 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Menu as MenuIcon } from '@mui/icons-material';
-import {
-  HamburgerButton,
-  MobileMenu,
-  MobileMenuOverlay,
-  MobileButton,
-  UniversityListContainer,
-  ButtonSection,
-} from './HamburgerMenu.style';
-import UniversityList from '../universityList/UniversityList';
+import styles from './HamburgerMenu.module.css';
+import { UniversityList } from '@/components/ui';
 
 interface HamburgerMenuProps {
   showDropdown?: boolean;
@@ -29,25 +21,42 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
 
   return (
     <>
-      <HamburgerButton onClick={handleMobileMenuToggle}>
-        <MenuIcon />
-      </HamburgerButton>
-
+      <button className={styles.hamburgerButton} onClick={handleMobileMenuToggle}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 12H21M3 6H21M3 18H21"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
       {isMobileMenuOpen && (
         <>
-          <MobileMenuOverlay onClick={handleMobileMenuClose} />
-          <MobileMenu>
+          <div className={styles.mobileMenuOverlay} onClick={handleMobileMenuClose} />
+          <div className={styles.mobileMenu}>
             {showDropdown && (
-              <UniversityListContainer>
+              <div className={styles.universityListContainer}>
                 <h3>대학교 선택</h3>
                 <UniversityList />
-              </UniversityListContainer>
+              </div>
             )}
-            <ButtonSection>
-              <MobileButton onClick={handleMobileMenuClose}>마이페이지</MobileButton>
-              <MobileButton onClick={handleMobileMenuClose}>로그인</MobileButton>
-            </ButtonSection>
-          </MobileMenu>
+            <div className={styles.buttonSection}>
+              <button className={styles.mobileButton} onClick={handleMobileMenuClose}>
+                마이페이지
+              </button>
+              <button className={styles.mobileButton} onClick={handleMobileMenuClose}>
+                로그인
+              </button>
+            </div>
+          </div>
         </>
       )}
     </>

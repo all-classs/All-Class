@@ -1,8 +1,4 @@
-import styled from '@emotion/styled';
-import Link from 'next/link';
-import Image from 'next/image';
-
-export const UniversityCard = styled(Link)`
+.universityCard {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,32 +8,33 @@ export const UniversityCard = styled(Link)`
     background-color 0.2s ease,
     transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: background-color, transform;
-`;
+}
 
-export const UniversityGrid = styled.div`
+.universityGrid {
   display: grid;
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
   width: 100%;
+}
 
-  &:hover .university-card {
-    transform: scale(0.9);
-    z-index: 1;
-    filter: grayscale(1);
-  }
+.universityGrid:hover .universityCard {
+  transform: scale(0.9);
+  z-index: 1;
+  filter: grayscale(1);
+}
 
-  .university-card:hover {
-    transform: scale(1.1);
-    z-index: 2;
-    filter: none;
-  }
-`;
-export const UniversityImage = styled(Image)`
+.universityGrid .universityCard:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  filter: none;
+}
+
+.universityImage {
   display: block;
   max-width: 100%;
   height: auto;
   object-fit: contain;
   pointer-events: none;
-`;
+} 

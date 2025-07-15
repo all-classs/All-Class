@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --foreground-rgb: 37, 37, 37;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  /* Color Variables */
+  --white: #FFFFFF;
+  --black: #252525;
+  --primary: #FFD600;
+  
+  /* Gray Scale */
+  --gray-50: #f9fafb;
+  --gray-100: #e5e5e5;
+  --gray-200: #d1d1d1;
+  --gray-300: #f9f9f9;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Yellow Theme */
+  --yellow-100: #FFF3C4;
+  --yellow-200: #FFE680;
+  --yellow-300: #FFD933;
+  --yellow-400: #FFCC00;
+  --yellow-500: #FFBF00;
+  --yellow-600: #FFB200;
+  --yellow-700: #FDCD23;
+  --yellow-800: #FFB71C;
+  --yellow-900: #FBAC00;
+  
+  /* Card Colors */
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  
+  /* Status Colors */
+  --status-opened-bg: #fef3c7;
+  --status-opened-text: #92400e;
+  --status-opened-border: #fbbf24;
+  
+  --status-closed-bg: #fde68a;
+  --status-closed-text: #78350f;
+  --status-closed-border: #f59e0b;
+  
+  /* Star Rating */
+  --star-color: #f59e0b;
+  --star-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  
+  /* Background Colors */
+  --background-main: #ffffff;
+  --background-secondary: #f8fafc;
+}
