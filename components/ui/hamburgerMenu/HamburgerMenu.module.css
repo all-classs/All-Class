@@ -1,0 +1,121 @@
+.hamburgerButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  padding-bottom: 0.3rem;
+}
+
+.hamburgerButton svg {
+  font-size: 24px;
+  color: var(--black);
+  transition: color 0.2s ease;
+}
+
+.hamburgerButton:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+
+.hamburgerButton:active {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 470px) {
+  .hamburgerButton {
+    display: flex;
+  }
+}
+
+.mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+@media (max-width: 470px) {
+  .mobileMenuOverlay {
+    display: block;
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100%;
+  background-color: var(--white);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.mobileMenu h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 470px) {
+  .mobileMenu {
+    display: flex;
+  }
+}
+
+.universityListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobileButton {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--black);
+  cursor: pointer;
+  background: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: none;
+  text-align: center;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileButton:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.buttonSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+} 
