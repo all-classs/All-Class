@@ -17,8 +17,6 @@ export default async function LectureList({ universityName }: { universityName: 
     icon: lecture.icon,
   }));
 
-  console.log(lectureList);
-
   return (
     <div className={styles.lectureListContainer}>
       {lectureList.map((lecture: Lecture) => (
