@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { LectureList, LectureSelector } from './components';
 import { CardListSkeleton } from '@/components/common/card/skeleton';
 import { fetchLecture } from './lib';
+import styles from '@/styles/global.module.css';
 
 export async function generateStaticParams() {
   return universityNames.map((name) => ({ universityName: name }));
@@ -23,9 +24,9 @@ export default async function UniversityPage({
   }
 
   return (
-    <main style={{ padding: '0.5rem clamp(0.1rem, 6.3vw, 7rem)' }}>
+    <main className={styles.paddingContainer}>
       <LectureSelector universityName={decoded} />
-      <Suspense fallback={<CardListSkeleton count={lectures.length} />}>
+      <Suspense fallback={<CardListSkeleton count={lectures.lectures?.length || 0} />}>
         <LectureList universityName={decoded} />
       </Suspense>
     </main>
