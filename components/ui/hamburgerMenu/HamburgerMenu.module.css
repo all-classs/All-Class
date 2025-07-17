@@ -28,7 +28,7 @@
   background-color: rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 470px) {
+@media (max-width: 550px) {
   .hamburgerButton {
     display: flex;
   }
@@ -45,7 +45,7 @@
   display: none;
 }
 
-@media (max-width: 470px) {
+@media (max-width: 550px) {
   .mobileMenuOverlay {
     display: block;
   }
@@ -74,7 +74,7 @@
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 470px) {
+@media (max-width: 550px) {
   .mobileMenu {
     display: flex;
   }
