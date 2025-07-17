@@ -17,3 +17,9 @@ export interface LectureResponse {
   message: string;
   data: LectureList | null;
 }
+
+export interface LectureResult {
+  success: boolean;
+  lectures?: LectureList;
+  message?: string;
+}
