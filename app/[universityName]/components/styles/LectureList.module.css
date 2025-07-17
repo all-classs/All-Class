@@ -9,6 +9,10 @@
 	padding: 1rem 3rem;
 	margin-bottom: 10vh;
 	margin-top: 1rem;
+
+	a{
+		text-decoration: none;
+	}
 }
 
 @media (max-width: 1200px) {
@@ -32,4 +36,13 @@
 		padding: 0.5rem;
 		gap: 10px;
 	}
+}
+
+.noLectureContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 10vh;
+	color: var(--text-secondary);
 }
