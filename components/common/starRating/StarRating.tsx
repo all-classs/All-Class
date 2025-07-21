@@ -3,7 +3,7 @@ import styles from './StarRating.module.css';
 interface StarRatingProps {
   rating: number;
   showRatingText?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large' | 'veryLarge';
 }
 
 export default function StarRating({
