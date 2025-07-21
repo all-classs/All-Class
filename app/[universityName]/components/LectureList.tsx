@@ -1,5 +1,5 @@
 import { Lecture, LectureResult } from '../lib';
-import { LectureCard } from '@/components/common';
+import LectureCard from '@/domains/lecture/components/LectureCard';
 import styles from './styles/LectureList.module.css';
 import Link from 'next/link';
 

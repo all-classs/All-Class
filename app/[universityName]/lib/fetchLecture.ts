@@ -4,7 +4,10 @@ import { HTTP_STATUS, ERROR_MESSAGES } from '@/constants';
 export async function fetchLecture(universityName: string): Promise<LectureResult> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${universityName}`
+      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${universityName}`,
+      {
+        cache: 'force-cache',
+      }
     );
 
     const data: LectureResponse = await response.json();

@@ -1,7 +1,7 @@
 import { universityNames } from '@/constants';
 import { Suspense } from 'react';
 import { LectureList, LectureSelector } from './components';
-import { CardListSkeleton } from '@/components/common/card/skeleton';
+import CardListSkeleton from '@/domains/lecture/skeleton/CardListSkeleton';
 import { fetchLecture } from './lib';
 import styles from '@/styles/global.module.css';
 

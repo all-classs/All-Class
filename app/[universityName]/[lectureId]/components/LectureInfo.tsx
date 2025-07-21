@@ -1,11 +1,10 @@
-import { LectureInfoResult } from '../lib';
-import { Lecture } from '../../lib';
-import styles from './styles/LectureInfo.module.css';
+import { Lecture } from '@/app/[universityName]/lib';
+import { LectureInfoResult } from '@/app/[universityName]/[lectureId]/lib';
 import { StarRating } from '@/components/common';
-import { Book, Tag, CalendarCheck, MessageSquare, Star } from 'lucide-react';
+import { manImage, womanImage } from '@/public';
+import { Book, Tag, CalendarCheck, MessageSquare } from 'lucide-react';
+import styles from './styles/LectureInfo.module.css';
 import Image from 'next/image';
-import manImage from '@/public/assets/default-profile/man.png';
-import womanImage from '@/public/assets/default-profile/woman.png';
 
 export default async function LectureInfo({
   lectureInfo,

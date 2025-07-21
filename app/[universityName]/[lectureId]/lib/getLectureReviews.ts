@@ -4,7 +4,10 @@ import { ReviewResponse, ReviewResult } from './reviewTypes';
 export async function getLectureReviews(lectureId: string): Promise<ReviewResult> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/review?lectureId=${lectureId}`
+      `${process.env.NEXT_PUBLIC_API_URL}/review?lectureId=${lectureId}`,
+      {
+        cache: 'force-cache',
+      }
     );
 
     const data: ReviewResponse = await response.json();

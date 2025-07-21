@@ -1,5 +1,5 @@
 import { ReviewResult } from '../lib';
-import { ReviewCard } from '@/components/common';
+import ReviewCard from '@/domains/review/components/ReviewCard';
 import { User } from 'lucide-react';
 import styles from './styles/ReviewList.module.css';
 

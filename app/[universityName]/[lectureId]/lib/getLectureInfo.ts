@@ -7,7 +7,10 @@ export async function getLectureInfo(
 ): Promise<LectureInfoResult> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${univerityName}&lectureId=${lectureId}`
+      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${univerityName}&lectureId=${lectureId}`,
+      {
+        cache: 'force-cache',
+      }
     );
 
     const data: LectureInfoResponse = await response.json();

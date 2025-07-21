@@ -1,21 +1,21 @@
 import { universities, University } from '@/constants/universityName';
 
-export interface UniversityWithImageSrc extends Omit<University, 'logo'> {
+interface UniversityWithImageSrc extends Omit<University, 'logo'> {
   imageSrc: string;
 }
 
-export const getImageSrc = (logo: University['logo']): string => {
+const getImageSrc = (logo: University['logo']): string => {
   return typeof logo === 'string' ? logo : logo.src;
 };
 
-export const getUniversitiesWithImageSrc = (): UniversityWithImageSrc[] => {
+const getUniversitiesWithImageSrc = (): UniversityWithImageSrc[] => {
   return universities.map((university) => ({
     ...university,
     imageSrc: getImageSrc(university.logo),
   }));
 };
 
-export const getUniversityByName = (name: string): UniversityWithImageSrc | undefined => {
+const getUniversityByName = (name: string): UniversityWithImageSrc | undefined => {
   const university = universities.find((uni) => uni.name === name || uni.slug === name);
   if (!university) return undefined;
 
@@ -25,7 +25,7 @@ export const getUniversityByName = (name: string): UniversityWithImageSrc | unde
   };
 };
 
-export const getUniversityBySlug = (slug: string): UniversityWithImageSrc | undefined => {
+const getUniversityBySlug = (slug: string): UniversityWithImageSrc | undefined => {
   const university = universities.find((uni) => uni.slug === slug);
   if (!university) return undefined;
 
@@ -34,3 +34,5 @@ export const getUniversityBySlug = (slug: string): UniversityWithImageSrc | unde
     imageSrc: getImageSrc(university.logo),
   };
 };
+
+export { getImageSrc, getUniversitiesWithImageSrc, getUniversityByName, getUniversityBySlug };
