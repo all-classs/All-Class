@@ -1,12 +1,13 @@
-import styles from './Card.module.css';
+import styles from './LectureCard.module.css';
 import StarRating from '../starRating/StarRating';
 import { Lecture } from '@/app/[universityName]/lib';
+import { BookOpen, Tag, Star } from 'lucide-react';
 
 interface CardProps {
   lecture: Lecture;
 }
 
-export default function Card({ lecture }: CardProps) {
+export default function LectureCard({ lecture }: CardProps) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.colorBar} />
@@ -27,17 +28,26 @@ export default function Card({ lecture }: CardProps) {
 
       <div className={styles.cardBody}>
         <div className={styles.cardDetail}>
-          <span className={styles.label}>학과</span>
+          <span className={styles.label}>
+            <BookOpen size={14} className={styles.icon} />
+            학과
+          </span>
           <span className={styles.value}>{lecture.department}</span>
         </div>
         <div className={styles.cardDetail}>
-          <span className={styles.label}>구분</span>
+          <span className={styles.label}>
+            <Tag size={14} className={styles.icon} />
+            구분
+          </span>
           <span className={styles.value}>
             <span className={styles.lectureTypeBadge}>{lecture.lectureType}</span>
           </span>
         </div>
         <div className={styles.cardDetail}>
-          <span className={styles.label}>평점</span>
+          <span className={styles.label}>
+            <Star size={14} className={styles.icon} />
+            평점
+          </span>
           <div className={styles.ratingContainer}>
             <StarRating rating={lecture.averageStarLating} size="large" />
           </div>
