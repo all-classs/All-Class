@@ -65,3 +65,8 @@
   --background-main: #ffffff;
   --background-secondary: #f8fafc;
 }
+
+
+.padding-container {
+  padding: 0.5rem clamp(0.1rem, 6.3vw, 7rem);
+}

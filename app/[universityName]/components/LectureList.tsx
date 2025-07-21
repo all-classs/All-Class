@@ -1,11 +1,15 @@
-import { fetchLecture, Lecture } from '../lib';
-import { Card } from '@/components/common';
+import { Lecture, LectureResult } from '../lib';
+import { LectureCard } from '@/components/common';
 import styles from './styles/LectureList.module.css';
+import Link from 'next/link';
 
-export default async function LectureList({ universityName }: { universityName: string }) {
-  const lectures = await fetchLecture(universityName);
+interface LectureListProps {
+  universityName: string;
+  lectures: LectureResult;
+}
 
-  const lectureList = lectures.map((lecture: Lecture) => ({
+export default function LectureList({ universityName, lectures }: LectureListProps) {
+  const lectureList = lectures.lectures?.map((lecture: Lecture) => ({
     lectureId: lecture.lectureId,
     lectureName: lecture.lectureName,
     department: lecture.department,
@@ -18,10 +22,27 @@ export default async function LectureList({ universityName }: { universityName: 
   }));
 
   return (
-    <div className={styles.lectureListContainer}>
-      {lectureList.map((lecture: Lecture) => (
-        <Card key={lecture.lectureId} lecture={lecture} />
-      ))}
-    </div>
+    <main
+      className={
+        lectures.success && lectureList ? styles.lectureListContainer : styles.noLectureContainer
+      }
+    >
+      {lectures.success && lectureList ? (
+        lectureList.map((lecture: Lecture) => {
+          const encodedOpened = encodeURIComponent(String(lecture.opened));
+
+          return (
+            <Link
+              href={`/${universityName}/${lecture.lectureId}?opened=${encodedOpened}`}
+              key={lecture.lectureId}
+            >
+              <LectureCard lecture={lecture} />
+            </Link>
+          );
+        })
+      ) : (
+        <div>{lectures.message} ㅠㅠ</div>
+      )}
+    </main>
   );
 }

@@ -49,7 +49,7 @@
 
 .selectorOption span {
   background-color: var(--yellow-200);
-  color: var(--white);
+  color: var(--black);
   padding: 8px 12px;
   display: flex;
   align-items: center;

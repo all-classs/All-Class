@@ -1,0 +1,234 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%, 
+    #e0e0e0 50%, 
+    #f0f0f0 75%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.reviewCard {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--gray-100);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImageSkeleton {
+  composes: skeleton;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.usernameSkeleton {
+  composes: skeleton;
+  height: 14px;
+  width: 80px;
+}
+
+.reviewMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dateIconSkeleton {
+  composes: skeleton;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dateSkeleton {
+  composes: skeleton;
+  height: 10px;
+  width: 60px;
+}
+
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.starRatingSkeleton {
+  composes: skeleton;
+  height: 16px;
+  width: 80px;
+  border-radius: 8px;
+}
+
+.ratingTextSkeleton {
+  composes: skeleton;
+  height: 14px;
+  width: 20px;
+}
+
+.cardBody {
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.reviewTitleSkeleton {
+  composes: skeleton;
+  height: 16px;
+  width: 90%;
+  margin-bottom: 0.75rem;
+}
+
+.reviewContentSkeleton {
+  composes: skeleton;
+  height: 14px;
+  width: 100%;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: auto;
+}
+
+.likesSection {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  background: var(--gray-50);
+  transition: background 0.3s ease;
+}
+
+.likeIconSkeleton {
+  composes: skeleton;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.likeCountSkeleton {
+  composes: skeleton;
+  height: 12px;
+  width: 20px;
+}
+
+@media (max-width: 1024px) {
+  .reviewCard {
+    padding: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviewCard {
+    padding: 1.25rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .ratingSection {
+    align-self: flex-end;
+  }
+
+  .reviewTitleSkeleton {
+    height: 16px;
+  }
+
+  .reviewContentSkeleton {
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviewCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .userInfo {
+    gap: 0.5rem;
+  }
+
+  .profileImage {
+    width: 32px;
+    height: 32px;
+  }
+
+  .usernameSkeleton {
+    height: 12px;
+    width: 70px;
+  }
+
+  .dateSkeleton {
+    height: 9px;
+    width: 50px;
+  }
+
+  .reviewTitleSkeleton {
+    height: 14px;
+  }
+
+  .reviewContentSkeleton {
+    height: 12px;
+  }
+
+  .likesSection {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .likeCountSkeleton {
+    height: 10px;
+    width: 18px;
+  }
+} 

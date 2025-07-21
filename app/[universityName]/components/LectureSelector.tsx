@@ -23,7 +23,7 @@ const selectorOptions = {
 export default function LectureSelector({ universityName }: { universityName: string }) {
   return (
     <div className={styles.lectureSelectorContainer}>
-      <Selector title="수강목록" universityName={universityName} options={selectorOptions} />
+      <Selector title="강의목록" universityName={universityName} options={selectorOptions} />
     </div>
   );
 }

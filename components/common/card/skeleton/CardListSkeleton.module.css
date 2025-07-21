@@ -2,11 +2,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  border-left: 1px solid var(--card-border);
+  /* border-left: 1px solid var(--card-border);
   border-right: 1px solid var(--card-border);
-  border-bottom: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border); */
   border-radius: 0 0 0.5rem 0.5rem;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   margin-bottom: 10vh;
 }
 

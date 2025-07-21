@@ -37,7 +37,6 @@
   font-style: italic;
 }
 
-/* Size variants */
 .small {
   font-size: 12px;
 }
@@ -48,6 +47,10 @@
 
 .large {
   font-size: 20px;
+}
+
+.veryLarge {
+  font-size: 24px;
 }
 
 .ratingText.small {
@@ -61,3 +64,7 @@
 .ratingText.large {
   font-size: 16px;
 } 
+
+.ratingText.veryLarge {
+  font-size: 18px;
+}
