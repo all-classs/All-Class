@@ -4,7 +4,7 @@ import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import profileImage from '@/public/assets/default-profile/profile.png';
 import ReviewCardModal from './ReviewCardModal';
-import styles from './ReviewCard.module.css';
+import styles from '../styles/ReviewCard.module.css';
 
 interface ReviewCardProps {
   review: Review;

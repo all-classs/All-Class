@@ -1,7 +1,7 @@
-import styles from './LectureCard.module.css';
-import StarRating from '../starRating/StarRating';
 import { Lecture } from '@/app/[universityName]/lib';
 import { BookOpen, Tag, Star } from 'lucide-react';
+import { StarRating } from '@/components/common';
+import styles from '../styles/LectureCard.module.css';
 
 interface CardProps {
   lecture: Lecture;

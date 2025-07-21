@@ -1,9 +1,10 @@
+import { Lecture } from '@/app/[universityName]/lib';
 import { getLectureInfo, getLectureReviews } from './lib';
-import styles from '@/styles/global.module.css';
+import { LectureInfo, ReviewList } from './components';
+import ReviewCardListSkeleton from '@/domains/review/skeleton/ReviewCardListSkeleton';
+import LectureInfoSkeleton from '@/domains/lecture/skeleton/LectureInfoSkeleton';
 import { Suspense } from 'react';
-import { LectureInfo, LectureInfoSkeleton, ReviewList } from './components';
-import { Lecture } from '../lib';
-import { ReviewCardListSkeleton } from '@/components/common/card/skeleton';
+import styles from '@/styles/global.module.css';
 
 export async function generateStaticParams() {
   return [];
