@@ -1,5 +1,6 @@
 import styles from './Header.module.css';
-import { UniversityList, HamburgerMenu } from '@/components/ui';
+import { HamburgerMenu } from '@/components/ui';
+import DropdownUniversityList from '@/components/ui/universityList/DropdownUniversityList';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -23,8 +24,7 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         </Link>
       </section>
       <section className={styles.centerSection}>
-        {/* 드롭다운 UI 전체를 UniversityList로 대체 */}
-        <UniversityList showDropdown={showDropdown} />
+        <DropdownUniversityList />
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
         <button className={styles.button}>마이페이지</button>
