@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useImperativeHandle, forwardRef, useState } from 'react';
+import { useCallback, useEffect, useImperativeHandle, forwardRef, useState } from 'react';
 import { X } from 'lucide-react';
 import styles from './Modal.module.css';
 
@@ -25,10 +25,10 @@ const Modal = forwardRef<ModalRef, ModalProps>(
       close: () => setIsOpen(false),
     }));
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
       setIsOpen(false);
       onClose?.();
-    };
+    }, [onClose]);
 
     useEffect(() => {
       const handleEscape = (e: KeyboardEvent) => {
@@ -46,7 +46,7 @@ const Modal = forwardRef<ModalRef, ModalProps>(
         document.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = 'unset';
       };
-    }, [isOpen]);
+    }, [isOpen, handleClose]);
 
     if (!isOpen) return null;
 
