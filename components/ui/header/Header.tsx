@@ -1,22 +1,28 @@
 'use client';
 
 import styles from './Header.module.css';
-import { HamburgerMenu } from '@/components/ui';
-import DropdownUniversityList from '@/components/ui/universityList/DropdownUniversityList';
+import { HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef } from 'react';
-import LoginModal, { LoginModalRef } from '@/components/common/modal/LoginModal';
+import { LoginModal } from '@/components/common';
+import { useAuthStore, useModalStore } from '@/store';
 
 interface HeaderProps {
   showDropdown?: boolean;
 }
 
 export default function Header({ showDropdown = false }: HeaderProps) {
-  const loginModalRef = useRef<LoginModalRef>(null);
+  const { isLoggedIn, logout } = useAuthStore();
+  const { openLoginModal } = useModalStore();
+
   const handleLoginClick = () => {
-    loginModalRef.current?.open();
+    openLoginModal();
   };
+
+  const handleLogoutClick = () => {
+    logout();
+  };
+
   return (
     <header className={styles.headerContainer}>
       <section className={styles.leftSection}>
@@ -32,16 +38,22 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         </Link>
       </section>
       <section className={styles.centerSection}>
-        <DropdownUniversityList />
+        {showDropdown && <DropdownUniversityList />}
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
         <button className={styles.button}>마이페이지</button>
-        <button className={styles.button} onClick={handleLoginClick}>
-          로그인
-        </button>
+        {isLoggedIn ? (
+          <button className={styles.button} onClick={handleLogoutClick}>
+            로그아웃
+          </button>
+        ) : (
+          <button className={styles.button} onClick={handleLoginClick}>
+            로그인
+          </button>
+        )}
       </section>
       {showDropdown && <HamburgerMenu showDropdown={showDropdown} />}
-      <LoginModal ref={loginModalRef} />
+      <LoginModal />
     </header>
   );
 }

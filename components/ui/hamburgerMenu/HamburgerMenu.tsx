@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styles from './HamburgerMenu.module.css';
 import { UniversityList } from '@/components/ui';
 import dynamic from 'next/dynamic';
-import type { LoginModalRef } from '@/components/common/modal/LoginModal';
+import { useModalStore } from '@/store';
 
 const LoginModal = dynamic(() => import('@/components/common/modal/LoginModal'), { ssr: false });
 
@@ -14,7 +14,7 @@ interface HamburgerMenuProps {
 
 export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const loginModalRef = useRef<LoginModalRef>(null);
+  const { openLoginModal } = useModalStore();
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -25,7 +25,7 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
   };
 
   const handleLoginClick = () => {
-    loginModalRef.current?.open();
+    openLoginModal();
   };
 
   return (
@@ -68,7 +68,7 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
           </div>
         </>
       )}
-      <LoginModal ref={loginModalRef} />
+      <LoginModal />
     </>
   );
 }
