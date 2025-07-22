@@ -3,15 +3,16 @@
 import { useState } from 'react';
 import Modal from './Modal';
 import styles from './LoginModal.module.css';
-import { useLoginMutation } from '@/hooks/query/useLoginMutation';
+import { useLoginMutation } from '@/hooks/query';
 import { useAuthStore, useModalStore } from '@/store';
 
 export default function LoginModal() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const { loginModalOpen, closeLoginModal } = useModalStore();
+
   const loginMutation = useLoginMutation();
   const login = useAuthStore((s) => s.login);
-  const { loginModalOpen, closeLoginModal } = useModalStore();
 
   const handleClose = () => {
     setId('');
