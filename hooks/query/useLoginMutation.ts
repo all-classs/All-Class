@@ -1,0 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
+import { LoginParams, LoginResponse } from '@/types/auth';
+import { postLogin } from '@/api';
+
+export function useLoginMutation() {
+  return useMutation<LoginResponse, Error, LoginParams>({
+    mutationFn: postLogin,
+  });
+}

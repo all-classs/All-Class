@@ -1,45 +1,42 @@
 'use client';
 
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import Modal, { ModalRef } from './Modal';
+import { useState } from 'react';
+import Modal from './Modal';
 import styles from './LoginModal.module.css';
+import { useLoginMutation } from '@/hooks/query/useLoginMutation';
+import { useAuthStore, useModalStore } from '@/store';
 
-interface LoginModalProps {
-  onClose?: () => void;
-}
-
-export interface LoginModalRef {
-  open: () => void;
-  close: () => void;
-}
-
-const LoginModal = forwardRef<LoginModalRef, LoginModalProps>(({ onClose }, ref) => {
+export default function LoginModal() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const modalRef = useRef<ModalRef>(null);
-
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      modalRef.current?.open();
-    },
-    close: () => {
-      modalRef.current?.close();
-    },
-  }));
+  const loginMutation = useLoginMutation();
+  const login = useAuthStore((s) => s.login);
+  const { loginModalOpen, closeLoginModal } = useModalStore();
 
   const handleClose = () => {
     setId('');
     setPassword('');
-    onClose?.();
+    closeLoginModal();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleClose();
+    loginMutation.mutate(
+      { id, password },
+      {
+        onSuccess: (userData) => {
+          login(userData);
+          handleClose();
+        },
+        onError: (error) => {
+          alert(error instanceof Error ? error.message : '로그인 실패');
+        },
+      }
+    );
   };
 
   return (
-    <Modal ref={modalRef} title="로그인" size="small" onClose={handleClose}>
+    <Modal open={loginModalOpen} title="로그인" size="small" onClose={handleClose}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
           <label htmlFor="login-id" className={styles.label}>
@@ -53,6 +50,7 @@ const LoginModal = forwardRef<LoginModalRef, LoginModalProps>(({ onClose }, ref)
             onChange={(e) => setId(e.target.value)}
             required
             autoFocus
+            disabled={loginMutation.isPending}
           />
         </div>
         <div className={styles.inputGroup}>
@@ -66,14 +64,13 @@ const LoginModal = forwardRef<LoginModalRef, LoginModalProps>(({ onClose }, ref)
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loginMutation.isPending}
           />
         </div>
-        <button type="submit" className={styles.loginButton}>
-          로그인
+        <button type="submit" className={styles.loginButton} disabled={loginMutation.isPending}>
+          {loginMutation.isPending ? '로그인 중...' : '로그인'}
         </button>
       </form>
     </Modal>
   );
-});
-
-export default LoginModal;
+}
