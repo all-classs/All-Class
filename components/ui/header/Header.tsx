@@ -1,23 +1,27 @@
 'use client';
 
 import styles from './Header.module.css';
-import { UniversityList, HamburgerMenu } from '@/components/ui';
+import { HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
-import { useDropdown } from '@/hooks';
 import Image from 'next/image';
+import { LoginModal } from '@/components/common';
+import { useAuthStore, useModalStore } from '@/store';
 
 interface HeaderProps {
   showDropdown?: boolean;
 }
 
 export default function Header({ showDropdown = false }: HeaderProps) {
-  const {
-    isDropdownOpen,
-    dropdownRef,
-    handleDropdownOpen,
-    handleDropdownMouseLeave,
-    handleDropdownMouseEnter,
-  } = useDropdown();
+  const { isLoggedIn, logout } = useAuthStore();
+  const { openLoginModal } = useModalStore();
+
+  const handleLoginClick = () => {
+    openLoginModal();
+  };
+
+  const handleLogoutClick = () => {
+    logout();
+  };
 
   return (
     <header className={styles.headerContainer}>
@@ -33,26 +37,23 @@ export default function Header({ showDropdown = false }: HeaderProps) {
           />
         </Link>
       </section>
-      <section className={styles.centerSection} onMouseEnter={handleDropdownOpen}>
-        <div
-          className={`${styles.centerDropdown} ${!showDropdown ? styles.hidden : ''}`}
-          ref={dropdownRef}
-        >
-          <button className={styles.dropdownTrigger}>대학교 선택</button>
-          <div
-            className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.open : ''}`}
-            onMouseLeave={handleDropdownMouseLeave}
-            onMouseEnter={handleDropdownMouseEnter}
-          >
-            <UniversityList />
-          </div>
-        </div>
+      <section className={styles.centerSection}>
+        {showDropdown && <DropdownUniversityList />}
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
         <button className={styles.button}>마이페이지</button>
-        <button className={styles.button}>로그인</button>
+        {isLoggedIn ? (
+          <button className={styles.button} onClick={handleLogoutClick}>
+            로그아웃
+          </button>
+        ) : (
+          <button className={styles.button} onClick={handleLoginClick}>
+            로그인
+          </button>
+        )}
       </section>
       {showDropdown && <HamburgerMenu showDropdown={showDropdown} />}
+      <LoginModal />
     </header>
   );
 }

@@ -20,7 +20,6 @@ const UniversityList = memo(function UniversityList() {
       {universityData.map((university) => {
         const href = `/${university.slug}`;
         const isCurrent = decodedPathname === href;
-
         return (
           <Link
             className={`${styles.universityCard} university-card`}

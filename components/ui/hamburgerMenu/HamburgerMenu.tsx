@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import styles from './HamburgerMenu.module.css';
 import { UniversityList } from '@/components/ui';
+import dynamic from 'next/dynamic';
+import { useModalStore, useAuthStore } from '@/store';
+
+const LoginModal = dynamic(() => import('@/components/common/modal/LoginModal'), { ssr: false });
 
 interface HamburgerMenuProps {
   showDropdown?: boolean;
@@ -10,6 +14,8 @@ interface HamburgerMenuProps {
 
 export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openLoginModal } = useModalStore();
+  const { isLoggedIn, logout } = useAuthStore();
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -17,6 +23,14 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
 
   const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    openLoginModal();
+  };
+
+  const handleLogoutClick = () => {
+    logout();
   };
 
   return (
@@ -52,13 +66,20 @@ export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuPro
               <button className={styles.mobileButton} onClick={handleMobileMenuClose}>
                 마이페이지
               </button>
-              <button className={styles.mobileButton} onClick={handleMobileMenuClose}>
-                로그인
-              </button>
+              {isLoggedIn ? (
+                <button className={styles.mobileButton} onClick={handleLogoutClick}>
+                  로그아웃
+                </button>
+              ) : (
+                <button className={styles.mobileButton} onClick={handleLoginClick}>
+                  로그인
+                </button>
+              )}
             </div>
           </div>
         </>
       )}
+      <LoginModal />
     </>
   );
 }
