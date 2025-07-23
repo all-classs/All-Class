@@ -1,10 +1,10 @@
 import { Review } from '@/types';
-import { StarRating } from '@/components/common';
+import StarRating from '@/components/shared/ui/star-rating';
 import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import profileImage from '@/public/assets/default-profile/profile.png';
-import ReviewCardModal from './ReviewCardModal';
-import styles from '../styles/ReviewCard.module.css';
+import ReviewCardModal from '@/components/client/interactive/modals/ReviewCardModal';
+import styles from '@/domains/review/styles/ReviewCard.module.css';
 
 interface ReviewCardProps {
   review: Review;
