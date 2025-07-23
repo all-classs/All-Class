@@ -2,7 +2,7 @@ import { universityNames } from '@/constants';
 import { Suspense } from 'react';
 import { LectureList, LectureSelector } from './components';
 import CardListSkeleton from '@/domains/lecture/skeleton/CardListSkeleton';
-import { fetchLecture } from './lib';
+import { getLectureList } from '@/api';
 import styles from '@/styles/global.module.css';
 
 export async function generateStaticParams() {
@@ -10,8 +10,8 @@ export async function generateStaticParams() {
 }
 
 async function LectureListWrapper({ universityName }: { universityName: string }) {
-  const lectures = await fetchLecture(universityName);
-  return <LectureList lectures={lectures} universityName={universityName} />;
+  const lectures = await getLectureList(universityName);
+  return <LectureList universityName={universityName} lectures={lectures} />;
 }
 
 export default async function UniversityPage({

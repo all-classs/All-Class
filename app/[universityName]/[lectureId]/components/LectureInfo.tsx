@@ -1,18 +1,24 @@
-import { Lecture } from '@/app/[universityName]/lib';
-import { LectureInfoResult } from '@/app/[universityName]/[lectureId]/lib';
+import { Lecture, LectureInfoResult } from '@/types';
 import { StarRating } from '@/components/common';
 import { manImage, womanImage } from '@/public';
 import { Book, Tag, CalendarCheck, MessageSquare } from 'lucide-react';
 import styles from './styles/LectureInfo.module.css';
 import Image from 'next/image';
 
-export default async function LectureInfo({
-  lectureInfo,
-  lectureData,
-}: {
+interface LectureInfoProps {
   lectureInfo: LectureInfoResult;
   lectureData?: Lecture;
-}) {
+}
+
+export default function LectureInfo({ lectureInfo, lectureData }: LectureInfoProps) {
+  if (!lectureInfo.success || !lectureInfo.lectureInfo) {
+    return (
+      <main className={styles.infoContainer}>
+        <div>{lectureInfo.message || '강의 정보를 불러오는데 실패했습니다.'} ㅠㅠ</div>
+      </main>
+    );
+  }
+
   const lecture = lectureInfo.lectureInfo;
 
   // 일단 그냥 랜덤으로 뜨게.. 어차피 이미지도 없는디..
@@ -24,16 +30,16 @@ export default async function LectureInfo({
       <section className={styles.introSection}>
         <div className={styles.leftContent}>
           <div className={styles.topLine} />
-          <h1 className={styles.lectureName}>{lecture?.lectureName}</h1>
-          <div className={styles.professor}>{lecture?.professor}</div>
+          <h1 className={styles.lectureName}>{lecture.lectureName}</h1>
+          <div className={styles.professor}>{lecture.professor}</div>
           <div className={styles.infoBar}>
             <span className={styles.badge}>
               <Book size={16} className={styles.icon} />
-              {lecture?.department}
+              {lecture.department}
             </span>
             <span className={styles.badge}>
               <Tag size={16} className={styles.icon} />
-              {lecture?.lectureType}
+              {lecture.lectureType}
             </span>
             <span
               className={`${styles.badge} ${lectureData?.opened ? styles.opened : styles.closed}`}
@@ -43,7 +49,7 @@ export default async function LectureInfo({
             </span>
           </div>
 
-          {lecture?.introduction && (
+          {lecture.introduction && (
             <div className={styles.introduction}>
               <p>{lecture.introduction}</p>
             </div>
@@ -52,12 +58,12 @@ export default async function LectureInfo({
           <div className={styles.statsSection}>
             <div className={styles.statItem}>
               <MessageSquare size={16} className={styles.statIcon} />
-              <span className={styles.statNumber}>{lecture?.reviewCount || 0}</span>
+              <span className={styles.statNumber}>{lecture.reviewCount || 0}</span>
               <span className={styles.statLabel}>개의 리뷰</span>
             </div>
             <div className={styles.statItem}>
               <StarRating
-                rating={lecture?.averageStarLating || 0}
+                rating={lecture.averageStarLating || 0}
                 size="veryLarge"
                 showRatingText={true}
               />
