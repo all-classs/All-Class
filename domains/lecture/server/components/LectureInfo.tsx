@@ -1,8 +1,8 @@
 import { Lecture, LectureInfoResult } from '@/types';
-import { StarRating } from '@/components/common';
+import { StarRating } from '@/shared/components';
 import { manImage, womanImage } from '@/public';
 import { Book, Tag, CalendarCheck, MessageSquare } from 'lucide-react';
-import styles from './styles/LectureInfo.module.css';
+import styles from '../styles/LectureInfo.module.css';
 import Image from 'next/image';
 
 interface LectureInfoProps {

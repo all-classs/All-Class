@@ -1,13 +1,14 @@
 'use client';
 
 import { Review } from '@/types';
-import { StarRating } from '@/components/common';
+import { StarRating } from '@/shared/components';
 import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { forwardRef, useImperativeHandle, useState, useRef } from 'react';
-import Modal, { ModalRef } from './Modal';
+import { Modal } from '@/shared/components';
+import type { ModalRef } from '@/shared/components/client/Modal';
 import profileImage from '@/public/assets/default-profile/profile.png';
-import styles from './ReviewDetailModal.module.css';
+import styles from '../styles/ReviewDetailModal.module.css';
 
 interface ReviewDetailModalProps {
   review?: Review | null;

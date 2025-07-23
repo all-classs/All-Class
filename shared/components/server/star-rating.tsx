@@ -1,4 +1,4 @@
-import styles from './StarRating.module.css';
+import styles from './styles/StarRating.module.css';
 
 interface StarRatingProps {
   rating: number;

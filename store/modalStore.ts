@@ -1,10 +1,5 @@
 import { create } from 'zustand';
-
-interface ModalState {
-  loginModalOpen: boolean;
-  openLoginModal: () => void;
-  closeLoginModal: () => void;
-}
+import { ModalState } from '@/types';
 
 export const useModalStore = create<ModalState>((set) => ({
   loginModalOpen: false,

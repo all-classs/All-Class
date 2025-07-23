@@ -1,6 +1,6 @@
 import { Lecture, LectureResult } from '@/types';
-import LectureCard from '@/components/server/cards/lecture-card';
-import styles from '@/app/[universityName]/components/styles/LectureList.module.css';
+import { LectureCard } from '@/domains/lecture';
+import styles from '../styles/LectureList.module.css';
 import Link from 'next/link';
 
 interface LectureListProps {

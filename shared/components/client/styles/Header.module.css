@@ -1,0 +1,92 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem clamp(0.1rem, 9vw, 10rem);
+  position: relative;
+}
+
+.logo {
+  pointer-events: none;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.leftSection:hover {
+  filter: brightness(1.1);
+}
+
+.centerSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.centerSection:hover button {
+  color: var(--primary);
+}
+
+.centerSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media (max-width: 550px) {
+  .centerSection {
+    display: none;
+  }
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+  @media (max-width: 550px) {
+  .rightSection {
+    display: none;
+  }
+  
+  .rightSection.alwaysVisible {
+    display: flex;
+  }
+}
+
+.button {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--black);
+  cursor: pointer;
+  background: none;
+  padding: 0.5em 0.55em;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+@media (max-width: 375px) {
+  .button {
+    font-size: 0.9rem;
+  }
+
+  .logo{
+    width: 110px;
+  }
+}
+
+.button:hover {
+  background: var(--black);
+  color: var(--white);
+} 

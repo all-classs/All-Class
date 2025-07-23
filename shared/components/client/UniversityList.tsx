@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './University.module.css';
+import styles from './styles/University.module.css';
 import { memo, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';

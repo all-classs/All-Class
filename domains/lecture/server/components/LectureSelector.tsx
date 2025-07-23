@@ -1,5 +1,5 @@
-import styles from './styles/LectureSelector.module.css';
-import { Selector } from '@/components/common';
+import styles from '../styles/LectureSelector.module.css';
+import { Selector } from '@/shared/components';
 
 const selectorOptions = {
   department: [

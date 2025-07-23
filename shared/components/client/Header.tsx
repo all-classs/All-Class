@@ -1,10 +1,10 @@
 'use client';
 
-import styles from './Header.module.css';
-import { HamburgerMenu, DropdownUniversityList } from '@/components/ui';
+import styles from './styles/Header.module.css';
+import { HamburgerMenu, DropdownUniversityList } from '@/shared/components';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LoginModal } from '@/components/common';
+import { LoginModal } from '@/shared/components';
 import { useAuthStore, useModalStore } from '@/store';
 
 interface HeaderProps {

@@ -1,7 +1,7 @@
 import { Lecture } from '@/types';
 import { BookOpen, Tag, Star } from 'lucide-react';
-import StarRating from '@/shared/components/server/star-rating';
-import styles from '../../../shared/styles/LectureCard.module.css';
+import { StarRating } from '@/shared/components';
+import styles from '../styles/LectureCard.module.css';
 
 interface CardProps {
   lecture: Lecture;

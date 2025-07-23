@@ -1,4 +1,4 @@
-import { Header } from '@/components/ui';
+import { Header } from '@/shared/components';
 
 export default function Home() {
   return (

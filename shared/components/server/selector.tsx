@@ -1,4 +1,4 @@
-import styles from './Selector.module.css';
+import styles from './styles/Selector.module.css';
 import { getUniversityBySlug } from '@/utils';
 import Image from 'next/image';
 

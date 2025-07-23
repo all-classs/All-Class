@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Modal from './Modal';
-import styles from './LoginModal.module.css';
+import styles from './styles/LoginModal.module.css';
 import { useLoginMutation } from '@/hooks/query';
 import { useAuthStore, useModalStore } from '@/store';
 
