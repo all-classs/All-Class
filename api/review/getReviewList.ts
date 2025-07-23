@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
-import { ReviewResponse, ReviewResult } from './reviewTypes';
+import { ReviewResponse, ReviewResult } from '@/types/review';
 
-export async function getLectureReviews(lectureId: string): Promise<ReviewResult> {
+export async function getReviewList(lectureId: string): Promise<ReviewResult> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/review?lectureId=${lectureId}`,

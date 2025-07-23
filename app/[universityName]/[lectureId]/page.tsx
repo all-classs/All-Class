@@ -1,8 +1,8 @@
-import { Lecture } from '@/app/[universityName]/lib';
-import { getLectureInfo, getLectureReviews } from './lib';
+import { Lecture } from '@/types';
 import { LectureInfo, ReviewList } from './components';
 import ReviewCardListSkeleton from '@/domains/review/skeleton/ReviewCardListSkeleton';
 import LectureInfoSkeleton from '@/domains/lecture/skeleton/LectureInfoSkeleton';
+import { getLectureInfo, getReviewList } from '@/api';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 
@@ -23,8 +23,8 @@ async function LectureInfoWrapper({
   return <LectureInfo lectureInfo={lectureInfo} lectureData={lectureData} />;
 }
 
-async function ReviewCardWrapper({ lectureId }: { lectureId: string }) {
-  const reviewResult = await getLectureReviews(lectureId);
+async function ReviewListWrapper({ lectureId }: { lectureId: string }) {
+  const reviewResult = await getReviewList(lectureId);
   return <ReviewList reviewResult={reviewResult} />;
 }
 
@@ -50,7 +50,7 @@ export default async function LectureDetailPage({
         />
       </Suspense>
       <Suspense fallback={<ReviewCardListSkeleton count={6} />}>
-        <ReviewCardWrapper lectureId={lectureId} />
+        <ReviewListWrapper lectureId={lectureId} />
       </Suspense>
     </div>
   );

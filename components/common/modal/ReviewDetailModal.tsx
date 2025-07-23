@@ -1,6 +1,6 @@
 'use client';
 
-import { Review } from '@/app/[universityName]/[lectureId]/lib';
+import { Review } from '@/types';
 import { StarRating } from '@/components/common';
 import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';

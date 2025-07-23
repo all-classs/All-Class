@@ -1,6 +1,6 @@
 'use client';
 
-import { Review } from '@/app/[universityName]/[lectureId]/lib';
+import { Review } from '@/types';
 import { ReviewDetailModal } from '@/components/common';
 import { useRef } from 'react';
 

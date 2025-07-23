@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useImperativeHandle, forwardRef, useState } from 'react';
+import { useCallback, useEffect, useImperativeHandle, forwardRef, useState } from 'react';
 import { X } from 'lucide-react';
 import styles from './Modal.module.css';
 
@@ -9,6 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   onClose?: () => void;
+  open?: boolean;
 }
 
 export interface ModalRef {
@@ -17,18 +18,18 @@ export interface ModalRef {
 }
 
 const Modal = forwardRef<ModalRef, ModalProps>(
-  ({ title, children, size = 'medium', onClose }, ref) => {
-    const [isOpen, setIsOpen] = useState(false);
+  ({ title, children, size = 'medium', onClose, open }, ref) => {
+    const [internalOpen, setInternalOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
-      open: () => setIsOpen(true),
-      close: () => setIsOpen(false),
+      open: () => setInternalOpen(true),
+      close: () => setInternalOpen(false),
     }));
 
-    const handleClose = () => {
-      setIsOpen(false);
+    const handleClose = useCallback(() => {
+      setInternalOpen(false);
       onClose?.();
-    };
+    }, [onClose]);
 
     useEffect(() => {
       const handleEscape = (e: KeyboardEvent) => {
@@ -37,6 +38,7 @@ const Modal = forwardRef<ModalRef, ModalProps>(
         }
       };
 
+      const isOpen = typeof open === 'boolean' ? open : internalOpen;
       if (isOpen) {
         document.addEventListener('keydown', handleEscape);
         document.body.style.overflow = 'hidden';
@@ -46,8 +48,9 @@ const Modal = forwardRef<ModalRef, ModalProps>(
         document.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = 'unset';
       };
-    }, [isOpen]);
+    }, [open, internalOpen, handleClose]);
 
+    const isOpen = typeof open === 'boolean' ? open : internalOpen;
     if (!isOpen) return null;
 
     return (

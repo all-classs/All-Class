@@ -1,7 +1,7 @@
-import type { LectureResponse, LectureResult } from './lectureTypes';
 import { HTTP_STATUS, ERROR_MESSAGES } from '@/constants';
+import type { LectureResponse, LectureResult } from '@/types/lecture';
 
-export async function fetchLecture(universityName: string): Promise<LectureResult> {
+export async function getLectureList(universityName: string): Promise<LectureResult> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/class?university=${universityName}`,

@@ -1,13 +1,13 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
-import { LectureInfoResponse, LectureInfoResult } from './lectureInfoTypes';
+import { LectureInfoResponse, LectureInfoResult } from '@/types/lectureInfo';
 
 export async function getLectureInfo(
-  univerityName: string,
+  universityName: string,
   lectureId: string
 ): Promise<LectureInfoResult> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${univerityName}&lectureId=${lectureId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/class?university=${universityName}&lectureId=${lectureId}`,
       {
         cache: 'force-cache',
       }
