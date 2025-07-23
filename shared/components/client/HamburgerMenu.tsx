@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './HamburgerMenu.module.css';
-import { UniversityList } from '@/components/ui';
+import styles from './styles/HamburgerMenu.module.css';
+import { UniversityList } from '@/shared/components';
 import dynamic from 'next/dynamic';
 import { useModalStore, useAuthStore } from '@/store';
 
-const LoginModal = dynamic(() => import('@/components/common/modal/LoginModal'), { ssr: false });
+const LoginModal = dynamic(() => import('@/shared/components/client/LoginModal'), { ssr: false });
 
 interface HamburgerMenuProps {
   showDropdown?: boolean;

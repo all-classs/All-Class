@@ -1,0 +1,226 @@
+.cardContainer {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--card-border);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.cardContainer:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.colorBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 0 0 0 10px;
+  background: linear-gradient(180deg, var(--gray-400) 0%, var(--gray-500) 100%);
+}
+
+.icon {
+  margin-right: 5px;
+  stroke-width: 2;
+  vertical-align: middle;
+}
+
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-left: 12px;
+}
+
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.lectureName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.professor {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusBadge.opened {
+  background-color: var(--status-opened-bg);
+  color: var(--status-opened-text);
+  border: 1px solid var(--status-opened-border);
+}
+
+.statusBadge.closed {
+  background-color: var(--status-closed-bg);
+  color: var(--status-closed-text);
+  border: 1px solid var(--status-closed-border);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-left: 12px;
+}
+
+.cardDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 22px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.value {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 400;
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.lectureTypeBadge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    padding: 14px;
+    min-height: 140px;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-left: 10px;
+  }
+  
+  .cardStatus {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .cardInfo {
+    width: 100%;
+  }
+  
+  .lectureName {
+    font-size: 15px;
+  }
+  
+  .professor {
+    font-size: 12px;
+  }
+  
+  .cardBody {
+    padding-left: 10px;
+    gap: 8px;
+  }
+  
+  .cardDetail {
+    gap: 6px;
+    min-height: 20px;
+  }
+  
+  .value {
+    max-width: 70%;
+  }
+  
+  .label {
+    font-size: 13px;
+  }
+  
+  .value {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardContainer {
+    padding: 12px;
+    min-height: 130px;
+  }
+  
+  .cardHeader {
+    padding-left: 8px;
+  }
+  
+  .cardBody {
+    padding-left: 8px;
+  }
+  
+  .lectureName {
+    font-size: 14px;
+  }
+  
+  .professor {
+    font-size: 11px;
+  }
+}

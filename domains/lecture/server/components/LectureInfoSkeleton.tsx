@@ -1,4 +1,4 @@
-import styles from './LectureInfoSkeleton.module.css';
+import styles from '../styles/LectureInfoSkeleton.module.css';
 
 export default function LectureInfoSkeleton() {
   return (

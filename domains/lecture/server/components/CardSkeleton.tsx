@@ -1,4 +1,4 @@
-import styles from './CardSkeleton.module.css';
+import styles from '../styles/CardSkeleton.module.css';
 
 export default function CardSkeleton() {
   return (

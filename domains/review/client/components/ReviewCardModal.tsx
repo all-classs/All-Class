@@ -1,7 +1,7 @@
 'use client';
 
 import { Review } from '@/types';
-import { ReviewDetailModal } from '@/components/common';
+import { ReviewDetailModal } from '@/domains/review';
 import { useRef } from 'react';
 
 interface ReviewCardModalProps {

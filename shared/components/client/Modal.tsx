@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useImperativeHandle, forwardRef, useState } from 'react';
 import { X } from 'lucide-react';
-import styles from './Modal.module.css';
+import styles from './styles/Modal.module.css';
 
 interface ModalProps {
   title?: string;

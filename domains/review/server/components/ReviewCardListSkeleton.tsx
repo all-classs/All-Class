@@ -1,5 +1,5 @@
 import ReviewCardSkeleton from './ReviewCardSkeleton';
-import styles from './ReviewCardListSkeleton.module.css';
+import styles from '../styles/ReviewCardListSkeleton.module.css';
 
 interface ReviewCardListSkeletonProps {
   count?: number;

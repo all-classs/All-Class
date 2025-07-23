@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './University.module.css';
+import styles from './styles/University.module.css';
 import { useDropdown } from '@/hooks';
 import UniversityList from './UniversityList';
 
