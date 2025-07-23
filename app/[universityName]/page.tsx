@@ -1,8 +1,7 @@
 import { universityNames } from '@/constants';
 import { Suspense } from 'react';
-import { LectureList, LectureSelector } from './components';
-import CardListSkeleton from '@/domains/lecture/skeleton/CardListSkeleton';
-import { getLectureList } from '@/api';
+import { LectureList, LectureSelector, CardListSkeleton } from '@/domains/lecture';
+import { getLectureList } from '@/api/lecture';
 import styles from '@/styles/global.module.css';
 
 export async function generateStaticParams() {

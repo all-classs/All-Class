@@ -1,4 +1,4 @@
-import styles from './ReviewCardSkeleton.module.css';
+import styles from '../styles/ReviewCardSkeleton.module.css';
 
 export default function ReviewCardSkeleton() {
   return (
