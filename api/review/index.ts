@@ -1,0 +1,1 @@
+export { getReviewList } from './getReviewList';

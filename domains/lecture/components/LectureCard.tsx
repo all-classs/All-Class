@@ -1,4 +1,4 @@
-import { Lecture } from '@/app/[universityName]/lib';
+import { Lecture } from '@/types';
 import { BookOpen, Tag, Star } from 'lucide-react';
 import { StarRating } from '@/components/common';
 import styles from '../styles/LectureCard.module.css';
