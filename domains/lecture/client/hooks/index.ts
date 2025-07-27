@@ -1,0 +1,1 @@
+export { useLectureRating } from './useLectureRating';

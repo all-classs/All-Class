@@ -1,4 +1,4 @@
-import { Lecture, LectureInfoResult } from '@/types';
+import { Lecture, LectureInfoResult } from '@/domains/lecture';
 import { StarRating } from '@/components/common';
 import { manImage, womanImage } from '@/public';
 import { Book, Tag, CalendarCheck, MessageSquare } from 'lucide-react';
@@ -21,7 +21,6 @@ export default function LectureInfo({ lectureInfo, lectureData }: LectureInfoPro
 
   const lecture = lectureInfo.lectureInfo;
 
-  // 일단 그냥 랜덤으로 뜨게.. 어차피 이미지도 없는디..
   const profileImages = [manImage, womanImage];
   const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
 

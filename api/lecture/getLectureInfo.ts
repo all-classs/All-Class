@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
-import { LectureInfoResponse, LectureInfoResult } from '@/types/lectureInfo';
+import { LectureInfoResponse, LectureInfoResult } from '@/domains/lecture';
 
 export async function getLectureInfo(
   universityName: string,

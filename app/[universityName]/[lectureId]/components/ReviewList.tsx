@@ -1,7 +1,7 @@
-import ReviewCard from '@/domains/review/components/ReviewCard';
+import { ReviewCard } from '@/domains/review';
 import { User } from 'lucide-react';
 import styles from './styles/ReviewList.module.css';
-import { ReviewResult } from '@/types';
+import { ReviewResult } from '@/domains/review';
 
 interface ReviewListProps {
   reviewResult: ReviewResult;

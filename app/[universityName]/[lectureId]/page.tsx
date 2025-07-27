@@ -1,8 +1,10 @@
-import { Lecture } from '@/types';
-import { LectureInfo, ReviewList } from './components';
-import ReviewCardListSkeleton from '@/domains/review/skeleton/ReviewCardListSkeleton';
-import LectureInfoSkeleton from '@/domains/lecture/skeleton/LectureInfoSkeleton';
-import { getLectureInfo, getReviewList } from '@/api';
+import { Lecture } from '@/domains/lecture';
+import { LectureInfoSkeleton } from '@/domains/lecture';
+import { ReviewCardListSkeleton } from '@/domains/review';
+import LectureInfo from './components/LectureInfo';
+import ReviewList from './components/ReviewList';
+import { getLectureInfo } from '@/api/lecture';
+import { getReviewList } from '@/api/review';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 

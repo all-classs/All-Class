@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
-import { ReviewResponse, ReviewResult } from '@/types/review';
+import { ReviewResponse, ReviewResult } from '@/domains/review';
 
 export async function getReviewList(lectureId: string): Promise<ReviewResult> {
   try {

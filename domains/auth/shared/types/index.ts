@@ -21,3 +21,9 @@ export interface AuthState {
   login: (user: UserData) => void;
   logout: () => void;
 }
+
+export interface ModalState {
+  loginModalOpen: boolean;
+  openLoginModal: () => void;
+  closeLoginModal: () => void;
+}

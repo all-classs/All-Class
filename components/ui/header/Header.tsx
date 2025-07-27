@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 import { HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LoginModal } from '@/components/common';
+import { LoginModal } from '@/domains/auth';
 import { useAuthStore, useModalStore } from '@/store';
 
 interface HeaderProps {

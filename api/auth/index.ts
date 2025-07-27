@@ -1,4 +1,4 @@
-import { LoginParams, LoginResponse } from '@/types';
+import { LoginParams, LoginResponse } from '@/domains/auth';
 import { HTTP_STATUS } from '@/constants';
 
 export async function postLogin({ id, password }: LoginParams): Promise<LoginResponse> {

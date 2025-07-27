@@ -1,6 +1,6 @@
 'use client';
 
-import { Review } from '@/types';
+import { Review } from '@/domains/review';
 import { StarRating } from '@/components/common';
 import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';

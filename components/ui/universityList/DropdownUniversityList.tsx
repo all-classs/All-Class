@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './University.module.css';
-import { useDropdown } from '@/hooks';
+import { useDropdown } from './hooks/useDropdown';
 import UniversityList from './UniversityList';
 
 export default function DropdownUniversityList() {

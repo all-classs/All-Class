@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Modal from './Modal';
-import styles from './LoginModal.module.css';
-import { useLoginMutation } from '@/hooks/query';
+import Modal from '@/components/common/modal/Modal';
+import styles from './styles/LoginModal.module.css';
+import { useLoginMutation } from '../hooks';
 import { useAuthStore, useModalStore } from '@/store';
 
 export default function LoginModal() {

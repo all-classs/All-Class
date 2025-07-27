@@ -6,7 +6,9 @@ import { UniversityList } from '@/components/ui';
 import dynamic from 'next/dynamic';
 import { useModalStore, useAuthStore } from '@/store';
 
-const LoginModal = dynamic(() => import('@/components/common/modal/LoginModal'), { ssr: false });
+const LoginModal = dynamic(() => import('@/domains/auth/client/components/LoginModal'), {
+  ssr: false,
+});
 
 interface HamburgerMenuProps {
   showDropdown?: boolean;

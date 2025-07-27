@@ -1,4 +1,4 @@
-import { Review } from '@/types';
+import { Review } from '../shared/types';
 import { StarRating } from '@/components/common';
 import { Heart, Calendar } from 'lucide-react';
 import Image from 'next/image';
