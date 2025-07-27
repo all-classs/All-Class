@@ -1,17 +1,13 @@
 import { universityNames } from '@/constants';
-import { Suspense } from 'react';
-import { LectureList, LectureSelector } from './components';
-import CardListSkeleton from '@/domains/lecture/skeleton/CardListSkeleton';
-import { getLectureList } from '@/api';
+import { LectureListHybrid } from '@/domains/lecture';
+import LectureSelector from './components/LectureSelector';
+import { getLectureListStatic } from '@/api/lecture';
 import styles from '@/styles/global.module.css';
 
-export async function generateStaticParams() {
-  return universityNames.map((name) => ({ universityName: name }));
-}
+export const revalidate = false;
 
-async function LectureListWrapper({ universityName }: { universityName: string }) {
-  const lectures = await getLectureList(universityName);
-  return <LectureList universityName={universityName} lectures={lectures} />;
+export async function generateStaticParams() {
+  return universityNames.map((name) => ({ universityName: encodeURIComponent(name) }));
 }
 
 export default async function UniversityPage({
@@ -22,12 +18,12 @@ export default async function UniversityPage({
   const { universityName } = await params;
   const decoded = decodeURIComponent(universityName);
 
+  const staticLectures = await getLectureListStatic(decoded);
+
   return (
     <main className={styles.paddingContainer}>
       <LectureSelector universityName={decoded} />
-      <Suspense fallback={<CardListSkeleton count={12} />}>
-        <LectureListWrapper universityName={decoded} />
-      </Suspense>
+      <LectureListHybrid universityName={decoded} lectures={staticLectures} />
     </main>
   );
 }
