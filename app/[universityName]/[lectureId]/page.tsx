@@ -7,6 +7,8 @@ import { getLectureInfo } from '@/api/lecture';
 import { getReviewList } from '@/api/review';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { createQueryClient, prefetchLectureRating } from '@/utils';
 
 export async function generateStaticParams() {
   return [];
@@ -42,18 +44,24 @@ export default async function LectureDetailPage({
   const { lectureData: encodedLectureData } = await searchParams;
   const lectureData = JSON.parse(decodeURIComponent(encodedLectureData || '{}'));
 
+  const queryClient = createQueryClient();
+
+  await prefetchLectureRating(queryClient, parseInt(lectureId), universityName);
+
   return (
-    <div className={styles.paddingContainer}>
-      <Suspense fallback={<LectureInfoSkeleton />}>
-        <LectureInfoWrapper
-          universityName={universityName}
-          lectureId={lectureId}
-          lectureData={lectureData}
-        />
-      </Suspense>
-      <Suspense fallback={<ReviewCardListSkeleton count={6} />}>
-        <ReviewListWrapper lectureId={lectureId} />
-      </Suspense>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className={styles.paddingContainer}>
+        <Suspense fallback={<LectureInfoSkeleton />}>
+          <LectureInfoWrapper
+            universityName={universityName}
+            lectureId={lectureId}
+            lectureData={lectureData}
+          />
+        </Suspense>
+        <Suspense fallback={<ReviewCardListSkeleton count={6} />}>
+          <ReviewListWrapper lectureId={lectureId} />
+        </Suspense>
+      </div>
+    </HydrationBoundary>
   );
 }
