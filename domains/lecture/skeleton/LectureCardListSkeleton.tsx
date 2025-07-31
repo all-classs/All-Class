@@ -1,5 +1,5 @@
-import CardSkeleton from './CardSkeleton';
-import styles from './CardListSkeleton.module.css';
+import CardSkeleton from './LectureCardSkeleton';
+import styles from './LectureCardListSkeleton.module.css';
 
 interface CardListSkeletonProps {
   count?: number;
