@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Header.module.css';
-import { HamburgerMenu, DropdownUniversityList } from '@/components/ui';
+import { Button, HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LoginModal } from '@/domains/auth';
@@ -41,15 +41,15 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         {showDropdown && <DropdownUniversityList />}
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
-        <button className={styles.button}>마이페이지</button>
+        <Button variant="default">마이페이지</Button>
         {isLoggedIn ? (
-          <button className={styles.button} onClick={handleLogoutClick}>
+          <Button variant="default" onClick={handleLogoutClick}>
             로그아웃
-          </button>
+          </Button>
         ) : (
-          <button className={styles.button} onClick={handleLoginClick}>
+          <Button variant="default" onClick={handleLoginClick}>
             로그인
-          </button>
+          </Button>
         )}
       </section>
       {showDropdown && <HamburgerMenu showDropdown={showDropdown} />}

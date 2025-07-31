@@ -1,10 +1,10 @@
 import { universityNames } from '@/constants';
-import { LectureListHybrid } from '@/domains/lecture';
-import LectureSelector from './components/LectureSelector';
 import { getLectureListStatic } from '@/api/lecture';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { createQueryClient, prefetchMultipleLectureRatings } from '@/utils';
+import { Suspense } from 'react';
+import { LectureCardListSkeleton, LectureSelector, LectureListHybrid } from '@/domains/lecture';
 
 export const revalidate = false;
 
@@ -32,7 +32,9 @@ export default async function UniversityPage({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className={styles.paddingContainer}>
         <LectureSelector universityName={decoded} />
-        <LectureListHybrid universityName={decoded} lectures={staticLectures} />
+        <Suspense fallback={<LectureCardListSkeleton count={6} />}>
+          <LectureListHybrid universityName={decoded} lectures={staticLectures} />
+        </Suspense>
       </main>
     </HydrationBoundary>
   );

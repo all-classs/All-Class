@@ -7,12 +7,16 @@ interface DynamicRatingProps {
   lectureId: number;
   universityName: string;
   size?: 'small' | 'medium' | 'large' | 'veryLarge';
+  showRatingText?: boolean;
+  fallbackRating?: number;
 }
 
 export default function DynamicRating({
   lectureId,
   universityName,
   size = 'large',
+  showRatingText = false,
+  fallbackRating = 0,
 }: DynamicRatingProps) {
   const { data, isLoading, error } = useLectureRating({
     lectureId,
@@ -20,6 +24,10 @@ export default function DynamicRating({
   });
 
   if (isLoading) {
+    if (fallbackRating > 0) {
+      return <StarRating rating={fallbackRating} size={size} showRatingText={showRatingText} />;
+    }
+
     return (
       <div
         style={{
@@ -34,8 +42,14 @@ export default function DynamicRating({
   }
 
   if (error || !data?.success) {
-    return <StarRating rating={0} size={size} />;
+    return <StarRating rating={fallbackRating} size={size} showRatingText={showRatingText} />;
   }
 
-  return <StarRating rating={data.rating || 0} size={size} />;
+  return (
+    <StarRating
+      rating={data.rating || fallbackRating}
+      size={size}
+      showRatingText={showRatingText}
+    />
+  );
 }

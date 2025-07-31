@@ -1,16 +1,26 @@
-import { Lecture, LectureInfoResult } from '@/domains/lecture';
-import { StarRating } from '@/components/common';
+import { LectureInfoResult, DynamicRating, DynamicReviewCount } from '@/domains/lecture';
 import { manImage, womanImage } from '@/public';
 import { Book, Tag, CalendarCheck, MessageSquare } from 'lucide-react';
-import styles from './styles/LectureInfo.module.css';
+import styles from '../../styles/LectureInfo.module.css';
 import Image from 'next/image';
+
+interface LectureStatus {
+  opened: boolean;
+}
 
 interface LectureInfoProps {
   lectureInfo: LectureInfoResult;
-  lectureData?: Lecture;
+  lectureData?: LectureStatus;
+  lectureId: string;
+  universityName: string;
 }
 
-export default function LectureInfo({ lectureInfo, lectureData }: LectureInfoProps) {
+export default function LectureInfo({
+  lectureInfo,
+  lectureData,
+  lectureId,
+  universityName,
+}: LectureInfoProps) {
   if (!lectureInfo.success || !lectureInfo.lectureInfo) {
     return (
       <main className={styles.infoContainer}>
@@ -57,14 +67,22 @@ export default function LectureInfo({ lectureInfo, lectureData }: LectureInfoPro
           <div className={styles.statsSection}>
             <div className={styles.statItem}>
               <MessageSquare size={16} className={styles.statIcon} />
-              <span className={styles.statNumber}>{lecture.reviewCount || 0}</span>
+              <span className={styles.statNumber}>
+                <DynamicReviewCount
+                  lectureId={parseInt(lectureId)}
+                  universityName={universityName}
+                  fallbackCount={lecture.reviewCount || 0}
+                />
+              </span>
               <span className={styles.statLabel}>개의 리뷰</span>
             </div>
             <div className={styles.statItem}>
-              <StarRating
-                rating={lecture.averageStarLating || 0}
+              <DynamicRating
+                lectureId={parseInt(lectureId)}
+                universityName={universityName}
                 size="veryLarge"
                 showRatingText={true}
+                fallbackRating={lecture.averageStarLating || 0}
               />
             </div>
           </div>
@@ -78,8 +96,6 @@ export default function LectureInfo({ lectureInfo, lectureData }: LectureInfoPro
               width={200}
               height={200}
               className={styles.image}
-              priority
-              unoptimized
               loading="eager"
               fetchPriority="high"
             />

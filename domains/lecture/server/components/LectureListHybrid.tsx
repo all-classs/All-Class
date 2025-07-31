@@ -32,12 +32,13 @@ export default function LectureListHybrid({ universityName, lectures }: LectureL
   return (
     <main className={styles.lectureListContainer}>
       {lectureList.map((lecture: StaticLectureData) => {
-        const encodedOpened = encodeURIComponent(String(lecture.opened));
+        const openedParam = lecture.opened ? 'true' : 'false';
 
         return (
           <Link
-            href={`/${universityName}/${lecture.lectureId}?opened=${encodedOpened}`}
+            href={`/${universityName}/${lecture.lectureId}?opened=${openedParam}`}
             key={lecture.lectureId}
+            prefetch={true}
           >
             <LectureCardHybrid staticData={lecture} universityName={universityName} />
           </Link>

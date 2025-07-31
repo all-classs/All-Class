@@ -1,0 +1,201 @@
+@keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+  
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 25%, 
+      #e0e0e0 50%, 
+      #f0f0f0 75%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+  }
+  
+  .cardContainer {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--card-border);
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .colorBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0 0 0 10px;
+    background: linear-gradient(180deg, #e0e0e0 0%, #d0d0d0 100%);
+  }
+  
+  .cardHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-left: 12px;
+  }
+  
+  .cardInfo {
+    flex: 1;
+  }
+  
+  .lectureNameSkeleton {
+    composes: skeleton;
+    height: 20px;
+    width: 70%;
+    margin-bottom: 8px;
+  }
+  
+  .professorSkeleton {
+    composes: skeleton;
+    height: 16px;
+    width: 45%;
+  }
+  
+  .cardStatus {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 10px;
+  }
+  
+  .statusBadgeSkeleton {
+    composes: skeleton;
+    height: 24px;
+    width: 40px;
+    border-radius: 16px;
+  }
+  
+  .cardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+    padding-left: 12px;
+  }
+  
+  .cardDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 22px;
+  }
+  
+  .labelSkeleton {
+    composes: skeleton;
+    height: 16px;
+    width: 40px;
+  }
+  
+  .valueSkeleton {
+    composes: skeleton;
+    height: 16px;
+    width: 60px;
+  }
+  
+  .valueSkeletonBadge {
+    composes: skeleton;
+    height: 20px;
+    width: 50px;
+    border-radius: 12px;
+  }
+  
+  .starRatingSkeleton {
+    composes: skeleton;
+    height: 18px;
+    width: 90px;
+    border-radius: 9px;
+  }
+  
+  @media (max-width: 768px) {
+    .cardContainer {
+      padding: 14px;
+      min-height: 140px;
+    }
+    
+    .cardHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      padding-left: 10px;
+    }
+    
+    .cardStatus {
+      margin-left: 0;
+      align-self: flex-end;
+    }
+    
+    .cardInfo {
+      width: 100%;
+    }
+    
+    .lectureNameSkeleton {
+      height: 18px;
+      width: 80%;
+    }
+    
+    .professorSkeleton {
+      height: 14px;
+      width: 50%;
+    }
+    
+    .cardBody {
+      padding-left: 10px;
+      gap: 8px;
+    }
+    
+    .cardDetail {
+      gap: 6px;
+      min-height: 20px;
+    }
+    
+    .labelSkeleton {
+      height: 14px;
+      width: 35px;
+    }
+    
+    .valueSkeleton {
+      height: 14px;
+      width: 55px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cardContainer {
+      padding: 12px;
+      min-height: 130px;
+    }
+    
+    .cardHeader {
+      padding-left: 8px;
+    }
+    
+    .cardBody {
+      padding-left: 8px;
+    }
+    
+    .lectureNameSkeleton {
+      height: 16px;
+    }
+    
+    .professorSkeleton {
+      height: 12px;
+    }
+  } 
+  
