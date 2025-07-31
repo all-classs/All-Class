@@ -4,6 +4,7 @@ import type { DynamicLectureData } from '@/domains/lecture';
 export interface RatingResult {
   success: boolean;
   rating?: number;
+  reviewCount?: number;
   message?: string;
 }
 
@@ -25,6 +26,7 @@ export async function getLectureRating(
       return {
         success: true,
         rating: data.data.averageStarLating,
+        reviewCount: data.data.reviewCount || 0,
       };
     }
 

@@ -54,6 +54,7 @@ export default function LectureCardHybrid({ staticData, universityName }: Lectur
               lectureId={staticData.lectureId}
               universityName={universityName}
               size="large"
+              showRatingText={true}
             />
           </div>
         </div>
