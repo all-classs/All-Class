@@ -6,7 +6,7 @@ export async function getReviewList(lectureId: string): Promise<ReviewResult> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/review?lectureId=${lectureId}`,
       {
-        cache: 'force-cache',
+        cache: 'no-store',
       }
     );
 
