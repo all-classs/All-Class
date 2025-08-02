@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from './HamburgerMenu.module.css';
 import { UniversityList } from '@/components/ui';
 import dynamic from 'next/dynamic';
-import { useModalStore, useAuthStore } from '@/store';
+import { useAuth, useLoginModal } from '@/domains/auth';
 
 const LoginModal = dynamic(() => import('@/domains/auth/client/components/LoginModal'), {
   ssr: false,
@@ -16,8 +16,8 @@ interface HamburgerMenuProps {
 
 export default function HamburgerMenu({ showDropdown = false }: HamburgerMenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openLoginModal } = useModalStore();
-  const { isLoggedIn, logout } = useAuthStore();
+  const { open: openLoginModal } = useLoginModal();
+  const { isLoggedIn, logout } = useAuth();
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);

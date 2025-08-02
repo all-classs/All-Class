@@ -4,16 +4,15 @@ import styles from './Header.module.css';
 import { Button, HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LoginModal } from '@/domains/auth';
-import { useAuthStore, useModalStore } from '@/store';
+import { LoginModal, useAuth, useLoginModal } from '@/domains/auth';
 
 interface HeaderProps {
   showDropdown?: boolean;
 }
 
 export default function Header({ showDropdown = false }: HeaderProps) {
-  const { isLoggedIn, logout } = useAuthStore();
-  const { openLoginModal } = useModalStore();
+  const { isLoggedIn, logout } = useAuth();
+  const { open: openLoginModal } = useLoginModal();
 
   const handleLoginClick = () => {
     openLoginModal();
