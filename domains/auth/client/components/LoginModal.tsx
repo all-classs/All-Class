@@ -3,21 +3,23 @@
 import { useState } from 'react';
 import Modal from '@/components/common/modal/Modal';
 import styles from './styles/LoginModal.module.css';
-import { useLoginMutation } from '../hooks';
-import { useAuthStore, useModalStore } from '@/store';
+import { useLoginMutation, useLoginModal } from '../hooks';
+import { setToken, setUserInfo } from '@/utils';
+import { UI_MESSAGES } from '@/constants';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function LoginModal() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { loginModalOpen, closeLoginModal } = useModalStore();
+  const { isOpen, close } = useLoginModal();
+  const queryClient = useQueryClient();
 
   const loginMutation = useLoginMutation();
-  const login = useAuthStore((s) => s.login);
 
   const handleClose = () => {
     setId('');
     setPassword('');
-    closeLoginModal();
+    close();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,18 +28,28 @@ export default function LoginModal() {
       { id, password },
       {
         onSuccess: (userData) => {
-          login(userData);
+          setToken(userData.token);
+
+          const userInfo = {
+            name: userData.name,
+            userKey: userData.userKey,
+            role: userData.role,
+          };
+
+          setUserInfo(userInfo);
+          queryClient.setQueryData(['auth', 'user'], userInfo);
+
           handleClose();
         },
         onError: (error) => {
-          alert(error instanceof Error ? error.message : '로그인 실패');
+          alert(error instanceof Error ? error.message : UI_MESSAGES.AUTH.LOGIN_FAILED);
         },
       }
     );
   };
 
   return (
-    <Modal open={loginModalOpen} title="로그인" size="small" onClose={handleClose}>
+    <Modal open={isOpen} title="로그인" size="small" onClose={handleClose}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
           <label htmlFor="login-id" className={styles.label}>
