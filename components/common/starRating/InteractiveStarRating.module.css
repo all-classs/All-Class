@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.starButton {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.starButton:hover:not(.disabled) {
+  background-color: var(--gray-100);
+}
+
+.starButton.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.star {
+  transition: all 0.2s ease;
+}
+
+.star.filled {
+  fill: var(--star-color);
+  color: var(--star-color);
+  filter: drop-shadow(0 1px 2px rgba(245, 158, 11, 0.3));
+}
+
+.star.empty {
+  fill: none;
+  color: var(--gray-400);
+  stroke: var(--gray-400);
+  stroke-width: 1;
+}
+
+.ratingText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.small {
+  gap: 0.3rem;
+}
+
+.small .stars {
+  gap: 0.2rem;
+}
+
+.small .starButton {
+  padding: 0.2rem;
+}
+
+.small .ratingText {
+  font-size: 0.8rem;
+}
+
+.medium {
+  gap: 0.5rem;
+}
+
+.large {
+  gap: 0.6rem;
+}
+
+.large .stars {
+  gap: 0.3rem;
+}
+
+.large .starButton {
+  padding: 0.3rem;
+}
+
+.large .ratingText {
+  font-size: 1rem;
+}

@@ -2,6 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { getLectureRating } from '@/api/lecture';
 import { getReviewList } from '@/api/review';
 import type { StaticLectureData } from '@/domains/lecture';
+import { CACHE_TIME } from '@/constants';
 
 export async function prefetchLectureRating(
   queryClient: QueryClient,
@@ -11,7 +12,7 @@ export async function prefetchLectureRating(
   await queryClient.prefetchQuery({
     queryKey: ['lecture-rating', lectureId, universityName],
     queryFn: () => getLectureRating(lectureId, universityName),
-    staleTime: 1000 * 60 * 5,
+    staleTime: CACHE_TIME.STALE_TIME,
   });
 }
 
@@ -22,7 +23,7 @@ export async function prefetchReviewList(
   await queryClient.prefetchQuery({
     queryKey: ['reviews', lectureId],
     queryFn: () => getReviewList(lectureId),
-    staleTime: 1000 * 60 * 5,
+    staleTime: CACHE_TIME.STALE_TIME,
   });
 }
 

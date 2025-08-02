@@ -1,5 +1,6 @@
 import { LoginParams, LoginResponse } from '@/domains/auth';
 import { HTTP_STATUS } from '@/constants';
+import { setToken } from '@/utils';
 
 export async function postLogin({ id, password }: LoginParams): Promise<LoginResponse> {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
@@ -10,12 +11,17 @@ export async function postLogin({ id, password }: LoginParams): Promise<LoginRes
 
   const data = await response.json();
 
-  if (data.status === HTTP_STATUS.ACCEPTED) {
-    return {
+  if (data.status === HTTP_STATUS.OK) {
+    const loginResponse = {
       name: data.data.name,
+      token: data.data.token,
       userKey: data.data.userKey,
       role: data.data.auth || data.data.role || '',
     };
+
+    setToken(loginResponse.token);
+
+    return loginResponse;
   }
 
   if (data.status === HTTP_STATUS.UNAUTHORIZED)
@@ -27,5 +33,6 @@ export async function postLogin({ id, password }: LoginParams): Promise<LoginRes
     name: '',
     userKey: '',
     role: '',
+    token: '',
   };
 }
