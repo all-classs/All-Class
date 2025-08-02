@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from './providers';
+import AuthHydrationProvider from './providers/AuthHydrationProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,7 +28,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AppProviders>
-          <div>{children}</div>
+          <AuthHydrationProvider>
+            <div>{children}</div>
+          </AuthHydrationProvider>
         </AppProviders>
       </body>
     </html>
