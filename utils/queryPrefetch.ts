@@ -21,10 +21,32 @@ export async function prefetchReviewList(
   lectureId: string
 ): Promise<void> {
   await queryClient.prefetchQuery({
-    queryKey: ['reviews', lectureId],
-    queryFn: () => getReviewList(lectureId),
+    queryKey: ['reviews', lectureId, 'rating_desc'],
+    queryFn: () => getReviewList({ lectureId }),
     staleTime: CACHE_TIME.STALE_TIME,
   });
+}
+
+export async function prefetchAllSortOptions(
+  queryClient: QueryClient,
+  lectureId: string
+): Promise<void> {
+  const sortOptions = [
+    { key: 'rating_desc', params: {} },
+    { key: 'rating_asc', params: { lowness: true } },
+    { key: 'likes_desc', params: { likes: true } },
+    { key: 'latest', params: { recent: true } },
+  ];
+
+  await Promise.allSettled(
+    sortOptions.map(({ key, params }) =>
+      queryClient.prefetchQuery({
+        queryKey: ['reviews', lectureId, key],
+        queryFn: () => getReviewList({ lectureId, ...params }),
+        staleTime: CACHE_TIME.STALE_TIME,
+      })
+    )
+  );
 }
 
 export async function prefetchMultipleLectureRatings(
