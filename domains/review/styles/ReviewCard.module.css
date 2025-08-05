@@ -137,6 +137,11 @@
   stroke-width: 2;
 }
 
+.likeIcon.active {
+  fill: var(--red);
+  color: var(--red);
+}
+
 .likeCount {
   font-size: 0.8rem;
   color: var(--text-secondary);
