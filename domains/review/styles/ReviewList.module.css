@@ -13,11 +13,46 @@
   border-bottom: 1px solid var(--gray-100);
 }
 
+.reviewControls {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  .reviewHeader {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .reviewTitle {
+    text-align: center;
+  }
+  
+  .reviewControls {
+    justify-content: center;
+  }
+  
+  .reviewActions {
+    align-self: center;
+  }
+}
+
+
 .reviewTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+.reviewSelector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .reviewActions {
@@ -26,17 +61,20 @@
   gap: 1rem;
 }
 
-.reviewCount {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
 
 .reviewList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+
+.reviewListContent {
+  display: contents;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.reviewListContent.fetching {
+  opacity: 0.6;
 }
 
 .emptyState {

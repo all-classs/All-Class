@@ -1,14 +1,29 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
 import { ReviewResponse, ReviewResult } from '@/domains/review';
 
-export async function getReviewList(lectureId: string): Promise<ReviewResult> {
+interface GetReviewListParams {
+  lectureId: string;
+  lowness?: boolean;
+  likes?: boolean;
+  recent?: boolean;
+}
+
+export async function getReviewList({
+  lectureId,
+  lowness,
+  likes,
+  recent,
+}: GetReviewListParams): Promise<ReviewResult> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/review?lectureId=${lectureId}`,
-      {
-        cache: 'no-store',
-      }
-    );
+    const params = new URLSearchParams({ lectureId });
+
+    if (lowness) params.append('lowness', 'true');
+    if (likes) params.append('likes', 'true');
+    if (recent) params.append('recent', 'true');
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review?${params.toString()}`, {
+      cache: 'no-store',
+    });
 
     const data: ReviewResponse = await response.json();
 
@@ -22,7 +37,7 @@ export async function getReviewList(lectureId: string): Promise<ReviewResult> {
     if (data.status === HTTP_STATUS.ACCEPTED) {
       return {
         success: false,
-        message: data.message || '수강 후기가 어디에도 없습니다.',
+        message: data.message || ERROR_MESSAGES.REVIEW_FETCH_EMPTY,
       };
     }
 

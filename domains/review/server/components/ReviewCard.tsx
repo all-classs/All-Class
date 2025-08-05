@@ -1,16 +1,18 @@
-import { Review } from '../../shared/types';
+import { memo } from 'react';
+import { Review } from '../../shared/types/review';
 import { StarRating } from '@/components/common';
-import { Heart, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import Image from 'next/image';
 import profileImage from '@/public/assets/default-profile/profile.png';
 import { ReviewCardModal } from '../../client/components';
 import styles from '../../styles/ReviewCard.module.css';
+import { LikeReview } from '../../client/components';
 
 interface ReviewCardProps {
   review: Review;
 }
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+export default memo(function ReviewCard({ review }: ReviewCardProps) {
   return (
     <ReviewCardModal review={review}>
       <div className={styles.reviewCard}>
@@ -24,7 +26,6 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                 height={40}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
             <div className={styles.userDetails}>
@@ -47,12 +48,9 @@ export default function ReviewCard({ review }: ReviewCardProps) {
         </div>
 
         <div className={styles.cardFooter}>
-          <div className={styles.likesSection}>
-            <Heart size={16} className={styles.likeIcon} />
-            <span className={styles.likeCount}>{review.likes}</span>
-          </div>
+          <LikeReview review={review} />
         </div>
       </div>
     </ReviewCardModal>
   );
-}
+});

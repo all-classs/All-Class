@@ -8,6 +8,7 @@ import { forwardRef, useImperativeHandle, useState, useRef } from 'react';
 import Modal, { ModalRef } from './Modal';
 import profileImage from '@/public/assets/default-profile/profile.png';
 import styles from './ReviewDetailModal.module.css';
+import { useLikeReviewAction } from '@/domains/review/client/hooks';
 
 interface ReviewDetailModalProps {
   review?: Review | null;
@@ -38,6 +39,11 @@ const ReviewDetailModal = forwardRef<ReviewDetailModalRef, ReviewDetailModalProp
       setReview(null);
       onClose?.();
     };
+
+    const { handleLikeClick, isLoggedIn } = useLikeReviewAction({
+      review: review!,
+      setReview,
+    });
 
     return (
       <Modal ref={modalRef} title="수강 후기 상세" size="large" onClose={handleClose}>
@@ -79,10 +85,13 @@ const ReviewDetailModal = forwardRef<ReviewDetailModalRef, ReviewDetailModalProp
                 ))}
               </div>
             </div>
-
             <div className={styles.reviewFooter}>
-              <div className={styles.likesSection}>
-                <Heart size={18} className={styles.likeIcon} />
+              <div className={styles.likesSection} onClick={handleLikeClick}>
+                <Heart
+                  size={18}
+                  className={styles.likeIcon}
+                  style={{ cursor: isLoggedIn ? 'pointer' : 'default' }}
+                />
                 <span className={styles.likeCount}>{review.likes}개의 좋아요</span>
               </div>
             </div>

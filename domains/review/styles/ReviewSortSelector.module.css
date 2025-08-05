@@ -1,0 +1,136 @@
+.sortContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.sortTabs {
+  display: flex;
+  gap: 8px;
+  background-color: var(--gray-50);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-100);
+}
+
+.sortTab {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sortTab:hover {
+  color: var(--text-primary);
+  background-color: var(--gray-100);
+}
+
+.sortTab.active {
+  background-color: var(--primary);
+  color: var(--black);
+  font-weight: 600;
+}
+
+.sortTab.active:hover {
+  background-color: var(--yellow-400);
+}
+
+.sortSelector {
+  position: relative;
+  display: none;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  justify-content: space-between;
+}
+
+.sortButton:hover {
+  border-color: var(--gray-300);
+  background-color: var(--gray-50);
+}
+
+.sortButton.open {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 214, 0, 0.1);
+}
+
+.sortLabel {
+  color: var(--text-primary);
+}
+
+.chevron {
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.sortDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  z-index: 50;
+  overflow: hidden;
+}
+
+.sortOption {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sortOption:hover {
+  background-color: var(--gray-50);
+}
+
+.sortOption.active {
+  background-color: var(--yellow-100);
+  color: var(--black);
+  font-weight: 600;
+}
+
+.sortOption.active:hover {
+  background-color: var(--yellow-200);
+}
+
+@media (max-width: 767px) {
+  .sortTabs {
+    display: none;
+  }
+  
+  .sortSelector {
+    display: block;
+  }
+}

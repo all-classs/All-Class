@@ -1,6 +1,6 @@
 'use client';
 
-import { Review } from '../../shared/types';
+import { Review } from '../../shared/types/review';
 import ReviewDetailModal from '@/components/common/modal/ReviewDetailModal';
 import { useRef } from 'react';
 
