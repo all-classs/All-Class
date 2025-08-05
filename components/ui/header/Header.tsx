@@ -40,7 +40,9 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         {showDropdown && <DropdownUniversityList />}
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
-        <Button variant="default">마이페이지</Button>
+        <Link href="/mypage/classes">
+          <Button variant="default">마이페이지</Button>
+        </Link>
         {isLoggedIn ? (
           <Button variant="default" onClick={handleLogoutClick}>
             로그아웃
