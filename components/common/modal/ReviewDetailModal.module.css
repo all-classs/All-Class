@@ -112,6 +112,7 @@
   border-radius: 24px;
   background: var(--gray-50);
   transition: background 0.3s ease;
+  cursor: pointer;
 }
 
 .likesSection:hover {
@@ -121,6 +122,11 @@
 .likeIcon {
   color: var(--text-secondary);
   stroke-width: 2;
+}
+
+.likeIcon.active {
+  fill: #ff4757;
+  color: #ff4757;
 }
 
 .likeCount {
