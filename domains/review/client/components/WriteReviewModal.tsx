@@ -1,26 +1,36 @@
 'use client';
 
-import { useState, forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Modal, InteractiveStarRating, type ModalRef } from '@/components/common';
 import { Button } from '@/components/ui';
-import { UI_MESSAGES } from '@/constants';
-import styles from './styles/WriteReviewModal.module.css';
-
-interface WriteReviewModalProps {
-  onClose?: () => void;
-}
-
-export interface WriteReviewModalRef {
-  open: () => void;
-  close: () => void;
-}
+import { useWriteReviewForm, useReviewSubmit } from '../hooks';
+import type { WriteReviewModalProps, WriteReviewModalRef } from '../../shared/types/components';
+import styles from '../../styles/WriteReviewModal.module.css';
 
 const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
-  ({ onClose }, ref) => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [rating, setRating] = useState(0);
+  ({ lectureId, lectureName, onClose }, ref) => {
     const modalRef = useRef<ModalRef>(null);
+
+    const {
+      title,
+      content,
+      rating,
+      setTitle,
+      setContent,
+      setRating,
+      resetForm,
+      validateForm,
+      getFormData,
+    } = useWriteReviewForm();
+
+    const { submitReview, isSubmitting } = useReviewSubmit({
+      lectureId,
+      lectureName,
+      onSuccess: () => {
+        handleClose();
+        modalRef.current?.close();
+      },
+    });
 
     useImperativeHandle(ref, () => ({
       open: () => {
@@ -32,30 +42,21 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
     }));
 
     const handleClose = () => {
-      setTitle('');
-      setContent('');
-      setRating(0);
+      resetForm();
       onClose?.();
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
 
-      if (!title.trim()) {
-        alert(UI_MESSAGES.VALIDATION.TITLE_REQUIRED);
-        return;
-      }
-      if (!content.trim()) {
-        alert(UI_MESSAGES.VALIDATION.CONTENT_REQUIRED);
-        return;
-      }
-      if (rating === 0) {
-        alert(UI_MESSAGES.VALIDATION.RATING_REQUIRED);
+      const validation = validateForm();
+      if (!validation.isValid) {
+        alert(validation.message);
         return;
       }
 
-      handleClose();
-      modalRef.current?.close();
+      const formData = getFormData();
+      await submitReview(formData);
     };
 
     return (
@@ -103,8 +104,8 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
             <Button variant="secondary" onClick={handleClose} type="button">
               초기화
             </Button>
-            <Button variant="primary" type="submit">
-              작성완료
+            <Button variant="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? '작성 중...' : '작성완료'}
             </Button>
           </div>
         </form>

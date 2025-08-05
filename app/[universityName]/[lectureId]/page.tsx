@@ -4,7 +4,7 @@ import { getLectureInfo } from '@/api/lecture';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { createQueryClient, prefetchLectureRating, prefetchReviewList } from '@/utils';
+import { createQueryClient, prefetchLectureRating, prefetchAllSortOptions } from '@/utils';
 
 async function LectureInfoWrapper({
   universityName,
@@ -26,8 +26,17 @@ async function LectureInfoWrapper({
   );
 }
 
-function ReviewListWrapper({ lectureId }: { lectureId: string }) {
-  return <DynamicReviewList lectureId={lectureId} />;
+async function ReviewListWrapper({
+  lectureId,
+  universityName,
+}: {
+  lectureId: string;
+  universityName: string;
+}) {
+  const lectureInfo = await getLectureInfo(universityName, lectureId);
+  const lectureName = lectureInfo.success ? lectureInfo.lectureInfo?.lectureName : '';
+
+  return <DynamicReviewList lectureId={lectureId} lectureName={lectureName} />;
 }
 
 export default async function LectureDetailPage({
@@ -46,7 +55,7 @@ export default async function LectureDetailPage({
 
   await Promise.allSettled([
     prefetchLectureRating(queryClient, parseInt(lectureId), universityName),
-    prefetchReviewList(queryClient, lectureId),
+    prefetchAllSortOptions(queryClient, lectureId),
   ]);
 
   return (
@@ -60,7 +69,7 @@ export default async function LectureDetailPage({
           />
         </Suspense>
         <Suspense fallback={<ReviewCardListSkeleton count={6} />}>
-          <ReviewListWrapper lectureId={lectureId} />
+          <ReviewListWrapper lectureId={lectureId} universityName={universityName} />
         </Suspense>
       </main>
     </HydrationBoundary>

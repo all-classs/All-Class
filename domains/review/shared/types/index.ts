@@ -1,27 +1,24 @@
-export interface Review {
-  postId: number;
-  postTitle: string;
-  postContent: string;
-  starLating: number;
-  likes: number;
-  createDate: string;
-  user: {
-    userNumber: number;
-    username: string;
-    profile: string;
-  };
-}
+export type { Review, ReviewList, ReviewResponse, ReviewResult, SortOption } from './review';
 
-export type ReviewList = Review[];
+export type {
+  PostReviewRequest,
+  PostReviewResponse,
+  PostReviewResult,
+  GetReviewListParams,
+  LikeReviewParams,
+  LikeReviewResponse,
+  LikeReviewResult,
+  GetLectureNameParams,
+  GetLectureNameResult,
+} from './api';
 
-export interface ReviewResponse {
-  status: number;
-  message: string;
-  data: ReviewList | null;
-}
-
-export interface ReviewResult {
-  success: boolean;
-  reviews?: ReviewList;
-  message?: string;
-}
+export type {
+  WriteReviewModalProps,
+  WriteReviewModalRef,
+  ReviewSortSelectorProps,
+  ValidationResult,
+  ReviewFormData,
+  ReviewSubmitData,
+  UseReviewListParams,
+  UseReviewSubmitProps,
+} from './components';

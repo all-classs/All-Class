@@ -1,75 +1,47 @@
-// import { revalidateTag } from 'next/cache';
-// import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
 
-// export async function POST(request: NextRequest) {
-//   try {
-//     const { universityName, action, secret } = await request.json();
+export async function POST(request: NextRequest) {
+  try {
+    const { universityName, action } = await request.json();
 
-//     // 보안을 위한 secret 키 검증
-//     if (secret !== process.env.REVALIDATION_SECRET) {
-//       return NextResponse.json({ message: 'Invalid secret' }, { status: 401 });
-//     }
+    if (!universityName) {
+      return NextResponse.json({ message: 'University name is required' }, { status: 400 });
+    }
 
-//     if (!universityName) {
-//       return NextResponse.json({ message: 'University name is required' }, { status: 400 });
-//     }
+    switch (action) {
+      case 'lecture_added':
+      case 'lecture_removed':
+      case 'lecture_modified':
+        await revalidateTag(`lectures-${universityName}`);
+        break;
 
-//     // 액션에 따른 재생성 로직
-//     switch (action) {
-//       case 'lecture_added':
-//       case 'lecture_removed':
-//       case 'lecture_modified':
-//         // 특정 대학교의 강의 목록 페이지 재생성
-//         await revalidateTag(`lectures-${universityName}`);
-//         console.log(`Revalidated lectures for ${universityName} - Action: ${action}`);
-//         break;
+      case 'university_added':
+        await revalidateTag('universities');
+        break;
 
-//       case 'university_added':
-//         // 전체 대학교 목록 재생성 (필요한 경우)
-//         await revalidateTag('universities');
-//         console.log('Revalidated all universities');
-//         break;
+      default:
+        return NextResponse.json({ message: 'Invalid action' }, { status: 400 });
+    }
 
-//       default:
-//         return NextResponse.json({ message: 'Invalid action' }, { status: 400 });
-//     }
+    return NextResponse.json({
+      revalidated: true,
+      timestamp: new Date().toISOString(),
+      action,
+      universityName,
+    });
+  } catch (error) {
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+  }
+}
 
-//     return NextResponse.json({
-//       revalidated: true,
-//       timestamp: new Date().toISOString(),
-//       action,
-//       universityName,
-//     });
-//   } catch (error) {
-//     console.error('Revalidation error:', error);
-//     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
-//   }
-// }
-
-// // GET 요청으로도 간단한 재생성 지원
-// export async function GET(request: NextRequest) {
-//   const searchParams = request.nextUrl.searchParams;
-//   const universityName = searchParams.get('university');
-//   const secret = searchParams.get('secret');
-
-//   if (secret !== process.env.REVALIDATION_SECRET) {
-//     return NextResponse.json({ message: 'Invalid secret' }, { status: 401 });
-//   }
-
-//   if (!universityName) {
-//     return NextResponse.json({ message: 'University name is required' }, { status: 400 });
-//   }
-
-//   try {
-//     await revalidateTag(`lectures-${universityName}`);
-
-//     return NextResponse.json({
-//       revalidated: true,
-//       universityName,
-//       timestamp: new Date().toISOString(),
-//     });
-//   } catch (error) {
-//     console.error('Revalidation error:', error);
-//     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
-//   }
-// }
+// 예시: 동서대학교 강의 정보 수정 후 호출
+// fetch('https://all-class.vercel.app/api/revalidate', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+//     universityName: '동서대학교',
+//     action: 'lecture_modified'
+//   })
+// })
+// → https://all-class.vercel.app/동서대학교 페이지가 재생성됨
