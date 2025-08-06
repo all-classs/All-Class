@@ -4,6 +4,7 @@ import styles from './Header.module.css';
 import { Button, HamburgerMenu, DropdownUniversityList } from '@/components/ui';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 import { LoginModal, useAuth, useLoginModal } from '@/domains/auth';
 
 interface HeaderProps {
@@ -13,6 +14,8 @@ interface HeaderProps {
 export default function Header({ showDropdown = false }: HeaderProps) {
   const { isLoggedIn, logout } = useAuth();
   const { open: openLoginModal } = useLoginModal();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleLoginClick = () => {
     openLoginModal();
@@ -20,6 +23,13 @@ export default function Header({ showDropdown = false }: HeaderProps) {
 
   const handleLogoutClick = () => {
     logout();
+  };
+
+  const handleMyPageClick = () => {
+    if (pathname.startsWith('/mypage')) {
+      return;
+    }
+    router.push('/mypage/classes');
   };
 
   return (
@@ -40,9 +50,15 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         {showDropdown && <DropdownUniversityList />}
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
-        <Link href="/mypage/classes">
-          <Button variant="default">마이페이지</Button>
-        </Link>
+        {isLoggedIn ? (
+          <Button variant="default" onClick={handleMyPageClick}>
+            마이페이지
+          </Button>
+        ) : (
+          <Button variant="default" onClick={handleLoginClick}>
+            마이페이지
+          </Button>
+        )}
         {isLoggedIn ? (
           <Button variant="default" onClick={handleLogoutClick}>
             로그아웃
