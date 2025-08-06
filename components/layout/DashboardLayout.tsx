@@ -12,7 +12,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/mypage/classes', label: '수업', icon: BookOpen },
+  { href: '/mypage/lectures', label: '수업', icon: BookOpen },
   { href: '/mypage/reviews', label: '리뷰관리', icon: Star },
   { href: '/mypage/curriculum', label: '커리큘럼', icon: ClipboardList },
   { href: '/mypage/profile', label: '내정보', icon: User },

@@ -29,7 +29,7 @@ export default function Header({ showDropdown = false }: HeaderProps) {
     if (pathname.startsWith('/mypage')) {
       return;
     }
-    router.push('/mypage/classes');
+    router.push('/mypage/lectures');
   };
 
   return (
