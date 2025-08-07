@@ -1,5 +1,6 @@
 export { useReviewList } from './useReviewList';
 export { usePostReview } from './usePostReview';
+export { usePatchReview } from './usePatchReview';
 export { useWriteReviewForm } from './useWriteReviewForm';
 export { useReviewSubmit } from './useReviewSubmit';
 export { useReviewActions } from './useReviewActions';

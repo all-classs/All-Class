@@ -65,6 +65,35 @@
   /* Background Colors */
   --background-main: #ffffff;
   --background-secondary: #f8fafc;
+  --background-muted: #fafbfc;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 20px;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  
+  /* Button Colors */
+  --button-secondary-bg: #f3f4f6;
+  --button-secondary-text: #374151;
+  --button-secondary-border: #d1d5db;
+  --button-secondary-hover-bg: #e5e7eb;
+  --button-secondary-hover-border: #9ca3af;
+  
+  --button-danger-bg: #fef2f2;
+  --button-danger-text: #dc2626;
+  --button-danger-border: #fecaca;
+  --button-danger-hover-bg: #fee2e2;
+  --button-danger-hover-border: #fca5a5;
 }
 
 

@@ -8,8 +8,9 @@ import type { WriteReviewModalProps, WriteReviewModalRef } from '../../shared/ty
 import styles from '../../styles/WriteReviewModal.module.css';
 
 const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
-  ({ lectureId, lectureName, onClose }, ref) => {
+  ({ postId, lectureId, lectureName, onClose, onSuccess, mode = 'create', initialData }, ref) => {
     const modalRef = useRef<ModalRef>(null);
+    const isEditMode = mode === 'edit';
 
     const {
       title,
@@ -21,12 +22,15 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
       resetForm,
       validateForm,
       getFormData,
-    } = useWriteReviewForm();
+    } = useWriteReviewForm(initialData);
 
     const { submitReview, isSubmitting } = useReviewSubmit({
+      postId,
       lectureId,
       lectureName,
+      mode,
       onSuccess: () => {
+        onSuccess?.();
         handleClose();
         modalRef.current?.close();
       },
@@ -46,6 +50,10 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
       onClose?.();
     };
 
+    const handleReset = () => {
+      resetForm();
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
 
@@ -60,7 +68,12 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
     };
 
     return (
-      <Modal ref={modalRef} title="리뷰 작성" size="medium" onClose={handleClose}>
+      <Modal
+        ref={modalRef}
+        title={isEditMode ? '리뷰 수정' : '리뷰 작성'}
+        size="medium"
+        onClose={handleClose}
+      >
         <form className={styles.reviewForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <label htmlFor="review-title" className={styles.label}>
@@ -101,11 +114,17 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
           </div>
 
           <div className={styles.buttonGroup}>
-            <Button variant="secondary" onClick={handleClose} type="button">
+            <Button variant="secondary" onClick={handleReset} type="button">
               초기화
             </Button>
             <Button variant="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? '작성 중...' : '작성완료'}
+              {isSubmitting
+                ? isEditMode
+                  ? '수정 중...'
+                  : '작성 중...'
+                : isEditMode
+                  ? '수정완료'
+                  : '작성완료'}
             </Button>
           </div>
         </form>
