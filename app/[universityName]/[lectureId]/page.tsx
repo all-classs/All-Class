@@ -1,43 +1,11 @@
-import { ReviewCardListSkeleton, DynamicReviewList } from '@/domains/review';
-import { LectureInfoComponent as LectureInfo, LectureInfoSkeleton } from '@/domains/lecture';
-import { getLectureInfo } from '@/lib';
+import { ReviewCardListSkeleton } from '@/domains/review';
+import { LectureInfoSkeleton } from '@/domains/lecture';
+import { LectureInfoServer } from '@/domains/lecture/server/components/LectureInfoServer';
+import { ReviewListServer } from '@/domains/review/server/components/ReviewListServer';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { createQueryClient, prefetchLectureRating, prefetchAllSortOptions } from '@/utils';
-
-async function LectureInfoWrapper({
-  universityName,
-  lectureId,
-  lectureData,
-}: {
-  universityName: string;
-  lectureId: string;
-  lectureData?: { opened: boolean };
-}) {
-  const lectureInfo = await getLectureInfo(universityName, lectureId);
-  return (
-    <LectureInfo
-      lectureInfo={lectureInfo}
-      lectureData={lectureData}
-      lectureId={lectureId}
-      universityName={universityName}
-    />
-  );
-}
-
-async function ReviewListWrapper({
-  lectureId,
-  universityName,
-}: {
-  lectureId: string;
-  universityName: string;
-}) {
-  const lectureInfo = await getLectureInfo(universityName, lectureId);
-  const lectureName = lectureInfo.success ? lectureInfo.lectureInfo?.lectureName : '';
-
-  return <DynamicReviewList lectureId={lectureId} lectureName={lectureName} />;
-}
 
 export default async function LectureDetailPage({
   params,
@@ -62,14 +30,14 @@ export default async function LectureDetailPage({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className={styles.paddingContainer}>
         <Suspense fallback={<LectureInfoSkeleton />}>
-          <LectureInfoWrapper
+          <LectureInfoServer
             universityName={universityName}
             lectureId={lectureId}
             lectureData={lectureData}
           />
         </Suspense>
         <Suspense fallback={<ReviewCardListSkeleton count={6} />}>
-          <ReviewListWrapper lectureId={lectureId} universityName={universityName} />
+          <ReviewListServer lectureId={lectureId} universityName={universityName} />
         </Suspense>
       </main>
     </HydrationBoundary>
