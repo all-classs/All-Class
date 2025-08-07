@@ -22,7 +22,7 @@ export async function apiRequest(endpoint: string, options: RequestInit = {}) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('API Request failed:', error);
+    console.error(error);
     throw error;
   }
 }
