@@ -1,9 +1,19 @@
 import type { SortOption } from './review';
 
+export interface ReviewInitialData {
+  title: string;
+  content: string;
+  rating: number;
+}
+
 export interface WriteReviewModalProps {
-  lectureId: string;
+  postId?: string;
+  lectureId?: string;
   lectureName?: string;
   onClose?: () => void;
+  onSuccess?: () => void;
+  mode?: 'create' | 'edit';
+  initialData?: ReviewInitialData;
 }
 
 export interface WriteReviewModalRef {
@@ -39,7 +49,9 @@ export interface UseReviewListParams {
 }
 
 export interface UseReviewSubmitProps {
-  lectureId: string;
+  postId?: string;
+  lectureId?: string;
   lectureName?: string;
+  mode?: 'create' | 'edit';
   onSuccess?: () => void;
 }

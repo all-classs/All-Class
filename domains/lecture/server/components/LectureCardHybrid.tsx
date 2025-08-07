@@ -22,7 +22,7 @@ export default function LectureCardHybrid({ staticData, universityName }: Lectur
           <span
             className={`${styles.statusBadge} ${staticData.opened ? styles.opened : styles.closed}`}
           >
-            {staticData.opened ? '개설' : '폐강'}
+            {staticData.opened ? '개설' : '미개설'}
           </span>
         </div>
       </div>

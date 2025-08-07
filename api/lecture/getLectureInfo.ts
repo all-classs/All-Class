@@ -1,5 +1,6 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
 import { LectureInfoResponse, LectureInfoResult } from '@/domains/lecture';
+import { ClassData } from '@/domains/mypage';
 
 export async function getLectureInfo(
   universityName: string,
@@ -38,5 +39,27 @@ export async function getLectureInfo(
       success: false,
       message: ERROR_MESSAGES.LECUTRE_INFO_FETCH_UNKNOWN_ERROR,
     };
+  }
+}
+
+export async function getMyLectures(userNumber: number): Promise<ClassData[]> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/class/me?userNumber=${userNumber}`,
+      {
+        cache: 'force-cache',
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.status === 200) {
+      return data.data;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error fetching classes:', error);
+
+    return [];
   }
 }

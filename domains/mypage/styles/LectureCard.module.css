@@ -1,0 +1,196 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: 20px;
+  margin-top: 8px;
+  max-width: 100%;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+  padding: 24px 24px 0 24px;
+  margin-bottom: 20px;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.lectureInfo {
+  flex: 1;
+}
+
+.lectureName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.professor {
+  font-size: 15px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.reviewStatus {
+  margin-left: 16px;
+}
+
+.body {
+  padding: 0 24px 24px 24px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.infoValue {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.completionType {
+  padding: 6px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #fbbf24;
+  color: #1e293b;
+}
+
+.actionButton {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-1px);
+}
+
+.writeReviewButton {
+  background-color: #fbbf24;
+  color: #1e293b;
+}
+
+.writeReviewButton:hover {
+  background-color: #f59e0b !important;
+}
+
+.viewReviewButton {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.viewReviewButton:hover {
+  background-color: #cbd5e1 !important;
+}
+
+.linkButton {
+  text-decoration: none;
+  display: block;
+}
+
+/* Review Status Badge */
+.compactReviewBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.compactReviewedBadge {
+  background-color: #fed7aa;
+  color: #c2410c;
+}
+
+.compactUnReviewedBadge {
+  background-color: #fef3c7;
+  color: #a16207;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .card {
+    border-radius: 12px;
+  }
+  
+  .header {
+    padding: 20px 20px 0 20px;
+  }
+  
+  .body {
+    padding: 0 20px 20px 20px;
+  }
+  
+  .lectureName {
+    font-size: 18px;
+  }
+  
+  .headerTop {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .reviewStatus {
+    margin-left: 0;
+  }
+} 

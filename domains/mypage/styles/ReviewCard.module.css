@@ -1,0 +1,295 @@
+.reviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--space-2xl);
+  margin-top: var(--space-xl);
+}
+
+.reviewCard {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.reviewCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-hover-shadow);
+  border-color: var(--gray-400);
+}
+
+.lectureHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xl) var(--space-2xl);
+  background-color: var(--background-muted);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.lectureInfo {
+  flex: 1;
+}
+
+.lectureName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+  line-height: 1.4;
+}
+
+.lectureDetails {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.professor {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.separator {
+  color: var(--text-muted);
+  margin: 0 2px;
+}
+
+.lectureType {
+  color: var(--text-secondary);
+}
+
+.avgRating {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: var(--space-sm) 10px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.avgRating svg {
+  color: var(--star-color);
+}
+
+.reviewCount {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+.reviewContent {
+  padding: var(--space-2xl);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.reviewTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.myRating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: var(--space-lg);
+}
+
+.myRating svg {
+  color: var(--star-color);
+  fill: currentColor;
+}
+
+.reviewText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-600);
+  margin: 0;
+  padding: var(--space-lg);
+  background-color: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-100);
+  flex: 1;
+  overflow-y: auto;
+  max-height: 8em;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-400) var(--gray-50);
+}
+
+.reviewText::-webkit-scrollbar {
+  width: var(--space-xs);
+}
+
+.reviewText::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--space-xs);
+}
+
+.reviewText::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: var(--space-xs);
+  transition: background 0.2s ease;
+}
+
+.reviewText::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.reviewFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg) var(--space-2xl);
+  border-top: 1px solid var(--gray-100);
+  background-color: var(--background-muted);
+}
+
+.reviewMeta {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metaItem svg {
+  color: var(--text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.editButton {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border: 1px solid var(--button-secondary-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editButton:hover {
+  background-color: var(--button-secondary-hover-bg);
+  border-color: var(--button-secondary-hover-border);
+}
+
+.deleteButton {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--button-danger-bg);
+  color: var(--button-danger-text);
+  border: 1px solid var(--button-danger-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: var(--button-danger-hover-bg);
+  border-color: var(--button-danger-hover-border);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 20px;
+  color: #64748b;
+}
+
+.emptySubtext {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.statsRow {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.statNumber {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .reviewGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .statsRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .reviewCard {
+    padding: 20px;
+  }
+  
+  .reviewFooter {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+} 

@@ -1,4 +1,5 @@
 export interface PostReviewRequest {
+  postId?: string;
   lectureName: string;
   userNumber: number;
   starLating: number;

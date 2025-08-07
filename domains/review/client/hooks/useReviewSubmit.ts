@@ -3,14 +3,24 @@
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/domains/auth';
 import { usePostReview } from './usePostReview';
+import { usePatchReview } from './usePatchReview';
 import { getUserNumber, getLectureName } from '../../shared/utils';
 import { UI_MESSAGES } from '@/constants';
 import type { ReviewSubmitData, UseReviewSubmitProps } from '../../shared/types/components';
 
-export function useReviewSubmit({ lectureId, lectureName, onSuccess }: UseReviewSubmitProps) {
+export function useReviewSubmit({
+  postId,
+  lectureId,
+  lectureName,
+  mode = 'create',
+  onSuccess,
+}: UseReviewSubmitProps) {
   const pathname = usePathname();
   const { user } = useAuth();
-  const postReviewMutation = usePostReview(lectureId);
+  const postReviewMutation = usePostReview(lectureId || '');
+  const patchReviewMutation = usePatchReview(lectureId || '');
+
+  const reviewMutation = mode === 'edit' ? patchReviewMutation : postReviewMutation;
 
   const submitReview = async (data: ReviewSubmitData) => {
     if (!user) {
@@ -19,43 +29,63 @@ export function useReviewSubmit({ lectureId, lectureName, onSuccess }: UseReview
     }
 
     try {
-      const lectureNameResult = await getLectureName({
-        lectureName,
-        lectureId,
-        pathname,
-      });
-
-      if (!lectureNameResult.success) {
-        alert(lectureNameResult.message);
-        return;
-      }
-
       const userNumber = getUserNumber(user);
       if (userNumber === null) {
         alert('사용자 번호를 확인할 수 없습니다.');
         return;
       }
 
-      const payload = {
-        lectureName: lectureNameResult.lectureName!,
-        userNumber,
-        starLating: data.rating,
-        postTitle: data.title,
-        postContent: data.content,
-      };
-      console.log(payload);
+      let payload;
 
-      postReviewMutation.mutate(payload, {
+      if (mode === 'edit' && postId) {
+        payload = {
+          postId,
+          lectureName: '',
+          userNumber,
+          starLating: data.rating,
+          postTitle: data.title,
+          postContent: data.content,
+        };
+      } else {
+        const lectureNameResult = await getLectureName({
+          lectureName,
+          lectureId: lectureId || '',
+          pathname,
+        });
+
+        if (!lectureNameResult.success) {
+          alert(lectureNameResult.message);
+          return;
+        }
+
+        payload = {
+          lectureName: lectureNameResult.lectureName!,
+          userNumber,
+          starLating: data.rating,
+          postTitle: data.title,
+          postContent: data.content,
+        };
+      }
+
+      reviewMutation.mutate(payload, {
         onSuccess: (result) => {
           if (result.success) {
-            alert(UI_MESSAGES.REVIEW.POST_SUCCESS);
+            const successMessage =
+              mode === 'edit'
+                ? '리뷰가 성공적으로 수정되었습니다.'
+                : UI_MESSAGES.REVIEW.POST_SUCCESS;
+            alert(successMessage);
             onSuccess?.();
           } else {
-            alert(result.message || UI_MESSAGES.REVIEW.POST_FAILED);
+            const errorMessage =
+              mode === 'edit' ? '리뷰 수정에 실패했습니다.' : UI_MESSAGES.REVIEW.POST_FAILED;
+            alert(result.message || errorMessage);
           }
         },
         onError: (error) => {
-          alert(error.message || UI_MESSAGES.REVIEW.POST_FAILED);
+          const errorMessage =
+            mode === 'edit' ? '리뷰 수정에 실패했습니다.' : UI_MESSAGES.REVIEW.POST_FAILED;
+          alert(error.message || errorMessage);
         },
       });
     } catch (error) {
@@ -65,6 +95,6 @@ export function useReviewSubmit({ lectureId, lectureName, onSuccess }: UseReview
 
   return {
     submitReview,
-    isSubmitting: postReviewMutation.isPending,
+    isSubmitting: reviewMutation.isPending,
   };
 }

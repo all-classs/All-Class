@@ -1,13 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UI_MESSAGES } from '@/constants';
 import type { ValidationResult, ReviewFormData } from '../../shared/types/components';
 
-export function useWriteReviewForm() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [rating, setRating] = useState(0);
+interface InitialData {
+  title?: string;
+  content?: string;
+  rating?: number;
+}
+
+export function useWriteReviewForm(initialData?: InitialData) {
+  const [title, setTitle] = useState(initialData?.title || '');
+  const [content, setContent] = useState(initialData?.content || '');
+  const [rating, setRating] = useState(initialData?.rating || 0);
+
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || '');
+      setContent(initialData.content || '');
+      setRating(initialData.rating || 0);
+    }
+  }, [initialData]);
 
   const validateForm = (): ValidationResult => {
     if (!title.trim()) {
