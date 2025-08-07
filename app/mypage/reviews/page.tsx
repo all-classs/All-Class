@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { headers } from 'next/headers';
 import { DashboardLayout } from '@/components/layout';
 import { LoadingSpinner } from '@/components/common/loading/LoadingSpinner';
-import { getMyReview } from '@/api';
+import { getMyReview } from '@/lib';
 import { ReviewList, ReviewStats } from '@/domains/mypage';
 
 async function ReviewContent() {

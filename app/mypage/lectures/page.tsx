@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { DashboardLayout } from '@/components/layout';
 import { LoadingSpinner } from '@/components/common/loading/LoadingSpinner';
 import { headers } from 'next/headers';
-import { getMyLectures, getMyReview } from '@/api';
+import { getMyLectures, getMyReview } from '@/lib';
 import { LectureList, type LectureWithReviewStatus } from '@/domains/mypage';
 
 async function fetchLectureData(userNumber: number): Promise<LectureWithReviewStatus[]> {

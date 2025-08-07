@@ -1,6 +1,6 @@
 import { ReviewCardListSkeleton, DynamicReviewList } from '@/domains/review';
 import { LectureInfoComponent as LectureInfo, LectureInfoSkeleton } from '@/domains/lecture';
-import { getLectureInfo } from '@/api';
+import { getLectureInfo } from '@/lib';
 import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
