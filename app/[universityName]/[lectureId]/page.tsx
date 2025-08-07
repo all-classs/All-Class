@@ -6,6 +6,26 @@ import { Suspense } from 'react';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { createQueryClient, prefetchLectureRating, prefetchAllSortOptions } from '@/utils';
+import { universityNames } from '@/constants';
+import { getLectureListStatic } from '@/lib';
+
+export async function generateStaticParams() {
+  const allParams = await Promise.allSettled(
+    universityNames.map(async (universityName) => {
+      const lectures = await getLectureListStatic(universityName);
+      return lectures.success && lectures.lectures
+        ? lectures.lectures.map((lecture) => ({
+            universityName: encodeURIComponent(universityName),
+            lectureId: lecture.lectureId.toString(),
+          }))
+        : [];
+    })
+  );
+
+  return allParams
+    .filter((result) => result.status === 'fulfilled')
+    .flatMap((result) => result.value);
+}
 
 export default async function LectureDetailPage({
   params,
