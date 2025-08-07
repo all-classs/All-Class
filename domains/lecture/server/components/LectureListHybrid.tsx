@@ -1,4 +1,4 @@
-import { StaticLectureResult } from '@/api/lecture/getLectureListStatic';
+import { StaticLectureResult } from '@/lib/lecture/getLectureListStatic';
 import { StaticLectureData } from '../../shared/types';
 import LectureCardHybrid from './LectureCardHybrid';
 import Link from 'next/link';

@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData, useQueryClient } from '@tanstack/react-query';
-import { getReviewList } from '@/api/review';
+import { getReviewList } from '@/lib/review';
 import { CACHE_TIME } from '@/constants';
 import { getSortParams } from '../../shared/utils';
 import type { SortOption, ReviewResult } from '../../shared/types/review';

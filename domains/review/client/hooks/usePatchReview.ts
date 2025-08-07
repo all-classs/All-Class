@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchReview } from '@/api/review';
+import { patchReview } from '@/lib/review';
 import type { PostReviewRequest, PostReviewResult } from '../../shared/types/api';
 
 export function usePatchReview(lectureId: string) {
