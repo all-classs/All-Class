@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getLectureRating } from '@/api/lecture';
+import { getLectureRating } from '@/lib/lecture';
 import { CACHE_TIME } from '@/constants';
 
 interface UseLectureRatingParams {

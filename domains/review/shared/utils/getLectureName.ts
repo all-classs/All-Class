@@ -1,4 +1,4 @@
-import { getLectureInfo } from '@/api/lecture';
+import { getLectureInfo } from '@/lib/lecture';
 import { ERROR_MESSAGES } from '@/constants';
 import type { GetLectureNameParams, GetLectureNameResult } from '../types';
 

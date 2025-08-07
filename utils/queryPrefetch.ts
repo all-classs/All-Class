@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
-import { getLectureRating } from '@/api/lecture';
-import { getReviewList } from '@/api/review';
+import { getLectureRating } from '@/lib/lecture';
+import { getReviewList } from '@/lib/review';
 import type { StaticLectureData } from '@/domains/lecture';
 import { CACHE_TIME } from '@/constants';
 

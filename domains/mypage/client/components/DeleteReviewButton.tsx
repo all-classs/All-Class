@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteReview } from '@/api';
+import { deleteReview } from '@/lib';
 import { revalidateReviewsPage, revalidateLecturesPage } from '@/app/mypage/actions';
 import type { ReviewCardProps } from '../../shared/types';
 import styles from '../../styles/ReviewCard.module.css';
