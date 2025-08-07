@@ -1,4 +1,5 @@
 export { default as ReviewCard } from './server/components/ReviewCard';
+export { ReviewListServer } from './server/components/ReviewListServer';
 
 export { default as ReviewCardModal } from './client/components/ReviewCardModal';
 export { default as WriteReviewModal } from './client/components/WriteReviewModal';
