@@ -1,2 +1,2 @@
-export { getReviewList, postReview, patchReview, deleteReview } from './review';
+export { getReviewList, postReview, getMyReview, deleteReview, patchReview } from './review';
 export { likeReview } from './like';

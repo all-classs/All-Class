@@ -13,6 +13,14 @@ export const ERROR_MESSAGES = {
   REVIEW_LIKE_SUCCESS: '좋아요가 추가되었습니다.',
   REVIEW_LIKE_CANCEL_SUCCESS: '좋아요가 취소되었습니다.',
   REVIEW_LIKE_UNKNOWN_ERROR: '좋아요에 알 수 없는 오류가 발생했습니다.',
+  REVIEW_DELETE_FAILED: '리뷰 삭제에 실패했습니다.',
+  REVIEW_DELETE_UNKNOWN_ERROR: '리뷰 삭제에 알 수 없는 오류가 발생했습니다.',
+  REVIEW_PATCH_FAILED: '리뷰 수정에 실패했습니다.',
+  REVIEW_PATCH_UNKNOWN_ERROR: '리뷰 수정에 알 수 없는 오류가 발생했습니다.',
+  REVIEW_PATCH_FORBIDDEN: '접근 권한이 없습니다.',
+  REVIEW_PATCH_UNAUTHORIZED: '로그인이 필요합니다.',
+  REVIEW_PATCH_NOT_FOUND: '리뷰를 찾을 수 없습니다.',
+  REVIEW_PATCH_INVALID_REQUEST: '잘못된 요청입니다.',
 };
 
 export const UI_MESSAGES = {
