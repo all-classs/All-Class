@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { likeReview } from '@/api/review';
+import { likeReview } from '@/lib/review';
 import type { LikeReviewParams, LikeReviewResult } from '../../shared/types/api';
 
 export function useLikeReview() {

@@ -1,5 +1,5 @@
 import { universityNames } from '@/constants';
-import { getLectureListStatic } from '@/api/lecture';
+import { getLectureListStatic } from '@/lib/lecture';
 import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { createQueryClient, prefetchMultipleLectureRatings } from '@/utils';

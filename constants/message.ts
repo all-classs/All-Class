@@ -21,6 +21,15 @@ export const ERROR_MESSAGES = {
   REVIEW_PATCH_UNAUTHORIZED: '로그인이 필요합니다.',
   REVIEW_PATCH_NOT_FOUND: '리뷰를 찾을 수 없습니다.',
   REVIEW_PATCH_INVALID_REQUEST: '잘못된 요청입니다.',
+  UNAUTHORIZED: '인증이 필요합니다.',
+  FORBIDDEN: '접근 권한이 없습니다.',
+  ACCEPTED: '요청이 접수되었습니다.',
+  UNKNOWN_ERROR: '알 수 없는 오류가 발생했습니다.',
+  NETWORK_ERROR: '네트워크 오류가 발생했습니다.',
+  GET_FAILED: 'GET 요청에 실패했습니다.',
+  POST_FAILED: 'POST 요청에 실패했습니다.',
+  PATCH_FAILED: 'PATCH 요청에 실패했습니다.',
+  DELETE_FAILED: 'DELETE 요청에 실패했습니다.',
 };
 
 export const UI_MESSAGES = {
