@@ -1,6 +1,5 @@
 import { HTTP_STATUS } from '@/constants';
 import { LoginParams, LoginResponse } from '@/domains/auth';
-import { setToken } from '@/utils';
 import { apiPost } from '../apiClient';
 
 export async function postLogin({ id, password }: LoginParams): Promise<LoginResponse> {
@@ -17,8 +16,6 @@ export async function postLogin({ id, password }: LoginParams): Promise<LoginRes
         userKey: response.data.userKey,
         role: response.data.auth || response.data.role || '',
       };
-
-      setToken(loginResponse.token);
 
       return loginResponse;
     }
