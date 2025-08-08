@@ -28,9 +28,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthHydrationProvider>
-          <AppProviders>
-            <div>{children}</div>
-          </AppProviders>
+          <div>{children}</div>
         </AuthHydrationProvider>
       </body>
     </html>
