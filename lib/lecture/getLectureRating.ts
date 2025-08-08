@@ -1,5 +1,5 @@
 import { HTTP_STATUS } from '@/constants';
-import { apiRequest } from '../apiClient';
+import { apiRequest, apiGetWithTags } from '../apiClient';
 
 export interface RatingResult {
   success: boolean;
@@ -13,16 +13,12 @@ export async function getLectureRating(
   universityName: string
 ): Promise<RatingResult> {
   try {
-    const response = await apiRequest('/class', {
-      method: 'GET',
-      cache: 'no-store',
-    });
-
-    const url = `/class?university=${universityName}&lectureId=${lectureId}`;
-    const data = await apiRequest(url, {
-      method: 'GET',
-      cache: 'no-store',
-    });
+    const data = await apiGetWithTags(
+      '/class',
+      { university: universityName, lectureId },
+      [`lecture-info-${universityName}-${lectureId}`],
+      'force-cache'
+    );
 
     if (data.status === HTTP_STATUS.OK && data.data) {
       if (data.data.averageStarLating !== undefined) {

@@ -15,6 +15,21 @@ export function DeleteReviewButton({ review, userNumber }: ReviewCardProps) {
         });
 
         await Promise.all([revalidateReviewsPage(), revalidateLecturesPage()]);
+
+        try {
+          await fetch('/api/revalidate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'review_deleted',
+              universityName: review.lecture.university,
+              lectureId: String(review.lecture.lectureId),
+              userNumber,
+            }),
+          });
+        } catch (error) {
+          console.error('리뷰 삭제 태그 재검증 실패', error);
+        }
       } catch (error) {
         alert('리뷰 삭제에 실패했습니다.');
       }
