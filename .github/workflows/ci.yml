@@ -1,0 +1,92 @@
+name: AllClass CI
+run-name: AllClass CI • ${{ github.ref_name }} • by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - feat/**
+  pull_request:
+    branches:
+      - main
+      - dev
+      - feat/**
+
+jobs:
+  lint_build:
+    name: "🔧 Lint & Build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: "========== 🔧 Lint & Build • START =========="
+        run: echo "========== 🔧 Lint & Build • START =========="
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
+      - name: "========== 🔧 Lint & Build • END =========="
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          echo "========== 🔧 Lint & Build • END (status: ${JOB_STATUS}) =========="
+
+  e2e:
+    name: "🧪 AllClass E2E Test"
+    needs: lint_build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: "========== 🧪 AllClass E2E • START =========="
+        run: echo "========== 🧪 AllClass E2E • START =========="
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn build
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+          browser: chrome
+          env: TEST_USER_ID=${{ secrets.CYPRESS_TEST_USER_ID }}, TEST_USER_PW=${{ secrets.CYPRESS_TEST_USER_PW }}
+        env:
+          CI: true
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          CYPRESS_TEST_USER_ID: ${{ secrets.CYPRESS_TEST_USER_ID }}
+          CYPRESS_TEST_USER_PW: ${{ secrets.CYPRESS_TEST_USER_PW }}
+
+      - name: "========== 🧪 AllClass E2E • END =========="
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          echo "========== 🧪 AllClass E2E • END (status: ${JOB_STATUS}) =========="
