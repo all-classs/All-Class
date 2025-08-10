@@ -74,7 +74,7 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
         size="medium"
         onClose={handleClose}
       >
-        <form className={styles.reviewForm} onSubmit={handleSubmit}>
+        <form className={styles.reviewForm} onSubmit={handleSubmit} data-test="write-review-form">
           <div className={styles.inputGroup}>
             <label htmlFor="review-title" className={styles.label}>
               제목
@@ -88,6 +88,7 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
               placeholder="리뷰 제목을 입력하세요"
               required
               maxLength={100}
+              data-test="review-title-input"
             />
           </div>
 
@@ -109,15 +110,16 @@ const WriteReviewModal = forwardRef<WriteReviewModalRef, WriteReviewModalProps>(
               required
               rows={6}
               maxLength={1000}
+              data-test="review-content-input"
             />
             <div className={styles.charCount}>{content.length}/1000</div>
           </div>
 
           <div className={styles.buttonGroup}>
-            <Button variant="secondary" onClick={handleReset} type="button">
+            <Button variant="secondary" onClick={handleReset} type="button" data-test="write-reset">
               초기화
             </Button>
-            <Button variant="primary" type="submit" disabled={isSubmitting}>
+            <Button variant="primary" type="submit" disabled={isSubmitting} data-test="write-submit">
               {isSubmitting
                 ? isEditMode
                   ? '수정 중...'

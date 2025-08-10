@@ -13,7 +13,7 @@ export function LectureCard({ lecture }: LectureCardProps) {
     : `${styles.compactReviewBadge} ${styles.compactUnReviewedBadge}`;
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-test="my-lecture-card" data-lecture-id={lecture.classNumber}>
       <Link href={`/동서대학교/${lecture.classNumber}`} style={{ textDecoration: 'none' }}>
         <div className={styles.header}>
           <div className={styles.headerTop}>

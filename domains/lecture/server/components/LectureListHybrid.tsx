@@ -12,7 +12,7 @@ interface LectureListHybridProps {
 export default function LectureListHybrid({ universityName, lectures }: LectureListHybridProps) {
   if (!lectures.success || !lectures.lectures) {
     return (
-      <main className={styles.noLectureContainer}>
+      <main className={styles.noLectureContainer} data-test="empty-state">
         <div>{lectures.message || '강의를 불러오는데 실패했습니다.'}</div>
       </main>
     );
@@ -30,7 +30,7 @@ export default function LectureListHybrid({ universityName, lectures }: LectureL
   }));
 
   return (
-    <main className={styles.lectureListContainer}>
+    <main className={styles.lectureListContainer} data-test="lecture-list">
       {lectureList.map((lecture: StaticLectureData) => {
         const openedParam = lecture.opened ? 'true' : 'false';
 
@@ -39,6 +39,8 @@ export default function LectureListHybrid({ universityName, lectures }: LectureL
             href={`/${universityName}/${lecture.lectureId}?opened=${openedParam}`}
             key={lecture.lectureId}
             prefetch={true}
+            data-test="lecture-card"
+            data-lecture-id={lecture.lectureId}
           >
             <LectureCardHybrid staticData={lecture} universityName={universityName} />
           </Link>

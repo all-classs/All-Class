@@ -15,7 +15,7 @@ interface ReviewCardProps {
 export default memo(function ReviewCard({ review }: ReviewCardProps) {
   return (
     <ReviewCardModal review={review}>
-      <div className={styles.reviewCard}>
+      <div className={styles.reviewCard} data-test="review-item" data-review-id={review.postId}>
         <div className={styles.cardHeader}>
           <div className={styles.userInfo}>
             <div className={styles.profileImage}>
@@ -43,8 +43,8 @@ export default memo(function ReviewCard({ review }: ReviewCardProps) {
         </div>
 
         <div className={styles.cardBody}>
-          <h3 className={styles.reviewTitle}>{review.postTitle}</h3>
-          <p className={styles.reviewContent}>{review.postContent}</p>
+          <h3 className={styles.reviewTitle} data-test="review-title">{review.postTitle}</h3>
+          <p className={styles.reviewContent} data-test="review-content">{review.postContent}</p>
         </div>
 
         <div className={styles.cardFooter}>

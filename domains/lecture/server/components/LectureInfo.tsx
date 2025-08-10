@@ -35,12 +35,12 @@ export default function LectureInfo({
   const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
 
   return (
-    <main className={styles.infoContainer}>
+    <main className={styles.infoContainer} data-test="lecture-detail">
       <section className={styles.introSection}>
         <div className={styles.leftContent}>
           <div className={styles.topLine} />
-          <h1 className={styles.lectureName}>{lecture.lectureName}</h1>
-          <div className={styles.professor}>{lecture.professor}</div>
+          <h1 className={styles.lectureName} data-test="lecture-title">{lecture.lectureName}</h1>
+          <div className={styles.professor} data-test="lecture-professor">{lecture.professor}</div>
           <div className={styles.infoBar}>
             <span className={styles.badge}>
               <Book size={16} className={styles.icon} />
@@ -67,7 +67,7 @@ export default function LectureInfo({
           <div className={styles.statsSection}>
             <div className={styles.statItem}>
               <MessageSquare size={16} className={styles.statIcon} />
-              <span className={styles.statNumber}>
+              <span className={styles.statNumber} data-test="detail-review-count">
                 <DynamicReviewCount
                   lectureId={parseInt(lectureId)}
                   universityName={universityName}

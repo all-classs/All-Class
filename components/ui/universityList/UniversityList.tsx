@@ -25,6 +25,8 @@ const UniversityList = memo(function UniversityList() {
             className={`${styles.universityCard} university-card`}
             key={university.slug}
             href={href}
+            data-test="univ-option"
+            data-slug={university.slug}
             onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
               if (isCurrent) {
                 e.preventDefault();

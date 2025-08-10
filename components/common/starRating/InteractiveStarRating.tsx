@@ -50,7 +50,11 @@ export default function InteractiveStarRating({
   const displayRating = hoverRating || rating;
 
   return (
-    <div className={`${styles.container} ${styles[size]}`} onMouseLeave={handleMouseLeave}>
+    <div
+      className={`${styles.container} ${styles[size]}`}
+      onMouseLeave={handleMouseLeave}
+      data-test="star-rating"
+    >
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <linearGradient id="halfStar" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -68,6 +72,7 @@ export default function InteractiveStarRating({
             onMouseEnter={(event) => handleMouseEnter(star, event)}
             onClick={(event) => handleClick(star, event)}
             disabled={disabled}
+            data-test={`star-${star}`}
           >
             <Star
               size={size === 'small' ? 20 : size === 'medium' ? 28 : 32}

@@ -51,7 +51,7 @@ export default function Header({ showDropdown = false }: HeaderProps) {
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
         {isLoggedIn ? (
-          <Button variant="default" onClick={handleMyPageClick}>
+          <Button variant="default" onClick={handleMyPageClick} data-test="open-mypage">
             마이페이지
           </Button>
         ) : (
@@ -60,11 +60,11 @@ export default function Header({ showDropdown = false }: HeaderProps) {
           </Button>
         )}
         {isLoggedIn ? (
-          <Button variant="default" onClick={handleLogoutClick}>
+          <Button variant="default" onClick={handleLogoutClick} data-test="logout">
             로그아웃
           </Button>
         ) : (
-          <Button variant="default" onClick={handleLoginClick}>
+          <Button variant="default" onClick={handleLoginClick} data-test="open-login">
             로그인
           </Button>
         )}

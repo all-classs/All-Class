@@ -41,7 +41,7 @@ export default function ReviewHeader({
         <ReviewSortSelector selectedSort={sortOption} onSortChange={onSortChange} />
       </div>
       <div className={styles.reviewActions}>
-        <Button variant="primary" onClick={handleWriteReviewClick}>
+        <Button variant="primary" onClick={handleWriteReviewClick} data-test="write-review">
           리뷰작성
         </Button>
       </div>

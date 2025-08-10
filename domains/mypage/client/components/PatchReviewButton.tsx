@@ -48,7 +48,7 @@ export function PatchReviewButton({ review, userNumber }: ReviewCardProps) {
 
   return (
     <>
-      <button className={styles.editButton} onClick={handleEditReview}>
+      <button className={styles.editButton} onClick={handleEditReview} data-test="my-review-edit">
         수정
       </button>
 

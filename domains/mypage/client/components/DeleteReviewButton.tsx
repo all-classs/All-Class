@@ -37,7 +37,12 @@ export function DeleteReviewButton({ review, userNumber }: ReviewCardProps) {
   };
 
   return (
-    <button type="button" onClick={handleDelete} className={styles.deleteButton}>
+    <button
+      type="button"
+      onClick={handleDelete}
+      className={styles.deleteButton}
+      data-test="my-review-delete"
+    >
       삭제
     </button>
   );
