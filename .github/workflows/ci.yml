@@ -33,6 +33,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Check case-sensitive paths
+        run: |
+          echo "🔍 Checking case-sensitive file paths..."
+          git config core.ignorecase false
+          # git에서 추적하는 파일과 실제 파일 시스템 비교
+          for f in $(git ls-files); do
+            if [ ! -e "$f" ]; then
+              echo "❌ Case mismatch detected: $f"
+              exit 1
+            fi
+          done
+          echo "✅ No case-sensitive path issues found."
+
       - name: Lint
         run: yarn lint
 
