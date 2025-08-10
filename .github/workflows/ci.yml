@@ -76,7 +76,6 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:3000'
           browser: chrome
-          env: TEST_USER_ID=${{ secrets.CYPRESS_TEST_USER_ID }}, TEST_USER_PW=${{ secrets.CYPRESS_TEST_USER_PW }}
         env:
           CI: true
           NEXT_TELEMETRY_DISABLED: 1
