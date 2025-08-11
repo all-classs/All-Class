@@ -75,6 +75,23 @@ export function useReviewSubmit({
                 ? '리뷰가 성공적으로 수정되었습니다.'
                 : UI_MESSAGES.REVIEW.POST_SUCCESS;
             alert(successMessage);
+            try {
+              const pathSegments = pathname.split('/');
+              const universityName = decodeURIComponent(pathSegments[1] || '');
+              const action = mode === 'edit' ? 'review_updated' : 'review_added';
+              fetch('/api/revalidate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  action,
+                  universityName,
+                  lectureId,
+                  userNumber,
+                }),
+              }).catch(() => {});
+            } catch (error) {
+              console.error('리뷰 작성/수정 태그 재검증 실패', error);
+            }
             onSuccess?.();
           } else {
             const errorMessage =

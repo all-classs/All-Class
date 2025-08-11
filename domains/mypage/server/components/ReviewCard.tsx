@@ -5,7 +5,7 @@ import styles from '../../styles/ReviewCard.module.css';
 
 export function ReviewCard({ review, userNumber }: ReviewCardProps) {
   return (
-    <div className={styles.reviewCard}>
+    <div className={styles.reviewCard} data-test="my-review-item" data-review-id={review.postId}>
       <div className={styles.lectureHeader}>
         <div className={styles.lectureInfo}>
           <h3 className={styles.lectureName}>{review.lecture.lectureName}</h3>
@@ -24,13 +24,17 @@ export function ReviewCard({ review, userNumber }: ReviewCardProps) {
 
       <div className={styles.reviewContent}>
         <div className={styles.reviewHeader}>
-          <h4 className={styles.reviewTitle}>{review.postTitle}</h4>
+          <h4 className={styles.reviewTitle} data-test="my-review-title">
+            {review.postTitle}
+          </h4>
           <div className={styles.myRating}>
             <Star size={14} fill="currentColor" />
             <span>{review.starLating}</span>
           </div>
         </div>
-        <p className={styles.reviewText}>{review.postContent}</p>
+        <p className={styles.reviewText} data-test="my-review-content">
+          {review.postContent}
+        </p>
       </div>
 
       <div className={styles.reviewFooter}>

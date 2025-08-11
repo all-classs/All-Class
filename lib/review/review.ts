@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
 import { ReviewResult, PostReviewRequest, PostReviewResult } from '@/domains/review';
 import { MyReviewData, DeleteReviewRequest, DeleteReviewResult } from '@/domains/mypage';
-import { apiPost, apiPatch, apiDelete, apiGetWithCache } from '../apiClient';
+import { apiPost, apiPatch, apiDelete, apiGetWithTags } from '../apiClient';
 
 export async function getReviewList({
   lectureId,
@@ -22,7 +22,12 @@ export async function getReviewList({
       ...(recent && { recent }),
     };
 
-    const response = await apiGetWithCache('/review', params);
+    const response = await apiGetWithTags(
+      '/review',
+      params,
+      [`reviews-${lectureId}`],
+      'force-cache'
+    );
 
     if (response.status === HTTP_STATUS.OK && Array.isArray(response.data)) {
       return {
@@ -140,9 +145,12 @@ export async function deleteReview(request: DeleteReviewRequest): Promise<Delete
 
 export async function getMyReview(userNumber: number): Promise<MyReviewData[]> {
   try {
-    const response = await apiGetWithCache('/review/me', {
-      userNumber: userNumber.toString(),
-    });
+    const response = await apiGetWithTags(
+      '/review/me',
+      { userNumber },
+      [`my-reviews-${userNumber}`],
+      'force-cache'
+    );
 
     if (response.status === 200 && Array.isArray(response.data)) {
       return response.data;

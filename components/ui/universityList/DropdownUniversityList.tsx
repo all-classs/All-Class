@@ -15,7 +15,9 @@ export default function DropdownUniversityList() {
 
   return (
     <div className={styles.centerDropdown} ref={dropdownRef} onMouseEnter={handleDropdownOpen}>
-      <button className={styles.dropdownTrigger}>대학교 선택</button>
+      <button className={styles.dropdownTrigger} data-test="univ-switch">
+        대학교 선택
+      </button>
       <div
         className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.open : ''}`}
         onMouseLeave={handleDropdownMouseLeave}

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { universityName, action } = await request.json();
+    const { universityName, action, lectureId, userNumber } = await request.json();
 
     if (!universityName) {
       return NextResponse.json({ message: 'University name is required' }, { status: 400 });
@@ -14,6 +14,23 @@ export async function POST(request: NextRequest) {
       case 'lecture_removed':
       case 'lecture_modified':
         await revalidateTag(`lectures-${universityName}`);
+        if (lectureId) {
+          await revalidateTag(`lecture-info-${universityName}-${lectureId}`);
+          await revalidateTag(`reviews-${lectureId}`);
+        }
+        break;
+
+      case 'review_added':
+      case 'review_updated':
+      case 'review_deleted':
+        if (lectureId) {
+          await revalidateTag(`reviews-${lectureId}`);
+          await revalidateTag(`lecture-info-${universityName}-${lectureId}`);
+        }
+        if (userNumber) {
+          await revalidateTag(`my-reviews-${userNumber}`);
+          await revalidateTag(`my-lectures-${userNumber}`);
+        }
         break;
 
       case 'university_added':
@@ -29,6 +46,8 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
       action,
       universityName,
+      lectureId,
+      userNumber,
     });
   } catch (error) {
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });

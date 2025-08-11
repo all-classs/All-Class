@@ -32,7 +32,7 @@ export default function ReviewList({ reviews, isLoading, isFetching, error }: Re
 
   if (!reviews || reviews.length === 0) {
     return (
-      <div className={styles.emptyState}>
+      <div className={styles.emptyState} data-test="empty-state">
         <div className={styles.emptyIcon}>
           <User size={48} />
         </div>
@@ -43,7 +43,7 @@ export default function ReviewList({ reviews, isLoading, isFetching, error }: Re
   }
 
   return (
-    <div className={styles.reviewList}>
+    <div className={styles.reviewList} data-test="review-list">
       <div className={`${styles.reviewListContent} ${isFetching ? styles.fetching : ''}`}>
         {reviews.map((review) => (
           <ReviewCard key={review.postId} review={review} />

@@ -9,13 +9,13 @@ export default function LikeReview({ review }: { review: Review }) {
   const { handleLikeClick, isLoggedIn } = useLikeReviewAction({ review });
 
   return (
-    <div className={styles.likesSection} onClick={handleLikeClick}>
+    <div className={styles.likesSection} onClick={handleLikeClick} data-test="like">
       <Heart
         size={16}
         className={styles.likeIcon}
         style={{ cursor: isLoggedIn ? 'pointer' : 'default' }}
       />
-      <span className={styles.likeCount}>{review.likes}</span>
+      <span className={styles.likeCount} data-test="like-count">{review.likes}</span>
     </div>
   );
 }
