@@ -1,17 +1,19 @@
 import { ERROR_MESSAGES, HTTP_STATUS } from '@/constants';
 import { LectureInfoResult, LectureInfo } from '@/domains/lecture';
 import { ClassData } from '@/domains/mypage';
-import { apiGetWithCache } from '../apiClient';
+import { apiGetWithTags } from '../apiClient';
 
 export async function getLectureInfo(
   universityName: string,
   lectureId: string
 ): Promise<LectureInfoResult> {
   try {
-    const response = await apiGetWithCache('/class', {
-      university: universityName,
-      lectureId: lectureId,
-    });
+    const response = await apiGetWithTags(
+      '/class',
+      { university: universityName, lectureId },
+      [`lecture-info-${universityName}-${lectureId}`],
+      'force-cache'
+    );
 
     if (response.status === HTTP_STATUS.OK && response.data) {
       return {
@@ -41,9 +43,12 @@ export async function getLectureInfo(
 
 export async function getMyLectures(userNumber: number): Promise<ClassData[]> {
   try {
-    const response = await apiGetWithCache('/class/me', {
-      userNumber: userNumber.toString(),
-    });
+    const response = await apiGetWithTags(
+      '/class/me',
+      { userNumber },
+      [`my-lectures-${userNumber}`],
+      'force-cache'
+    );
 
     if (response.status === 200 && Array.isArray(response.data)) {
       return response.data;

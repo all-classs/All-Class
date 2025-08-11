@@ -10,7 +10,7 @@ interface LectureCardHybridProps {
 
 export default function LectureCardHybrid({ staticData, universityName }: LectureCardHybridProps) {
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardContainer} data-test="lecture-card-inner">
       <div className={styles.colorBar} />
 
       <div className={styles.cardHeader}>
@@ -49,7 +49,7 @@ export default function LectureCardHybrid({ staticData, universityName }: Lectur
             <Star size={14} className={styles.icon} />
             평점
           </span>
-          <div className={styles.ratingContainer}>
+          <div className={styles.ratingContainer} data-test="card-rating">
             <DynamicRating
               lectureId={staticData.lectureId}
               universityName={universityName}

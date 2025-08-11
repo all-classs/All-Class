@@ -1,6 +1,7 @@
 export { default as LectureCardHybrid } from './server/components/LectureCardHybrid';
 export { default as LectureListHybrid } from './server/components/LectureListHybrid';
 export { default as LectureInfoComponent } from './server/components/LectureInfo';
+export { LectureInfoServer } from './server/components/LectureInfoServer';
 
 export { default as DynamicRating } from './client/components/DynamicRating';
 export { default as DynamicReviewCount } from './client/components/DynamicReviewCount';

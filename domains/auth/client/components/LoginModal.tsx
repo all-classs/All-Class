@@ -50,7 +50,7 @@ export default function LoginModal() {
 
   return (
     <Modal open={isOpen} title="로그인" size="small" onClose={handleClose}>
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
+      <form className={styles.loginForm} onSubmit={handleSubmit} data-test="login-form">
         <div className={styles.inputGroup}>
           <label htmlFor="login-id" className={styles.label}>
             아이디
@@ -80,7 +80,12 @@ export default function LoginModal() {
             disabled={loginMutation.isPending}
           />
         </div>
-        <button type="submit" className={styles.loginButton} disabled={loginMutation.isPending}>
+        <button
+          type="submit"
+          className={styles.loginButton}
+          disabled={loginMutation.isPending}
+          data-test="login-submit"
+        >
           {loginMutation.isPending ? '로그인 중...' : '로그인'}
         </button>
       </form>

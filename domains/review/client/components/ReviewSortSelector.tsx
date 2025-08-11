@@ -25,25 +25,27 @@ export default function ReviewSortSelector({
   };
 
   return (
-    <div className={styles.sortContainer}>
-      <div className={styles.sortTabs}>
+    <div className={styles.sortContainer} data-test="sort-container">
+      <div className={styles.sortTabs} data-test="sort-tabs">
         {SORT_OPTIONS.map((option) => (
           <button
             key={option.value}
             className={`${styles.sortTab} ${selectedSort === option.value ? styles.active : ''}`}
             onClick={() => onSortChange(option.value)}
             type="button"
+            data-test={`sort-${option.value}`}
           >
             {option.label}
           </button>
         ))}
       </div>
 
-      <div className={styles.sortSelector}>
+      <div className={styles.sortSelector} data-test="sort-selector">
         <button
           className={`${styles.sortButton} ${isDropdownOpen ? styles.open : ''}`}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           type="button"
+          data-test="sort-dropdown-toggle"
         >
           <span className={styles.sortLabel}>{selectedOption?.label || '별점 높은순'}</span>
           <ChevronDown
@@ -53,13 +55,14 @@ export default function ReviewSortSelector({
         </button>
 
         {isDropdownOpen && (
-          <div className={styles.sortDropdown}>
+          <div className={styles.sortDropdown} data-test="sort-dropdown">
             {SORT_OPTIONS.map((option) => (
               <button
                 key={option.value}
                 className={`${styles.sortOption} ${selectedSort === option.value ? styles.active : ''}`}
                 onClick={() => handleOptionClick(option.value)}
                 type="button"
+                data-test={`sort-option-${option.value}`}
               >
                 {option.label}
               </button>

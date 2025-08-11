@@ -16,7 +16,7 @@ export function LectureList({ lectures }: LectureListProps) {
   }
 
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} data-test="my-lectures-list">
       {lectures.map((lecture) => (
         <LectureCard key={lecture.classNumber} lecture={lecture} />
       ))}

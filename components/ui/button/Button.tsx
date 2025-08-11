@@ -2,27 +2,21 @@
 
 import styles from './Button.module.css';
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'default' | 'primary' | 'secondary';
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
   className?: string;
 }
 
 export default function Button({
   children,
-  onClick,
   variant = 'default',
-  disabled = false,
-  type = 'button',
   className = '',
+  ...rest
 }: ButtonProps) {
   const buttonClass = `${styles.button} ${styles[variant]} ${className}`.trim();
 
   return (
-    <button type={type} className={buttonClass} onClick={onClick} disabled={disabled}>
+    <button {...rest} type={rest.type ?? 'button'} className={buttonClass}>
       {children}
     </button>
   );

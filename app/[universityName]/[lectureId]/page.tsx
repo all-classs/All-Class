@@ -1,13 +1,11 @@
-import { ReviewCardListSkeleton } from '@/domains/review';
-import { LectureInfoSkeleton } from '@/domains/lecture';
-import { LectureInfoServer } from '@/domains/lecture/server/components/LectureInfoServer';
-import { ReviewListServer } from '@/domains/review/server/components/ReviewListServer';
+import { ReviewCardListSkeleton, ReviewListServer } from '@/domains/review';
+import { LectureInfoSkeleton, LectureInfoServer } from '@/domains/lecture';
 import { Suspense } from 'react';
-import styles from '@/styles/global.module.css';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { createQueryClient, prefetchLectureRating, prefetchAllSortOptions } from '@/utils';
 import { universityNames } from '@/constants';
 import { getLectureListStatic } from '@/lib';
+import styles from '@/styles/global.module.css';
 
 export async function generateStaticParams() {
   const allParams = await Promise.allSettled(

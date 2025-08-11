@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useLoginTrigger } from '@/hooks/useLoginTrigger';
+import { useLoginTrigger } from './hooks/useLoginTrigger';
 import { LoadingSpinner } from '../loading/LoadingSpinner';
 
 function LoginTrigger() {

@@ -6,7 +6,9 @@ const getHeaders = () => ({
   'Content-Type': 'application/json',
 });
 
-export async function apiRequest(endpoint: string, options: RequestInit = {}) {
+type NextFetchOptions = RequestInit & { next?: { tags?: string[] } };
+
+export async function apiRequest(endpoint: string, options: NextFetchOptions = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
 
   const config = {
@@ -90,5 +92,31 @@ export async function apiGetWithCache(
   return apiRequest(url, {
     method: 'GET',
     cache: cacheOption,
+  });
+}
+
+export async function apiGetWithTags(
+  endpoint: string,
+  params?: Record<string, string | boolean | number>,
+  tags?: string[],
+  cacheOption: RequestCache = 'force-cache'
+) {
+  let url = endpoint;
+
+  if (params) {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, String(value));
+      }
+    });
+    const qs = searchParams.toString();
+    if (qs) url += `?${qs}`;
+  }
+
+  return apiRequest(url, {
+    method: 'GET',
+    cache: cacheOption,
+    next: tags && tags.length > 0 ? { tags } : undefined,
   });
 }
