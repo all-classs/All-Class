@@ -1,14 +1,13 @@
 describe('사용자는 리뷰 좋아요를 누를 수 있고, 리뷰 정렬 탭을 통해 리뷰를 정렬할 수 있다.', () => {
   beforeEach(() => {
     cy.uiLogin();
-    cy.visit(encodeURI('/동서대학교'));
-    cy.contains('[data-test="lecture-card"] h3', '소프트웨어개발실습2', { timeout: 15000 })
-      .scrollIntoView()
-      .should('be.visible')
-      .then(($h3) => {
-        cy.wrap($h3).closest('a').click({ force: true });
-      });
-    cy.byTest('lecture-detail').should('exist');
+
+    const universityName = Cypress.env('TEST_UNIVERSITY_NAME');
+    cy.getLectureWithReviews(universityName).then((lectureWithReviews) => {
+      cy.visitUniversity();
+      cy.clickLectureByName(lectureWithReviews.lectureName);
+      cy.byTest('lecture-detail').should('exist');
+    });
   });
 
   it('사용자는 좋아요 버튼을 통해 리뷰에 좋아요를 누를 수 있다. 한번더 누르면 좋아요가 취소된다.', () => {
