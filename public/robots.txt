@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# 개인정보 관련 페이지는 크롤링 차단
+Disallow: /mypage/
+Disallow: /api/
+
+# Sitemap 위치
+Sitemap: https://all-class.vercel.app/sitemap.xml
