@@ -3,3 +3,4 @@ export * from './universityUtils';
 export * from './queryClient';
 export * from './queryPrefetch';
 export * from './tokenManager';
+export * from './invalidateReviewCache';
