@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { ReviewCardListSkeleton, ReviewListServer } from '@/domains/review';
 import { LectureInfoSkeleton, LectureInfoServer } from '@/domains/lecture';
 import { Suspense } from 'react';
@@ -6,6 +7,25 @@ import { createQueryClient, prefetchLectureRating, prefetchAllSortOptions } from
 import { universityNames } from '@/constants';
 import { getLectureListStatic } from '@/lib';
 import styles from '@/styles/global.module.css';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ universityName: string; lectureId: string }>;
+}): Promise<Metadata> {
+  const { universityName, lectureId } = await params;
+  const decodedUniversity = decodeURIComponent(universityName);
+
+  return {
+    title: `강의 상세정보`,
+    description: `${decodedUniversity} 강의의 상세정보와 학생 리뷰를 확인하세요. 실제 수강생들의 생생한 후기!`,
+    openGraph: {
+      title: `강의 상세정보 | AllClass`,
+      description: `${decodedUniversity} 강의의 상세정보와 학생 리뷰를 확인하세요.`,
+    },
+    keywords: [decodedUniversity, '강의상세', '강의리뷰', '수강후기', '평점', 'AllClass'],
+  };
+}
 
 export async function generateStaticParams() {
   const allParams = await Promise.allSettled(

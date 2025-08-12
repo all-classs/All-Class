@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { likeReview } from '@/lib/review';
+import { invalidateReviewCache } from '@/utils';
 import type { LikeReviewParams, LikeReviewResult } from '../../shared/types/api';
 
 export function useLikeReview() {
@@ -10,10 +11,7 @@ export function useLikeReview() {
   return useMutation<LikeReviewResult, Error, LikeReviewParams>({
     mutationFn: likeReview,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        exact: false,
-      });
+      invalidateReviewCache(queryClient);
     },
   });
 }

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { StaticLectureData } from '../../shared/types';
 import { BookOpen, Tag, Star } from 'lucide-react';
 import { DynamicRating } from '@/domains/lecture';
@@ -8,7 +9,10 @@ interface LectureCardHybridProps {
   universityName: string;
 }
 
-export default function LectureCardHybrid({ staticData, universityName }: LectureCardHybridProps) {
+const LectureCardHybrid = memo(function LectureCardHybrid({
+  staticData,
+  universityName,
+}: LectureCardHybridProps) {
   return (
     <div className={styles.cardContainer} data-test="lecture-card-inner">
       <div className={styles.colorBar} />
@@ -61,4 +65,6 @@ export default function LectureCardHybrid({ staticData, universityName }: Lectur
       </div>
     </div>
   );
-}
+});
+
+export default LectureCardHybrid;

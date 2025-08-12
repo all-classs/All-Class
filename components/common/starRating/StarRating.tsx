@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import styles from './StarRating.module.css';
 
 interface StarRatingProps {
@@ -6,16 +7,21 @@ interface StarRatingProps {
   size?: 'small' | 'medium' | 'large' | 'veryLarge';
 }
 
-export default function StarRating({
+const StarRating = memo(function StarRating({
   rating,
   showRatingText = true,
   size = 'medium',
 }: StarRatingProps) {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-  const emptyStars = 5 - Math.ceil(rating);
+  const starData = useMemo(() => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const emptyStars = 5 - Math.ceil(rating);
 
-  const renderStars = () => {
+    return { fullStars, hasHalfStar, emptyStars };
+  }, [rating]);
+
+  const renderStars = useMemo(() => {
+    const { fullStars, hasHalfStar, emptyStars } = starData;
     const stars = [];
 
     for (let i = 0; i < fullStars; i++) {
@@ -43,7 +49,7 @@ export default function StarRating({
     }
 
     return stars;
-  };
+  }, [starData, size]);
 
   if (rating === 0) {
     return <span className={styles.noRating}>평점 없음</span>;
@@ -51,10 +57,12 @@ export default function StarRating({
 
   return (
     <div className={styles.ratingContainer}>
-      <div className={styles.starRating}>{renderStars()}</div>
+      <div className={styles.starRating}>{renderStars}</div>
       {showRatingText && (
         <span className={`${styles.ratingText} ${styles[size]}`}>{rating.toFixed(1)}</span>
       )}
     </div>
   );
-}
+});
+
+export default StarRating;

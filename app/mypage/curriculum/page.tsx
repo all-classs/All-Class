@@ -1,4 +1,14 @@
+import type { Metadata } from 'next';
 import { DashboardLayout } from '@/components/layout';
+
+export const metadata: Metadata = {
+  title: '커리큘럼',
+  description: '내 커리큘럼 정보를 확인하고 관리하세요.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function CurriculumPage() {
   return (
