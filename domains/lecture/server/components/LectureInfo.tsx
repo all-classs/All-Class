@@ -39,8 +39,12 @@ export default function LectureInfo({
       <section className={styles.introSection}>
         <div className={styles.leftContent}>
           <div className={styles.topLine} />
-          <h1 className={styles.lectureName} data-test="lecture-title">{lecture.lectureName}</h1>
-          <div className={styles.professor} data-test="lecture-professor">{lecture.professor}</div>
+          <h1 className={styles.lectureName} data-test="lecture-title">
+            {lecture.lectureName}
+          </h1>
+          <div className={styles.professor} data-test="lecture-professor">
+            {lecture.professor}
+          </div>
           <div className={styles.infoBar}>
             <span className={styles.badge}>
               <Book size={16} className={styles.icon} />

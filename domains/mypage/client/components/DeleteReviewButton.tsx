@@ -2,10 +2,14 @@
 
 import { deleteReview } from '@/lib';
 import { revalidateReviewsPage, revalidateLecturesPage } from '@/app/mypage/actions';
+import { useQueryClient } from '@tanstack/react-query';
+import { invalidateReviewCache } from '@/utils';
 import type { ReviewCardProps } from '../../shared/types';
 import styles from '../../styles/ReviewCard.module.css';
 
 export function DeleteReviewButton({ review, userNumber }: ReviewCardProps) {
+  const queryClient = useQueryClient();
+
   const handleDelete = async () => {
     if (confirm('정말로 이 리뷰를 삭제하시겠습니까?')) {
       try {
@@ -14,22 +18,9 @@ export function DeleteReviewButton({ review, userNumber }: ReviewCardProps) {
           userNumber,
         });
 
-        await Promise.all([revalidateReviewsPage(), revalidateLecturesPage()]);
+        invalidateReviewCache(queryClient, String(review.lecture.lectureId));
 
-        try {
-          await fetch('/api/revalidate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'review_deleted',
-              universityName: review.lecture.university,
-              lectureId: String(review.lecture.lectureId),
-              userNumber,
-            }),
-          });
-        } catch (error) {
-          console.error('리뷰 삭제 태그 재검증 실패', error);
-        }
+        await Promise.all([revalidateReviewsPage(), revalidateLecturesPage()]);
       } catch (error) {
         alert('리뷰 삭제에 실패했습니다.');
       }
