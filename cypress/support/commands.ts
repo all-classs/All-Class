@@ -48,6 +48,78 @@ Cypress.Commands.add('uiLogin', (userId?: string, userPw?: string) => {
   cy.get('header').contains('button', '로그아웃', { timeout: 10000 }).should('be.visible');
 });
 
+Cypress.Commands.add('getMyLectures', () => {
+  return cy.request({
+    method: 'GET',
+    url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class/me`,
+    qs: { userNumber: Cypress.env('TEST_USER_NUMBER') },
+  });
+});
+
+Cypress.Commands.add('getUniversityLectures', (universityName: string) => {
+  return cy.request({
+    method: 'GET',
+    url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class`,
+    qs: { university: universityName },
+  });
+});
+
+Cypress.Commands.add('visitUniversity', (universityName?: string) => {
+  const university = universityName || Cypress.env('TEST_UNIVERSITY_NAME');
+  cy.visit(encodeURI(`/${university}`));
+});
+
+Cypress.Commands.add('clickLectureByName', (lectureName: string) => {
+  cy.contains('[data-test="lecture-card"] h3', lectureName, { timeout: 15000 })
+    .scrollIntoView()
+    .should('be.visible')
+    .then(($h3) => {
+      cy.wrap($h3).closest('a').click({ force: true });
+    });
+});
+
+Cypress.Commands.add('getLectureWithReviews', (universityName: string) => {
+  return cy.getUniversityLectures(universityName).then((response) => {
+    const lectures = response.body.data as { lectureName: string; lectureId: number }[];
+
+    // 각 강의를 순차적으로 확인하여 리뷰가 있는 첫 번째 강의 찾기
+    let currentIndex = 0;
+
+    const checkNextLecture = (): Cypress.Chainable<{ lectureName: string; lectureId: number }> => {
+      if (currentIndex >= lectures.length) {
+        throw new Error('리뷰가 있는 강의를 찾을 수 없습니다');
+      }
+
+      const lecture = lectures[currentIndex];
+
+      return cy
+        .request({
+          method: 'GET',
+          url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class`,
+          qs: {
+            university: universityName,
+            lectureId: lecture.lectureId,
+          },
+          failOnStatusCode: false,
+        })
+        .then((detailResponse) => {
+          if (
+            detailResponse.status === 200 &&
+            detailResponse.body.data &&
+            detailResponse.body.data.reviewCount > 0
+          ) {
+            return cy.wrap(lecture);
+          } else {
+            currentIndex++;
+            return checkNextLecture();
+          }
+        });
+    };
+
+    return checkNextLecture();
+  });
+});
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
@@ -55,6 +127,17 @@ declare global {
       byTest(testId: string): Chainable<JQuery<HTMLElement>>;
       dedupeByTest(testId: string): Chainable<void>;
       uiLogin(userId?: string, userPw?: string): Chainable<void>;
+      getMyLectures(): Chainable<
+        Cypress.Response<{ data: Array<{ lectureName: string; lectureId: number }> }>
+      >;
+      getUniversityLectures(
+        universityName: string
+      ): Chainable<Cypress.Response<{ data: Array<{ lectureName: string; lectureId: number }> }>>;
+      visitUniversity(universityName?: string): Chainable<void>;
+      clickLectureByName(lectureName: string): Chainable<void>;
+      getLectureWithReviews(
+        universityName: string
+      ): Chainable<{ lectureName: string; lectureId: number }>;
     }
   }
 }

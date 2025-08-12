@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postReview } from '@/lib/review';
+import { invalidateReviewCache } from '@/utils';
 import type { PostReviewRequest, PostReviewResult } from '../../shared/types/api';
 
 export function usePostReview(lectureId: string) {
@@ -10,11 +11,7 @@ export function usePostReview(lectureId: string) {
   return useMutation<PostReviewResult, Error, PostReviewRequest>({
     mutationFn: postReview,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['reviews', lectureId],
-        exact: false,
-      });
-      queryClient.invalidateQueries({ queryKey: ['lecture-rating'] });
+      invalidateReviewCache(queryClient, lectureId);
     },
   });
 }
