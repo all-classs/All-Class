@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'AllClass - 부산 대학교 강의정보 플랫폼',
+    default: 'AllClass - 부산소속 대학교 강의정보 플랫폼',
     template: '%s | AllClass',
   },
   description:
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ko_KR',
     url: 'https://all-class.vercel.app',
-    title: 'AllClass - 부산 대학교 강의정보 플랫폼',
+    title: 'AllClass - 부산소속 대학교 강의정보 플랫폼',
     description: 'AllClass를 통해 쉽고 빠르게 부산 소속 대학교 강의정보를 확인해보세요.',
     siteName: 'AllClass',
     images: [
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AllClass - 부산 대학교 강의정보 플랫폼',
+    title: 'AllClass - 부산소속 대학교 강의정보 플랫폼',
     description: 'AllClass를 통해 쉽고 빠르게 부산 소속 대학교 강의정보를 확인해보세요.',
     images: ['/assets/logo.svg'],
   },
