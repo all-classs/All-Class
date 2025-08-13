@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://allclass.vercel.app'),
   title: {
     default: 'AllClass - 부산소속 대학교 강의정보 플랫폼',
     template: '%s | AllClass',

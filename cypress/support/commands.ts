@@ -49,17 +49,32 @@ Cypress.Commands.add('uiLogin', (userId?: string, userPw?: string) => {
 });
 
 Cypress.Commands.add('getMyLectures', () => {
+  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
+  if (!apiUrl) {
+    throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
+  }
+
+  const userNumber = Cypress.env('TEST_USER_NUMBER') || Cypress.env('CYPRESS_TEST_USER_NUMBER');
+
+  cy.log(`API URL: ${apiUrl}`);
+  cy.log(`User Number: ${userNumber}`);
+
   return cy.request({
     method: 'GET',
-    url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class/me`,
-    qs: { userNumber: Cypress.env('TEST_USER_NUMBER') },
+    url: `${apiUrl}/class/me`,
+    qs: { userNumber },
   });
 });
 
 Cypress.Commands.add('getUniversityLectures', (universityName: string) => {
+  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
+  if (!apiUrl) {
+    throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
+  }
+
   return cy.request({
     method: 'GET',
-    url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class`,
+    url: `${apiUrl}/class`,
     qs: { university: universityName },
   });
 });
@@ -82,7 +97,6 @@ Cypress.Commands.add('getLectureWithReviews', (universityName: string) => {
   return cy.getUniversityLectures(universityName).then((response) => {
     const lectures = response.body.data as { lectureName: string; lectureId: number }[];
 
-    // 각 강의를 순차적으로 확인하여 리뷰가 있는 첫 번째 강의 찾기
     let currentIndex = 0;
 
     const checkNextLecture = (): Cypress.Chainable<{ lectureName: string; lectureId: number }> => {
@@ -92,10 +106,16 @@ Cypress.Commands.add('getLectureWithReviews', (universityName: string) => {
 
       const lecture = lectures[currentIndex];
 
+      const apiUrl =
+        Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
+      if (!apiUrl) {
+        throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
+      }
+
       return cy
         .request({
           method: 'GET',
-          url: `${Cypress.env('NEXT_PUBLIC_API_URL')}/class`,
+          url: `${apiUrl}/class`,
           qs: {
             university: universityName,
             lectureId: lecture.lectureId,
