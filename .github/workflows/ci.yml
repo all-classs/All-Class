@@ -80,6 +80,7 @@ jobs:
           CI: true
           NEXT_TELEMETRY_DISABLED: 1
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          CYPRESS_NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           CYPRESS_TEST_USER_ID: ${{ secrets.CYPRESS_TEST_USER_ID }}
           CYPRESS_TEST_USER_PW: ${{ secrets.CYPRESS_TEST_USER_PW }}
           CYPRESS_TEST_USER_NUMBER: ${{ secrets.CYPRESS_TEST_USER_NUMBER }}

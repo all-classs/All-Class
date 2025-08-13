@@ -49,7 +49,7 @@ Cypress.Commands.add('uiLogin', (userId?: string, userPw?: string) => {
 });
 
 Cypress.Commands.add('getMyLectures', () => {
-  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL');
+  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
   if (!apiUrl) {
     throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
   }
@@ -62,7 +62,7 @@ Cypress.Commands.add('getMyLectures', () => {
 });
 
 Cypress.Commands.add('getUniversityLectures', (universityName: string) => {
-  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL');
+  const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
   if (!apiUrl) {
     throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
   }
