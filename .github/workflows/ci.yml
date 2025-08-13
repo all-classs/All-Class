@@ -82,6 +82,8 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           CYPRESS_TEST_USER_ID: ${{ secrets.CYPRESS_TEST_USER_ID }}
           CYPRESS_TEST_USER_PW: ${{ secrets.CYPRESS_TEST_USER_PW }}
+          CYPRESS_TEST_USER_NUMBER: ${{ secrets.CYPRESS_TEST_USER_NUMBER }}
+          CYPRESS_TEST_UNIVERSITY_NAME: ${{ secrets.TEST_UNIVERSITY_NAME }}
 
       - name: "========== 🧪 AllClass E2E • END =========="
         if: always()
