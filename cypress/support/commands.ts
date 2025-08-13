@@ -92,10 +92,6 @@ Cypress.Commands.add('getLectureWithReviews', (universityName: string) => {
   return cy.getUniversityLectures(universityName).then((response) => {
     const lectures = response.body.data as { lectureName: string; lectureId: number }[];
 
-    if (!lectures || !Array.isArray(lectures) || lectures.length === 0) {
-      throw new Error('강의 목록을 가져올 수 없습니다');
-    }
-
     let currentIndex = 0;
 
     const checkNextLecture = (): Cypress.Chainable<{ lectureName: string; lectureId: number }> => {
@@ -105,7 +101,8 @@ Cypress.Commands.add('getLectureWithReviews', (universityName: string) => {
 
       const lecture = lectures[currentIndex];
 
-      const apiUrl = Cypress.env('NEXT_PUBLIC_API_URL');
+      const apiUrl =
+        Cypress.env('NEXT_PUBLIC_API_URL') || Cypress.env('CYPRESS_NEXT_PUBLIC_API_URL');
       if (!apiUrl) {
         throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
       }
