@@ -11,7 +11,17 @@ describe('사용자는 로그인을하고 자신이 들은 강의에 리뷰를 �
     cy.uiLogin();
 
     cy.getMyLectures().then((response) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(response.status).to.eq(200);
+
+      cy.then(() => console.log('getMyLectures response:', response.body));
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      expect(response.body.data).to.not.be.null;
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      expect(response.body.data).to.be.an('array');
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(response.body.data).to.have.length.greaterThan(0);
 
       const enrolledLecture = response.body.data[0];
@@ -47,6 +57,12 @@ describe('사용자는 로그인을하고 자신이 들은 강의에 리뷰를 �
     cy.uiLogin();
 
     cy.getMyLectures().then((enrolledResponse) => {
+      cy.then(() => console.log('getMyLectures response:', enrolledResponse.body));
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      expect(enrolledResponse.body.data).to.not.be.null;
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      expect(enrolledResponse.body.data).to.be.an('array');
+
       const enrolledLectures = enrolledResponse.body.data.map(
         (lecture: { lectureName: string }) => lecture.lectureName
       );
