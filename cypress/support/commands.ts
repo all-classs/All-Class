@@ -54,10 +54,15 @@ Cypress.Commands.add('getMyLectures', () => {
     throw new Error('NEXT_PUBLIC_API_URL 환경변수가 설정되지 않았습니다');
   }
 
+  const userNumber = Cypress.env('TEST_USER_NUMBER') || Cypress.env('CYPRESS_TEST_USER_NUMBER');
+
+  cy.log(`API URL: ${apiUrl}`);
+  cy.log(`User Number: ${userNumber}`);
+
   return cy.request({
     method: 'GET',
     url: `${apiUrl}/class/me`,
-    qs: { userNumber: Cypress.env('TEST_USER_NUMBER') },
+    qs: { userNumber },
   });
 });
 
