@@ -47,7 +47,8 @@ export default function Header({ showDropdown = false }: HeaderProps) {
         </Link>
       </section>
       <section className={styles.centerSection}>
-        {showDropdown && <DropdownUniversityList />}
+        {/* {showDropdown && <DropdownUniversityList />} */}
+        <DropdownUniversityList />
       </section>
       <section className={`${styles.rightSection} ${!showDropdown ? styles.alwaysVisible : ''}`}>
         {isLoggedIn ? (
