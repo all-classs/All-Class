@@ -1,0 +1,407 @@
+.features {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom, #f8fafc, #ffffff);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #FFD600;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rem;
+}
+
+.card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 214, 0, 0.05), transparent);
+  transition: left 0.2s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #fffef7 100%);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.cardDescription {
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.showcase {
+  background: linear-gradient(135deg, #fffef7 0%, #fefcf0 100%);
+  border-radius: 20px;
+  padding: 3rem;
+  color: #333;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.showcaseContent > h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mockCardWrapper {
+  width: 400px;
+  max-width: 100%;
+  text-align: left;
+}
+
+.lectureCard {
+  position: relative;
+  background: white;
+  color: #333;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  max-width: 400px;
+  width: 100%;
+  text-align: left;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.lectureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 0 0 0 10px;
+  background: linear-gradient(180deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.lectureHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding-left: 12px;
+}
+
+.lectureHeader h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.lectureRating {
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  white-space: nowrap;
+}
+
+.professor {
+  font-size: 13px;
+  color: #718096;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardContainer {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
+  max-width: 400px;
+  width: 100%;
+}
+
+.cardContainer:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.colorBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 0 0 0 10px;
+  background: linear-gradient(180deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-left: 12px;
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.lectureName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.professor {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusBadge.opened {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.statusBadge.closed {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-left: 12px;
+}
+
+.cardDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 22px;
+}
+
+.label {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.value {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 400;
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.lectureTypeBadge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.star {
+  color: #f59e0b;
+  text-shadow: 0 1px 2px rgba(245, 158, 11, 0.3);
+  font-size: 16px;
+}
+
+.halfStar {
+  color: #f59e0b;
+  opacity: 0.7;
+  text-shadow: 0 1px 2px rgba(245, 158, 11, 0.3);
+  font-size: 16px;
+}
+
+.ratingText {
+  padding-left: 0.4rem;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .features {
+    padding: 3rem 0;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .showcase {
+    padding: 2rem;
+  }
+  
+  .showcaseContent h3 {
+    font-size: 1.5rem;
+  }
+  
+  .lectureCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .icon {
+    font-size: 2.5rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+}
