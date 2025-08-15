@@ -1,6 +1,13 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/ui';
 import { LoginTriggerWrapper } from '@/components/common';
+import {
+  HeroSection,
+  FeaturesSectionLazy,
+  UniversityLogosLazy,
+  HowItWorksSectionLazy,
+  CTASectionLazy,
+} from '@/components/landing';
 
 export const metadata: Metadata = {
   title: 'AllClass',
@@ -23,7 +30,11 @@ export default async function Home({
   return (
     <main>
       <Header />
-      <div>Hello World</div>
+      <HeroSection />
+      <FeaturesSectionLazy />
+      <UniversityLogosLazy />
+      <HowItWorksSectionLazy />
+      <CTASectionLazy />
       {showLogin && <LoginTriggerWrapper />}
     </main>
   );
