@@ -19,17 +19,15 @@ AllClass는 학부 연구실 창업동아리에서 시작하여 예비창업을 
 ### 사용자 경험 최적화
 - **렌더링 전략**: SSG/ISR/하이브리드를 활용한 페이지별 최적화
 - **성능 지표**: Core Web Vitals 기준으로 지속적인 성능 모니터링
-- **반응형 디자인**: 다양한 디바이스에서의 일관된 사용자 경험
 
 ### 확장 가능한 아키텍처
-- **도메인 주도 설계**: 4개 도메인(auth, lecture, review, mypage)으로 명확한 분리
+- **도메인 단위 구조**: 4개 도메인(auth, lecture, review, mypage)으로 명확한 분리
 - **컴포넌트 설계**: 재사용 가능하고 테스트 가능한 모듈형 구조
 - **타입 안전성**: TypeScript 100% 적용으로 런타임 오류 방지
 
 ### 안정적인 개발 환경
 - **E2E 테스트**: Cypress를 통한 핵심 사용자 플로우 자동화 검증
 - **CI/CD 파이프라인**: GitHub Actions를 통한 배포 자동화
-- **코드 품질**: ESLint, Prettier를 통한 일관된 코드 스타일 유지
 
 ## 🛠️ 기술적 이슈 해결 과정
 
@@ -39,7 +37,7 @@ AllClass는 학부 연구실 창업동아리에서 시작하여 예비창업을 
 |------|------|-----------|-----------|------|------|
 | **1** | LCP 8초짜리 Next.js 프로젝트 리라이팅 계획 | 모든 페이지 SSR로 인한 성능 저하 | SSG/ISR 렌더링 전략 수립 | 프로젝트 방향성 정립 | [📖 Post #5](https://solplog.vercel.app/articles/post-5) |
 | **2** | 조건부 렌더링의 브라우저 이미지 캐시 무효화 | 이미지 재로딩으로 인한 UX 저하 | CSS visibility + React.memo 최적화 | 이미지 깜빡임 완전 제거 | [📖 Post #6](https://solplog.vercel.app/articles/post-6) |
-| **3** | 도메인 구조에 Next.js 끼얹어보기 | 역할 기반 폴더 구조의 개발 효율성 저하 | 도메인 + 기술적 레이어 하이브리드 설계 | 파일 크기 52.7% 감소 | [📖 Post #7](https://solplog.vercel.app/articles/post-7) |
+| **3** | 도메인 단위 구조에 Next.js 끼얹어보기 | 분산 폴더 구조의 개발 효율성 저하 | 도메인 + 기술적 레이어 하이브리드 설계 | 파일 크기 36% 감소 | [📖 Post #7](https://solplog.vercel.app/articles/post-7) |
 | **4** | 캐싱 레이어 분리로 평점 즉시 업데이트하기 | 정적 데이터와 실시간 업데이트 충돌 | ISR + React Query 하이브리드 캐싱 | 서버 부하 감소 + 실시간성 확보 | [📖 Post #8](https://solplog.vercel.app/articles/post-8) |
 | **5** | 서버-클라이언트 상태 동기화로 UI Flickering 제거 | 페이지 새로고침 시 UI 깜빡임 | SSR Hydration + dehydrate/hydrate | 매끄러운 페이지 전환 | [📖 Post #9](https://solplog.vercel.app/articles/post-9) |
 | **6** | 사용자 플로우 중심의 E2E 테스트 개선기 | UI 테스트 과다로 인한 비효율성 | 실제 API + 핵심 플로우 중심 테스트 | 핵심 플로우 자동화 검증 | [📖 Post #10](https://solplog.vercel.app/articles/post-10) |
@@ -57,7 +55,7 @@ AllClass는 학부 연구실 창업동아리에서 시작하여 예비창업을 
 
 ### 🏗️ 아키텍처 개선
 - **코드 라인**: 6,750줄 → 5,488줄 (18.7% 감소)
-- **평균 파일 크기**: 78.5줄 → 37.1줄 (52.7% 감소)
+- **평균 파일 크기**: 80줄 → 51줄 (36% 감소)
 - **의존성**: 23개 → 6개 (74% 감소)
 - **도메인 분리**: 4개 도메인으로 명확한 구조
 
